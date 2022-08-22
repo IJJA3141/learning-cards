@@ -1,0 +1,164 @@
+#include <msclr/marshal_cppstd.h>
+#include <msclr/marshal.h>
+#include "MainPage.h"
+#include <fstream>
+#include <codecvt>
+#include <string>
+#include <vector>
+#include <vcclr.h>
+#include <string>
+#include <locale>
+#include <codecvt>
+#include <cassert>
+
+using namespace std;
+using namespace System;
+using namespace System::Windows::Forms;
+[STAThread]
+
+/* test*/
+static int print_bytes(const void* object, size_t size) {
+
+ 
+#ifdef __cplusplus
+    const unsigned char* const bytes = static_cast<const unsigned char*>(object);
+#else // __cplusplus
+    const unsigned char* const bytes = object;
+#endif // __cplusplus
+
+    int r;
+
+    size_t i;
+
+    for (i = 0; i < size; i++)
+    {
+        //printf(bytes[i]);
+        int binary[8];
+        for (int n = 0; n < 8; n++) {
+            binary[7 - n] = (bytes[size - 1 - i] >> n) & 1;
+        }
+        /* print result */
+        for (int n = 0; n < 8; n++) {
+            r += binary[n];
+        }
+    }
+
+    return r;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+vector<vector<wstring>> getFile(string fileName, string spliter) {
+    vector<vector<wstring>> localeVocList = {};
+    fstream file;
+    int linePos = 0;
+    file.open(fileName, ios::in);
+    if (file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            vector<wstring> localeVocLine = {};
+
+            string t = "　";
+
+            if (line.find(t) != string::npos)
+            {
+                string left = line.substr(0, line.find(t));
+                string right = line.substr(line.find(t) + t.length(), line.length());
+
+                localeVocLine.push_back(wstring(left.begin(), left.end()));
+                localeVocLine.push_back(wstring(right.begin(), right.end()));
+            }
+            else
+            {
+                string left = line.substr(0, line.find(spliter));
+                string right = line.substr(line.find(spliter) + spliter.length(), line.length());
+
+                localeVocLine.push_back(wstring(left.begin(), left.end()));
+                localeVocLine.push_back(wstring(right.begin(), right.end()));
+            }
+
+            localeVocList.push_back(localeVocLine);
+            linePos++;
+        }
+        file.close();
+    }
+
+    return localeVocList;
+}
+
+System::Void QzCPP::MainPage::populate(System::Object^ sender, System::EventArgs^ e)
+{
+    /*vector<vector<wstring>>vocList = getFile("vocList.txt", " ");
+    //String^ t = gcnew String(vocList[0][0].c_str());
+    wstring s = L"見る目ある";
+    String^ t = gcnew String(s.c_str());
+    leftTB1->Text = t;
+    rightTB1->Text = L"",vocList[0][1];
+    */
+
+    fstream file;
+    file.open("vocList.txt", ios::out);
+    if(file.is_open())
+    {
+        try
+        { 
+            file << "test";
+        }
+        catch(string e)
+        {
+         
+        }
+        try
+        {
+            file << "テスト　鴨\n";
+        }
+        catch(string e)
+        {
+          
+        }
+        try 
+        {
+            String^ test = leftTB1->Text;
+            wstring t = msclr::interop::marshal_as< std::wstring >(test);
+            int i = stoi(t);
+            wstring a = to_wstring(i);
+            rightTB1->Text = gcnew String(a.c_str()); 
+        }
+        catch (string e)
+        {
+
+        }
+        try 
+        {
+            auto pi = L'π';
+            int tesssss = print_bytes(&pi, sizeof(pi));
+            leftTB1->Text = tesssss.ToString();
+        }
+        catch (string e)
+        {
+
+        }
+        file.close();
+    }
+
+    return System::Void();
+}
+
+int main() {
+	System::Windows::Forms::Application::EnableVisualStyles();
+	QzCPP::MainPage form;
+	Application::Run(% form);
+}
