@@ -21,6 +21,8 @@ namespace QzCPP {
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
+			
+			//test();
 		}
 
 	protected:
@@ -34,12 +36,45 @@ namespace QzCPP {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TextBox^ leftTB1;
 	protected:
 	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::TextBox^ rightTB2;
+	private: System::Windows::Forms::TextBox^ leftTB1;
 	private: System::Windows::Forms::TextBox^ rightTB1;
 	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::TextBox^ leftTB2;
 
+
+
+
+
+	
+	/*
+	private: System::Windows::Forms::TextBox^ leftTB3;
+	private: System::Windows::Forms::TextBox^ leftTB4;
+	private: System::Windows::Forms::TextBox^ leftTB5;
+	private: System::Windows::Forms::TextBox^ leftTB6;
+	private: System::Windows::Forms::TextBox^ leftTB7;
+	private: System::Windows::Forms::TextBox^ leftTB8;
+	private: System::Windows::Forms::TextBox^ leftTB9;
+	private: System::Windows::Forms::TextBox^ leftTB10;
+	*/
+
+
+
+
+
+
+	/*
+	private: System::Windows::Forms::TextBox^ rightTB3;
+	private: System::Windows::Forms::TextBox^ rightTB4;
+	private: System::Windows::Forms::TextBox^ rightTB5;
+	private: System::Windows::Forms::TextBox^ rightTB6;
+	private: System::Windows::Forms::TextBox^ rightTB7;
+	private: System::Windows::Forms::TextBox^ rightTB8;
+	private: System::Windows::Forms::TextBox^ rightTB9;
+	private: System::Windows::Forms::TextBox^ rightTB10;
+	*/
 
 	private:
 		/// <summary>
@@ -54,18 +89,13 @@ namespace QzCPP {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->rightTB2 = (gcnew System::Windows::Forms::TextBox());
+			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->rightTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->leftTB2 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
-			// 
-			// leftTB1
-			// 
-			this->leftTB1->Location = System::Drawing::Point(32, 141);
-			this->leftTB1->Name = L"leftTB1";
-			this->leftTB1->Size = System::Drawing::Size(246, 20);
-			this->leftTB1->TabIndex = 0;
 			// 
 			// button1
 			// 
@@ -76,6 +106,21 @@ namespace QzCPP {
 			this->button1->Text = L"button1";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MainPage::populate);
+			// 
+			// rightTB2
+			// 
+			this->rightTB2->Location = System::Drawing::Point(322, 169);
+			this->rightTB2->Name = L"rightTB2";
+			this->rightTB2->Size = System::Drawing::Size(186, 20);
+			this->rightTB2->TabIndex = 5;
+			// 
+			// leftTB1
+			// 
+			this->leftTB1->Location = System::Drawing::Point(32, 141);
+			this->leftTB1->Name = L"leftTB1";
+			this->leftTB1->Size = System::Drawing::Size(246, 20);
+			this->leftTB1->TabIndex = 0;
+			this->leftTB1->TextChanged += gcnew System::EventHandler(this, &MainPage::leftTB1_TextChanged);
 			// 
 			// rightTB1
 			// 
@@ -92,11 +137,20 @@ namespace QzCPP {
 			this->textBox1->Size = System::Drawing::Size(248, 20);
 			this->textBox1->TabIndex = 3;
 			// 
+			// leftTB2
+			// 
+			this->leftTB2->Location = System::Drawing::Point(32, 169);
+			this->leftTB2->Name = L"leftTB2";
+			this->leftTB2->Size = System::Drawing::Size(246, 20);
+			this->leftTB2->TabIndex = 4;
+			// 
 			// MainPage
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(751, 609);
+			this->Controls->Add(this->rightTB2);
+			this->Controls->Add(this->leftTB2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->rightTB1);
 			this->Controls->Add(this->button1);
@@ -114,5 +168,9 @@ namespace QzCPP {
 	private: System::Void populate(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void rightTB1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-	};
+	private: System::Void leftTB1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
+}
+};
 }
