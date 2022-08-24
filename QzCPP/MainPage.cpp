@@ -89,6 +89,8 @@ System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ 
     rightTB1->Text = gcnew String(converter.from_bytes(getFile("vocList.txt", " ")).c_str());
     */
 
+    
+
     return System::Void();
 }
 
@@ -180,8 +182,9 @@ System::Void QzCPP::MainPage::Populate()
         panelTBx->Controls->Add(leftPPx);
         panelTBx->Name = L"panelTB"+i;
 
+        this->ClientSize = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
+        this->backgroundDG->Size = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
         this->backgroundDG->Controls->Add(panelTBx);
-
         pos += posIncr;
     }
 }
