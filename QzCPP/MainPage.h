@@ -14,6 +14,8 @@ namespace QzCPP {
 	/// </summary>
 	public ref class MainPage : public System::Windows::Forms::Form
 	{
+	public: int NumberOfLine = 1;
+
 	public:
 		MainPage(void)
 		{
@@ -216,7 +218,7 @@ namespace QzCPP {
 			this->leftPP1->ResumeLayout(false);
 			this->leftPP1->PerformLayout();
 			this->ResumeLayout(false);
-
+			//this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &QzCPP::MainPage::OnFormClosing);
 		}
 
 #pragma endregion
@@ -243,5 +245,6 @@ private: System::Void panel4_Paint(System::Object^ sender, System::Windows::Form
 private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
 }
 	   private: System::Void Populate();
+			  //private: System::Void OnFormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventHandler^ e);
 };
 }

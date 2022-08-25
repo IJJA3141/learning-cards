@@ -13,14 +13,13 @@
 using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;
-[STAThread]
+
+wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
 string fromSystemstringToString(String^ text)
 {
     return msclr::interop::marshal_as<std::string>(text);
 }
-
-wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
 String^ fromStringToSystemstring(string text)
 {
@@ -81,19 +80,6 @@ vector<vector<string>> createVocList(string fileName, string spliter)
 
     return vocList;
 }
-
-System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ e)
-{
-    /*
-    store("vocList.txt", converter.to_bytes(msclr::interop::marshal_as<std::wstring>(leftTB1->Text)));
-    rightTB1->Text = gcnew String(converter.from_bytes(getFile("vocList.txt", " ")).c_str());
-    */
-
-    
-
-    return System::Void();
-}
-
 vector<vector<string>> vocList = createVocList("vocList.txt", " ");
 
 System::Void QzCPP::MainPage::Populate()
@@ -103,7 +89,12 @@ System::Void QzCPP::MainPage::Populate()
 
     pos += posIncr;
 
-    for (size_t i = 0; i < vocList.size(); i++)
+    try {
+        this->leftTB1->Text = fromStringToSystemstring(vocList[0][0]);
+        this->rightTB1->Text = fromStringToSystemstring(vocList[0][1]);
+    } catch (string e) {}
+
+    for (size_t i = 1; i < vocList.size(); i++)
     {
         System::Windows::Forms::Panel^ panelTBx = gcnew System::Windows::Forms::Panel();
 
@@ -125,7 +116,7 @@ System::Void QzCPP::MainPage::Populate()
         panelRDx->Location = System::Drawing::Point(557, 6);
         panelRDx->Size = System::Drawing::Size(6, 40);
         panelRDx->TabIndex = 3;
-        panelRDx->Name = L"panelRD"+i;
+        panelRDx->Name = L"panelRD"+i+1;
 
         rightTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         rightTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
@@ -136,7 +127,7 @@ System::Void QzCPP::MainPage::Populate()
         rightTBx->Location = System::Drawing::Point(10, 9);
         rightTBx->Size = System::Drawing::Size(537, 32);
         rightTBx->TabIndex = 0;
-        rightTBx->Name = L"rightTB"+i;
+        rightTBx->Name = L"rightTB"+i+1;
 
         rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
 
@@ -150,7 +141,7 @@ System::Void QzCPP::MainPage::Populate()
         leftTBx->Location = System::Drawing::Point(10, 9);
         leftTBx->Size = System::Drawing::Size(537, 32);
         leftTBx->TabIndex = 0;
-        leftTBx->Name = L"leftTB"+i;
+        leftTBx->Name = L"leftTB"+i+1;
 
         leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
 
@@ -160,7 +151,7 @@ System::Void QzCPP::MainPage::Populate()
         rightPPx->Size = System::Drawing::Size(557, 50);
         rightPPx->TabIndex = 2;
         rightPPx->Controls->Add(rightTBx);
-        rightPPx->Name = L"rightPP"+i;
+        rightPPx->Name = L"rightPP"+i+1;
 
         leftPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         leftPPx->Margin = System::Windows::Forms::Padding(0);
@@ -168,7 +159,7 @@ System::Void QzCPP::MainPage::Populate()
         leftPPx->Size = System::Drawing::Size(557, 50);
         leftPPx->TabIndex = 1;
         leftPPx->Controls->Add(leftTBx);
-        leftPPx->Name = L"leftPP"+i;
+        leftPPx->Name = L"leftPP"+i+1;
 
         panelTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         panelTBx->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::panel4_Paint);
@@ -180,14 +171,105 @@ System::Void QzCPP::MainPage::Populate()
         panelTBx->Controls->Add(panelRDx);
         panelTBx->Controls->Add(rightPPx);
         panelTBx->Controls->Add(leftPPx);
-        panelTBx->Name = L"panelTB"+i;
+        panelTBx->Name = L"panelTB"+i+1;
 
         this->ClientSize = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
         this->backgroundDG->Size = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
         this->backgroundDG->Controls->Add(panelTBx);
         pos += posIncr;
+
+        NumberOfLine += 1;
     }
 }
+
+System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ e)
+{
+    //-------TEXT------------//
+    //                       //
+    //ajouter +1 NumberOfLine//
+    //                       //
+    //-----------------------//
+
+
+    /*
+    store("vocList.txt", converter.to_bytes(msclr::interop::marshal_as<std::wstring>(leftTB1->Text)));
+    rightTB1->Text = gcnew String(converter.from_bytes(getFile("vocList.txt", " ")).c_str());
+    */   
+    
+    //this.Controls[name_of_label_to_be_changed].Forecolor = System.Drawing.Color.Red;
+
+    //this->backgroundDG->Controls.Find("textBox1", true).FirstOrDefault()
+
+    //TextBox t = this.Controls.Find("textBox1", true).FirstOrDefault() as TextBox;
+    //this->Controls->Count
+    int way;
+    int backgroundDGPos;
+
+    for (int thisControls = 0; thisControls < this->Controls->Count; thisControls++)
+    {
+        if (this->Controls[thisControls]->Name == L"backgroundDG")
+        {
+            backgroundDGPos = thisControls;
+        }
+    }
+    //                                     11
+    for (int textBox = 2; textBox <= NumberOfLine; textBox++)
+    {
+        for (int i = 0; i < this->Controls[backgroundDGPos]->Controls->Count; i++)
+        {
+            if (this->Controls[backgroundDGPos]->Controls[i]->Name == L"panelTB" + textBox)
+            {
+                way = i;
+            }
+        }
+    }
+
+    this->leftTB1->Text = fromStringToSystemstring(to_string(this->Controls[backgroundDGPos]->Controls->Count));
+
+    vocList[0][0] = fromSystemstringToString(this->leftTB1->Text);
+    vocList[0][1] = fromSystemstringToString(this->rightTB1->Text);
+
+    for (int i = 1; i <= NumberOfLine; i++)
+    {
+    vocList[i][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i - 1]->Controls[2]->Controls[0]->Text);
+    vocList[i][1] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i - 1]->Controls[1]->Controls[0]->Text);
+    }
+
+    /*
+    vocList[2][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[4]->Controls[2]->Controls[0]->Text);
+    vocList[2][1] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[4]->Controls[1]->Controls[0]->Text);
+    */
+
+    /*
+    for (int u = 1; u < vocList.size(); u++)
+    {
+        int q = u - 1;
+       
+            vocList[u][0] = fromSystemstringToString(this->Controls[way[q][0]]->Controls[way[q][1]]->Controls[2]->Controls[0]->Text);
+            vocList[u][1] = fromSystemstringToString(this->Controls[way[q][0]]->Controls[way[q][1]]->Controls[1]->Controls[0]->Text);
+    }*/
+
+    //vector<string> tempVec;
+    //tempVec.push_back(fromSystemstringToString(this->Controls[way[q][0]]->Controls[way[q][1]]->Controls[2]->Controls[0]->Text));
+    //tempVec.push_back(fromSystemstringToString(this->Controls[way[q][0]]->Controls[way[q][1]]->Controls[1]->Controls[0]->Text));
+    //vocList.push_back(tempVec);
+
+    store("ext.txt", vocList);
+
+    return System::Void();
+}
+
+
+/*System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventHandler^ e)
+{
+    System::Array^ a;
+    this->backgroundDG->Controls->CopyTo(a, 0);
+    int test = a->Length;
+    this->leftTB1->Text = fromStringToSystemstring(to_string(test));
+}*/
+
+
+[STAThread]
 
 void main() {
     System::Windows::Forms::Application::EnableVisualStyles();
