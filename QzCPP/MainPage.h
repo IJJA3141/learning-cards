@@ -15,6 +15,8 @@ namespace QzCPP {
 	public ref class MainPage : public System::Windows::Forms::Form
 	{
 	public: int NumberOfLine = 1;
+	public: int pos = 258;
+	public: int posIncr = 200;
 
 	public:
 		MainPage(void)
@@ -53,6 +55,7 @@ namespace QzCPP {
 
 	private: System::Windows::Forms::Panel^ rightPP1;
 	private: System::Windows::Forms::TextBox^ rightTB1;
+	private: System::Windows::Forms::Button^ button2;
 
 	private:
 		/// <summary>
@@ -76,6 +79,7 @@ namespace QzCPP {
 			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->bannerLG = (gcnew System::Windows::Forms::Panel());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->backgroundDG->SuspendLayout();
 			this->panelTB1->SuspendLayout();
 			this->rightPP1->SuspendLayout();
@@ -87,6 +91,7 @@ namespace QzCPP {
 			this->backgroundDG->AutoScroll = true;
 			this->backgroundDG->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)),
 				static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			this->backgroundDG->Controls->Add(this->button2);
 			this->backgroundDG->Controls->Add(this->panelTB1);
 			this->backgroundDG->Controls->Add(this->button1);
 			this->backgroundDG->Controls->Add(this->bannerLG);
@@ -198,6 +203,19 @@ namespace QzCPP {
 			this->bannerLG->Size = System::Drawing::Size(1600, 50);
 			this->bannerLG->TabIndex = 0;
 			// 
+			// button2
+			// 
+			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
+				static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->button2->Location = System::Drawing::Point(1394, 195);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(140, 78);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"button2";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MainPage::Test);
+			// 
 			// MainPage
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -218,33 +236,33 @@ namespace QzCPP {
 			this->leftPP1->ResumeLayout(false);
 			this->leftPP1->PerformLayout();
 			this->ResumeLayout(false);
-			//this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &QzCPP::MainPage::OnFormClosing);
+
 		}
 
 #pragma endregion
-	private: System::Void MainPage_Load(System::Object^ sender, System::EventArgs^ e) {
-	} 
-	private: System::Void AddRow(System::Object^ sender, System::EventArgs^ e);
-
+	private: System::Void menuStrip1_ItemClicked(System::Object^ sender, System::Windows::Forms::ToolStripItemClickedEventArgs^ e) {
+	}
+	private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
+	}
+	private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
+	private: System::Void tableLayoutPanel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
+	private: System::Void panel4_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	}
 	private: System::Void rightTB1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void leftTB1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
-}
-private: System::Void menuStrip1_ItemClicked(System::Object^ sender, System::Windows::Forms::ToolStripItemClickedEventArgs^ e) {
-}
-private: System::Void tableLayoutPanel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
-private: System::Void tableLayoutPanel2_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
-private: System::Void groupBox4_Enter(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void panel4_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-}
-private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
-}
-	   private: System::Void Populate();
-			  //private: System::Void OnFormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventHandler^ e);
+	private: System::Void groupBox4_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void groupBox1_Enter(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void MainPage_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void AddRow(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void Test(System::Object^ sender, System::EventArgs^ e);
+	//private: System::Void createNewRow(int i, int pos, int posIncr);
+	private: System::Void Populate();
 };
 }
