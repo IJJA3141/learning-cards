@@ -89,10 +89,8 @@ System::Void QzCPP::MainPage::Populate()
 
     pos += posIncr;
 
-    try {
-        this->leftTB1->Text = fromStringToSystemstring(vocList[0][0]);
-        this->rightTB1->Text = fromStringToSystemstring(vocList[0][1]);
-    } catch (string e) {}
+    this->leftTB1->Text = fromStringToSystemstring(vocList[0][0]);
+    this->rightTB1->Text = fromStringToSystemstring(vocList[0][1]);
 
     for (size_t i = 1; i < vocList.size(); i++)
     {
@@ -202,8 +200,9 @@ System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ 
 
     //TextBox t = this.Controls.Find("textBox1", true).FirstOrDefault() as TextBox;
     //this->Controls->Count
-    int way;
-    int backgroundDGPos;
+
+    int way = 0;
+    int backgroundDGPos = 0;
 
     for (int thisControls = 0; thisControls < this->Controls->Count; thisControls++)
     {
@@ -212,28 +211,36 @@ System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ 
             backgroundDGPos = thisControls;
         }
     }
-    //                                     11
-    for (int textBox = 2; textBox <= NumberOfLine; textBox++)
-    {
-        for (int i = 0; i < this->Controls[backgroundDGPos]->Controls->Count; i++)
-        {
-            if (this->Controls[backgroundDGPos]->Controls[i]->Name == L"panelTB" + textBox)
-            {
-                way = i;
-            }
-        }
-    }
+    
 
+    for (int i = 0; i < this->Controls[backgroundDGPos]->Controls->Count; i++)
+    {
+        if (this->Controls[backgroundDGPos]->Controls[i]->Name == L"panelTB2")
+        {
+            way = i - 1;
+            this->leftTB1->Text = fromStringToSystemstring(to_string(way));
+            break;
+        }
+        this->rightTB1->Text = fromStringToSystemstring(this->Controls[backgroundDGPos]->Controls[i]->Name);
+    }
+    
     this->leftTB1->Text = fromStringToSystemstring(to_string(this->Controls[backgroundDGPos]->Controls->Count));
 
     vocList[0][0] = fromSystemstringToString(this->leftTB1->Text);
     vocList[0][1] = fromSystemstringToString(this->rightTB1->Text);
 
-    for (int i = 1; i <= NumberOfLine; i++)
+    this->leftTB1->Text = fromStringToSystemstring(to_string(way));
+
+    for (int i = 1; i < NumberOfLine - 2; i++)
     {
-    vocList[i][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i - 1]->Controls[2]->Controls[0]->Text);
-    vocList[i][1] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i - 1]->Controls[1]->Controls[0]->Text);
+    /*
+    vocList[i][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i]->Controls[2]->Controls[0]->Text);
+    vocList[i][1] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[way + i]->Controls[1]->Controls[0]->Text);
+    */
     }
+
+    vocList[5][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[12]->Controls[2]->Controls[0]->Text);
+    vocList[5][1] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[12]->Controls[1]->Controls[0]->Text);
 
     /*
     vocList[2][0] = fromSystemstringToString(this->Controls[backgroundDGPos]->Controls[4]->Controls[2]->Controls[0]->Text);
