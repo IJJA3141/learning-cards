@@ -77,19 +77,36 @@ vector<vector<string>> createVocList(string fileName, string spliter)
             linePos++;
         }
     }
-
+    if (vocList.size() == 0)
+    {
+        vocList.resize(vocList.size() + 1, { "noneSys", "noneSys" });
+    }
     return vocList;
 }
 vector<vector<string>> vocList = createVocList("vocList.txt", " ");
 
 System::Void QzCPP::MainPage::Populate()
 {
+    int it = 0;
+
     pos += posIncr;
 
-    this->leftTB1->Text = fromStringToSystemstring(vocList[0][0]);
-    this->rightTB1->Text = fromStringToSystemstring(vocList[0][1]);
+    for (int i = it; i < vocList.size(); i++)
+    {
+        if (vocList[i][0] == "noneSys" && vocList[i][1] == "noneSys")
+        {
+            it++;
+        }
+        else
+        {
+            break;
+        }
+    }
 
-    for (int i = 1; i < vocList.size(); i++)
+    this->leftTB1->Text = fromStringToSystemstring(vocList[it][0]);
+    this->rightTB1->Text = fromStringToSystemstring(vocList[it][1]);
+
+    for (int i = it; i < vocList.size(); i++)
     {
         System::Windows::Forms::Panel^ panelTBx = gcnew System::Windows::Forms::Panel();
 
@@ -111,7 +128,7 @@ System::Void QzCPP::MainPage::Populate()
         panelRDx->Location = System::Drawing::Point(557, 6);
         panelRDx->Size = System::Drawing::Size(6, 40);
         panelRDx->TabIndex = 3;
-        panelRDx->Name = L"panelRD"+(i+1);
+        panelRDx->Name = L"panelRD" + (i + 1);
 
         rightTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         rightTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
@@ -122,9 +139,12 @@ System::Void QzCPP::MainPage::Populate()
         rightTBx->Location = System::Drawing::Point(10, 9);
         rightTBx->Size = System::Drawing::Size(537, 32);
         rightTBx->TabIndex = 0;
-        rightTBx->Name = L"rightTB"+(i+1);
+        rightTBx->Name = L"rightTB" + (i + 1);
 
-        rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
+        if (vocList[i][1] != "noneSys")
+        {
+            rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
+        }
 
         leftTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         leftTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
@@ -136,9 +156,12 @@ System::Void QzCPP::MainPage::Populate()
         leftTBx->Location = System::Drawing::Point(10, 9);
         leftTBx->Size = System::Drawing::Size(537, 32);
         leftTBx->TabIndex = 0;
-        leftTBx->Name = L"leftTB"+(i+1);
+        leftTBx->Name = L"leftTB" + (i + 1);
 
-        leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
+        if (vocList[i][0] == "noneSys")
+        {
+            leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
+        }
 
         rightPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         rightPPx->Margin = System::Windows::Forms::Padding(0);
@@ -146,7 +169,7 @@ System::Void QzCPP::MainPage::Populate()
         rightPPx->Size = System::Drawing::Size(557, 50);
         rightPPx->TabIndex = 2;
         rightPPx->Controls->Add(rightTBx);
-        rightPPx->Name = L"rightPP"+(i+1);
+        rightPPx->Name = L"rightPP" + (i + 1);
 
         leftPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         leftPPx->Margin = System::Windows::Forms::Padding(0);
@@ -154,7 +177,7 @@ System::Void QzCPP::MainPage::Populate()
         leftPPx->Size = System::Drawing::Size(557, 50);
         leftPPx->TabIndex = 1;
         leftPPx->Controls->Add(leftTBx);
-        leftPPx->Name = L"leftPP"+(i+1);
+        leftPPx->Name = L"leftPP" + (i + 1);
 
         panelTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         panelTBx->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::panel4_Paint);
@@ -166,7 +189,7 @@ System::Void QzCPP::MainPage::Populate()
         panelTBx->Controls->Add(panelRDx);
         panelTBx->Controls->Add(rightPPx);
         panelTBx->Controls->Add(leftPPx);
-        panelTBx->Name = L"panelTB"+(i+1);
+        panelTBx->Name = L"panelTB" + (i + 1);
 
         this->ClientSize = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
         this->backgroundDG->Size = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
@@ -174,6 +197,7 @@ System::Void QzCPP::MainPage::Populate()
         pos += posIncr;
 
         NumberOfLine += 1;
+
     }
 }
 
@@ -260,10 +284,14 @@ System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ 
     this->backgroundDG->Controls->Add(panelTBx);
     pos += posIncr;
 
-    vector<string> c = vector<string>(2);
-    vocList.push_back(c);
+    vocList.resize(vocList.size() + 1, { "noneSys", "noneSys" });
 
     return System::Void();
+}
+
+bool emptyOrNot(System::String^ sstr)
+{
+    return System::String::IsNullOrWhiteSpace(sstr);
 }
 
 System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
@@ -272,8 +300,17 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
     int firstPanel;
     int StoringPosition;
 
-    vocList[0][0] = fromSystemstringToString(this->leftTB1->Text);
-    vocList[0][1] = fromSystemstringToString(this->rightTB1->Text);
+    System::String^ tempsstr;
+
+    if (emptyOrNot(this->leftTB1->Text)) {
+        vocList[0][0] = "noneSys";
+    } else {
+        vocList[0][0] = fromSystemstringToString(this->leftTB1->Text);
+    } if (emptyOrNot(this->rightTB1->Text)) {
+        vocList[0][1] = "noneSys";
+    } else {
+        vocList[0][1] = fromSystemstringToString(this->rightTB1->Text);
+    }   
 
     for (int i = 0; i < this->Controls->Count; i++)
     {
@@ -295,17 +332,18 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
 
     for (int i = firstPanel, j = 1; i < NumberOfLine + firstPanel - 1 && j <= vocList.size(); i++, j++)
     {
-        vocList[j][0] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text);
-        vocList[j][1] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text);
-        StoringPosition = i;
-    }
-
-    for (int i = 0; i < vocList.size(); i++)
-    {
-        if (vocList[i][0] == " " && vocList[i][1] == " " || vocList[i][0] == "　" && vocList[i][1] == "　")
-        {
-            vocList.erase(vocList.begin() + i);
+        if (emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text)) {
+            vocList[j][0] = "noneSys";
         }
+        else {
+            vocList[j][0] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text);
+        } if (emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text)) {
+            vocList[j][1] = "noneSys";
+        }
+        else {
+            vocList[j][1] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text);
+        }
+        StoringPosition = i;
     }
 
     store("vocList.txt", vocList);
