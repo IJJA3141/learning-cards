@@ -91,7 +91,7 @@ System::Void QzCPP::MainPage::Populate()
 
     pos += posIncr;
 
-    for (int i = it; i < vocList.size(); i++)
+    for (int i = 0; i < vocList.size(); i++)
     {
         if (vocList[i][0] == "noneSys" && vocList[i][1] == "noneSys")
         {
@@ -103,9 +103,11 @@ System::Void QzCPP::MainPage::Populate()
         }
     }
 
+    if (it == vocList.size()) return;
+
     this->leftTB1->Text = fromStringToSystemstring(vocList[it][0]);
     this->rightTB1->Text = fromStringToSystemstring(vocList[it][1]);
-
+    
     for (int i = it; i < vocList.size(); i++)
     {
         System::Windows::Forms::Panel^ panelTBx = gcnew System::Windows::Forms::Panel();
