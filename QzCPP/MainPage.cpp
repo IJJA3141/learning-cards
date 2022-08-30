@@ -79,7 +79,7 @@ vector<vector<string>> createVocList(string fileName, string spliter)
     }
     if (vocList.size() == 0)
     {
-        vocList.resize(vocList.size() + 1, { "noneSys", "noneSys" });
+        vocList.resize(vocList.size() + 1, { "", "" });
     }
     return vocList;
 }
@@ -87,29 +87,14 @@ vector<vector<string>> vocList = createVocList("vocList.txt", " ");
 
 System::Void QzCPP::MainPage::Populate()
 {
-    int it = 0;
-
     pos += posIncr;
 
-    for (int i = 0; i < vocList.size(); i++)
-    {
-        if (vocList[i][0] == "noneSys" && vocList[i][1] == "noneSys")
-        {
-            it++;
-        }
-        else
-        {
-            break;
-        }
-    }
-
-    if (it == vocList.size()) return;
-
-    this->leftTB1->Text = fromStringToSystemstring(vocList[it][0]);
-    this->rightTB1->Text = fromStringToSystemstring(vocList[it][1]);
+    this->leftTB1->Text = fromStringToSystemstring(vocList[0][0]);
+    this->rightTB1->Text = fromStringToSystemstring(vocList[0][1]);
     
-    for (int i = it; i < vocList.size(); i++)
+    for (int i = 1; i < vocList.size(); i++)
     {
+
         System::Windows::Forms::Panel^ panelTBx = gcnew System::Windows::Forms::Panel();
 
         System::Windows::Forms::Panel^ leftPPx = gcnew System::Windows::Forms::Panel();
@@ -143,10 +128,8 @@ System::Void QzCPP::MainPage::Populate()
         rightTBx->TabIndex = 0;
         rightTBx->Name = L"rightTB" + (i + 1);
 
-        if (vocList[i][1] != "noneSys")
-        {
-            rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
-        }
+        rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
+
 
         leftTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         leftTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
@@ -160,10 +143,9 @@ System::Void QzCPP::MainPage::Populate()
         leftTBx->TabIndex = 0;
         leftTBx->Name = L"leftTB" + (i + 1);
 
-        if (vocList[i][0] == "noneSys")
-        {
-            leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
-        }
+
+        leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
+
 
         rightPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
         rightPPx->Margin = System::Windows::Forms::Padding(0);
@@ -286,7 +268,7 @@ System::Void QzCPP::MainPage::AddRow(System::Object^ sender, System::EventArgs^ 
     this->backgroundDG->Controls->Add(panelTBx);
     pos += posIncr;
 
-    vocList.resize(vocList.size() + 1, { "noneSys", "noneSys" });
+    vocList.resize(vocList.size() + 1, { "", "" });
 
     return System::Void();
 }
@@ -296,23 +278,20 @@ bool emptyOrNot(System::String^ sstr)
     return System::String::IsNullOrWhiteSpace(sstr);
 }
 
-System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
+System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::EventArgs^ e)
 {
     int backgroundDGPath;
-    int firstPanel;
     int StoringPosition;
+    int firstPanel;
+    int antJ = 1;
 
-    System::String^ tempsstr;
-
-    if (emptyOrNot(this->leftTB1->Text)) {
-        vocList[0][0] = "noneSys";
+    if (emptyOrNot(this->leftTB1->Text) && emptyOrNot(this->rightTB1->Text)) {
+        vocList.erase(vocList.begin());
+        antJ--;
     } else {
         vocList[0][0] = fromSystemstringToString(this->leftTB1->Text);
-    } if (emptyOrNot(this->rightTB1->Text)) {
-        vocList[0][1] = "noneSys";
-    } else {
         vocList[0][1] = fromSystemstringToString(this->rightTB1->Text);
-    }   
+    }
 
     for (int i = 0; i < this->Controls->Count; i++)
     {
@@ -332,17 +311,14 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
         }
     }
 
-    for (int i = firstPanel, j = 1; i < NumberOfLine + firstPanel - 1 && j <= vocList.size(); i++, j++)
+    for (int i = firstPanel, j = antJ; i < NumberOfLine + firstPanel - 1 && j <= vocList.size(); i++, j++)
     {
-        if (emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text)) {
-            vocList[j][0] = "noneSys";
+        if (emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text) && emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text)) {
+            vocList.erase(vocList.begin() + j);
+            j--;
         }
         else {
             vocList[j][0] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[2]->Controls[0]->Text);
-        } if (emptyOrNot(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text)) {
-            vocList[j][1] = "noneSys";
-        }
-        else {
             vocList[j][1] = fromSystemstringToString(this->Controls[backgroundDGPath]->Controls[i]->Controls[1]->Controls[0]->Text);
         }
         StoringPosition = i;
@@ -353,14 +329,11 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
     return System::Void();
 }
 
-/*System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventHandler^ e)
+System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
 {
-    System::Array^ a;
-    this->backgroundDG->Controls->CopyTo(a, 0);
-    int test = a->Length;
-    this->leftTB1->Text = fromStringToSystemstring(to_string(test));
-}*/
+    //Test//
 
+}
 
 [STAThread]
 
@@ -369,24 +342,3 @@ void main() {
     QzCPP::MainPage form;
     Application::Run(% form);
 }
-
-/*
-private: ArrayList^ arr = gcnew ArrayList();
-        //System::Windows::Forms::TextBox^ textBox10 = gcnew TextBox();
-
-           void test(void)
-           {
-            System::Windows::Forms::TextBox^ textBox10;
-            textBox10 = (gcnew System::Windows::Forms::TextBox());
-            SuspendLayout();
-
-            textBox10->Location = System::Drawing::Point(482, 779);
-            textBox10->Name = L"textBox1";
-            textBox10->Size = System::Drawing::Size(248, 20);
-            textBox10->TabIndex = 3;
-
-            arr->Add(textBox10);
-
-            //this->groupBox1->Controls->Add(textBox10);
-        }
-*/

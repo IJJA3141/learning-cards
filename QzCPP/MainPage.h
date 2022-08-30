@@ -71,6 +71,7 @@ namespace QzCPP {
 		void InitializeComponent(void)
 		{
 			this->backgroundDG = (gcnew System::Windows::Forms::Panel());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->panelTB1 = (gcnew System::Windows::Forms::Panel());
 			this->panelRD1 = (gcnew System::Windows::Forms::Panel());
 			this->rightPP1 = (gcnew System::Windows::Forms::Panel());
@@ -79,7 +80,6 @@ namespace QzCPP {
 			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->bannerLG = (gcnew System::Windows::Forms::Panel());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->backgroundDG->SuspendLayout();
 			this->panelTB1->SuspendLayout();
 			this->rightPP1->SuspendLayout();
@@ -100,6 +100,19 @@ namespace QzCPP {
 			this->backgroundDG->Name = L"backgroundDG";
 			this->backgroundDG->Size = System::Drawing::Size(1584, 665);
 			this->backgroundDG->TabIndex = 2;
+			// 
+			// button2
+			// 
+			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
+				static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->button2->Location = System::Drawing::Point(1394, 195);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(140, 78);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Test";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MainPage::Test);
 			// 
 			// panelTB1
 			// 
@@ -203,19 +216,6 @@ namespace QzCPP {
 			this->bannerLG->Size = System::Drawing::Size(1600, 50);
 			this->bannerLG->TabIndex = 0;
 			// 
-			// button2
-			// 
-			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
-				static_cast<System::Int32>(static_cast<System::Byte>(49)));
-			this->button2->Location = System::Drawing::Point(1394, 195);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(140, 78);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"button2";
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Click += gcnew System::EventHandler(this, &MainPage::Test);
-			// 
 			// MainPage
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -228,6 +228,7 @@ namespace QzCPP {
 			this->Controls->Add(this->backgroundDG);
 			this->Name = L"MainPage";
 			this->Text = L"MainPage";
+			this->Closed += gcnew System::EventHandler(this, &MainPage::OnFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainPage::MainPage_Load);
 			this->backgroundDG->ResumeLayout(false);
 			this->panelTB1->ResumeLayout(false);
@@ -260,9 +261,9 @@ namespace QzCPP {
 	}
 	private: System::Void MainPage_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
+	private: System::Void OnFormClosing(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void AddRow(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void Test(System::Object^ sender, System::EventArgs^ e);
-	//private: System::Void createNewRow(int i, int pos, int posIncr);
 	private: System::Void Populate();
 };
 }
