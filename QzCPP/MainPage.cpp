@@ -9,21 +9,20 @@
 #include <string>
 #include <vector>
 
-
-using namespace std;
-using namespace System;
 using namespace System::Windows::Forms;
+using namespace System;
+using namespace std;
 
 wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
 string fromSystemstringToString(String^ text)
 {
-    return msclr::interop::marshal_as<std::string>(text);
+    return converter.to_bytes(msclr::interop::marshal_as<std::wstring>(text));
 }
 
 String^ fromStringToSystemstring(string text)
 {
-    return msclr::interop::marshal_as<System::String^>(text);
+    return gcnew String(converter.from_bytes(text).c_str());
 }
 
 void store(string fileName,vector<vector<string>> vocList)
@@ -128,7 +127,7 @@ System::Void QzCPP::MainPage::Populate()
         rightTBx->TabIndex = 0;
         rightTBx->Name = L"rightTB" + (i + 1);
 
-        rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
+        rightTBx->Text = fromStringToSystemstring(vocList[i][1]);
 
 
         leftTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
@@ -144,7 +143,7 @@ System::Void QzCPP::MainPage::Populate()
         leftTBx->Name = L"leftTB" + (i + 1);
 
 
-        leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
+        leftTBx->Text = fromStringToSystemstring(vocList[i][0]);
 
 
         rightPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
@@ -331,8 +330,12 @@ System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::Even
 
 System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
 {
-    //Test//
-
+    //fromSystemstringToString
+    // 
+    //fromStringToSystemstring
+    //Test
+    
+    this->leftTB1->Text = fromStringToSystemstring(fromSystemstringToString(this->rightTB1->Text));
 }
 
 [STAThread]
