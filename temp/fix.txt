@@ -1,0 +1,177 @@
+vector<vector<string>> createVocList(string fileName, string spliter)
+{
+    vector<vector<string>> vocList;
+    int linePos = 0;
+    fstream file;
+    string line;
+
+    file.open(fileName, ios::in);
+    if (file.is_open())
+    {
+        while (getline(file, line))
+        {
+            vector<string> temp;
+
+            string t = "　";
+
+            if (line.find(t) != string::npos)
+            {
+                string left = line.substr(0, line.find(t));
+                string right = line.substr(line.find(t) + t.length(), line.length());
+
+                temp.push_back(string(left.begin(), left.end()));
+                temp.push_back(string(right.begin(), right.end()));
+            }
+            else
+            {
+                string left = line.substr(0, line.find(spliter));
+                string right = line.substr(line.find(spliter) + spliter.length(), line.length());
+
+                temp.push_back(string(left.begin(), left.end()));
+                temp.push_back(string(right.begin(), right.end()));
+            }
+
+            vocList.push_back(temp);
+            linePos++;
+        }
+    }
+    if (vocList.size() == 0)
+    {
+        vocList.resize(vocList.size() + 1, { "noneSys", "noneSys" });
+    }
+    return vocList;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+System::Void QzCPP::MainPage::Populate()
+{
+    int it = 0;
+
+    pos += posIncr;
+
+    for (int i = 0; i < vocList.size(); i++)
+    {
+        if (vocList[i][0] == "noneSys" && vocList[i][1] == "noneSys")
+        {
+            it++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (it == vocList.size()) return;
+
+    this->leftTB1->Text = fromStringToSystemstring(vocList[it][0]);
+    this->rightTB1->Text = fromStringToSystemstring(vocList[it][1]);
+    
+    for (int i = it; i < vocList.size(); i++)
+    {
+        System::Windows::Forms::Panel^ panelTBx = gcnew System::Windows::Forms::Panel();
+
+        System::Windows::Forms::Panel^ leftPPx = gcnew System::Windows::Forms::Panel();
+        System::Windows::Forms::TextBox^ leftTBx = gcnew System::Windows::Forms::TextBox();
+
+        System::Windows::Forms::Panel^ panelRDx = gcnew System::Windows::Forms::Panel();
+
+        System::Windows::Forms::Panel^ rightPPx = gcnew System::Windows::Forms::Panel();
+        System::Windows::Forms::TextBox^ rightTBx = gcnew System::Windows::Forms::TextBox();
+
+        panelTBx->SuspendLayout();
+
+        leftPPx->SuspendLayout();
+        rightPPx->SuspendLayout();
+
+        panelRDx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+        panelRDx->Margin = System::Windows::Forms::Padding(0);
+        panelRDx->Location = System::Drawing::Point(557, 6);
+        panelRDx->Size = System::Drawing::Size(6, 40);
+        panelRDx->TabIndex = 3;
+        panelRDx->Name = L"panelRD" + (i + 1);
+
+        rightTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+        rightTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
+        rightTBx->BorderStyle = System::Windows::Forms::BorderStyle::None;
+        rightTBx->Anchor = System::Windows::Forms::AnchorStyles::None;
+        rightTBx->ForeColor = System::Drawing::SystemColors::Window;
+        rightTBx->Margin = System::Windows::Forms::Padding(0);
+        rightTBx->Location = System::Drawing::Point(10, 9);
+        rightTBx->Size = System::Drawing::Size(537, 32);
+        rightTBx->TabIndex = 0;
+        rightTBx->Name = L"rightTB" + (i + 1);
+
+        if (vocList[i][1] != "noneSys")
+        {
+            rightTBx->Text = gcnew String(converter.from_bytes(vocList[i][1]).c_str());
+        }
+
+        leftTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+        leftTBx->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
+        //leftTBx->TextChanged += gcnew System::EventHandler(this, &MainPage::leftTB1_TextChanged);
+        leftTBx->BorderStyle = System::Windows::Forms::BorderStyle::None;
+        leftTBx->Anchor = System::Windows::Forms::AnchorStyles::None;
+        leftTBx->ForeColor = System::Drawing::SystemColors::Window;
+        leftTBx->Margin = System::Windows::Forms::Padding(0);
+        leftTBx->Location = System::Drawing::Point(10, 9);
+        leftTBx->Size = System::Drawing::Size(537, 32);
+        leftTBx->TabIndex = 0;
+        leftTBx->Name = L"leftTB" + (i + 1);
+
+        if (vocList[i][0] == "noneSys")
+        {
+            leftTBx->Text = gcnew String(converter.from_bytes(vocList[i][0]).c_str());
+        }
+
+        rightPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+        rightPPx->Margin = System::Windows::Forms::Padding(0);
+        rightPPx->Location = System::Drawing::Point(563, 0);
+        rightPPx->Size = System::Drawing::Size(557, 50);
+        rightPPx->TabIndex = 2;
+        rightPPx->Controls->Add(rightTBx);
+        rightPPx->Name = L"rightPP" + (i + 1);
+
+        leftPPx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+        leftPPx->Margin = System::Windows::Forms::Padding(0);
+        leftPPx->Location = System::Drawing::Point(0, 0);
+        leftPPx->Size = System::Drawing::Size(557, 50);
+        leftPPx->TabIndex = 1;
+        leftPPx->Controls->Add(leftTBx);
+        leftPPx->Name = L"leftPP" + (i + 1);
+
+        panelTBx->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+        panelTBx->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::panel4_Paint);
+        panelTBx->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+        panelTBx->Anchor = System::Windows::Forms::AnchorStyles::None;
+        panelTBx->Size = System::Drawing::Size(1120, 52);
+        panelTBx->TabIndex = 1;
+        panelTBx->Location = System::Drawing::Point(240, pos);
+        panelTBx->Controls->Add(panelRDx);
+        panelTBx->Controls->Add(rightPPx);
+        panelTBx->Controls->Add(leftPPx);
+        panelTBx->Name = L"panelTB" + (i + 1);
+
+        this->ClientSize = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
+        this->backgroundDG->Size = System::Drawing::Size(1584, 665 + (i * (50 + posIncr)));
+        this->backgroundDG->Controls->Add(panelTBx);
+        pos += posIncr;
+
+        NumberOfLine += 1;
+
+    }
+}

@@ -14,13 +14,10 @@ namespace QzCPP {
 	/// </summary>
 	public ref class MainPage : public System::Windows::Forms::Form
 	{
-	public: int NumberOfLine = 1;
-	public: int pos = 258;
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Button^ button6;
-	public: int posIncr = 200;
 
 	public:
 		MainPage(void)
@@ -75,19 +72,19 @@ namespace QzCPP {
 		void InitializeComponent(void)
 		{
 			this->backgroundDG = (gcnew System::Windows::Forms::Panel());
-			this->rightTB1 = (gcnew System::Windows::Forms::TextBox());
-			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
-			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->panelTB1 = (gcnew System::Windows::Forms::Panel());
 			this->panelRD1 = (gcnew System::Windows::Forms::Panel());
 			this->rightPP1 = (gcnew System::Windows::Forms::Panel());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->rightTB1 = (gcnew System::Windows::Forms::TextBox());
+			this->leftPP1 = (gcnew System::Windows::Forms::Panel());
+			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->bannerLG = (gcnew System::Windows::Forms::Panel());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->leftPP1 = (gcnew System::Windows::Forms::Panel());
 			this->backgroundDG->SuspendLayout();
 			this->panelTB1->SuspendLayout();
 			this->rightPP1->SuspendLayout();
@@ -96,186 +93,199 @@ namespace QzCPP {
 			// 
 			// backgroundDG
 			// 
-			this->backgroundDG->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
-			this->backgroundDG->Margin = System::Windows::Forms::Padding(0);
-			this->backgroundDG->Location = System::Drawing::Point(0, 377);
-			this->backgroundDG->Size = System::Drawing::Size(3168, 1279);
+			this->backgroundDG->AutoScroll = true;
+			this->backgroundDG->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)),
+				static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->backgroundDG->Controls->Add(this->panelTB1);
 			this->backgroundDG->Controls->Add(this->bannerLG);
 			this->backgroundDG->Controls->Add(this->button2);
 			this->backgroundDG->Controls->Add(this->button1);
+			this->backgroundDG->Location = System::Drawing::Point(0, 196);
+			this->backgroundDG->Margin = System::Windows::Forms::Padding(0);
 			this->backgroundDG->Name = L"backgroundDG";
-			this->backgroundDG->AutoScroll = true;
+			this->backgroundDG->Size = System::Drawing::Size(1584, 665);
 			this->backgroundDG->TabIndex = 2;
-			// 
-			// button2
-			// 
-			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
-			this->button2->Click += gcnew System::EventHandler(this, &MainPage::Test);
-			this->button2->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
-			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->button2->Location = System::Drawing::Point(2788, 375);
-			this->button2->Size = System::Drawing::Size(280, 150);
-			this->button2->UseVisualStyleBackColor = false;
-			this->button2->Name = L"button2";
-			this->button2->Text = L"Test";
-			this->button2->TabIndex = 2;
 			// 
 			// panelTB1
 			// 
-			this->panelTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->panelTB1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::panel4_Paint);
-			this->panelTB1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->panelTB1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
 			this->panelTB1->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->panelTB1->Location = System::Drawing::Point(480, 496);
-			this->panelTB1->Size = System::Drawing::Size(2238, 98);
+			this->panelTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->panelTB1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->panelTB1->Controls->Add(this->panelRD1);
 			this->panelTB1->Controls->Add(this->rightPP1);
 			this->panelTB1->Controls->Add(this->leftPP1);
+			this->panelTB1->Location = System::Drawing::Point(240, 258);
 			this->panelTB1->Name = L"panelTB1";
+			this->panelTB1->Size = System::Drawing::Size(1120, 52);
 			this->panelTB1->TabIndex = 1;
+			this->panelTB1->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::panel4_Paint);
 			// 
 			// panelRD1
 			// 
-			this->panelRD1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
-			this->panelRD1->Location = System::Drawing::Point(1114, 12);
+			this->panelRD1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
+				static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->panelRD1->Location = System::Drawing::Point(557, 6);
 			this->panelRD1->Margin = System::Windows::Forms::Padding(0);
-			this->panelRD1->Size = System::Drawing::Size(12, 77);
 			this->panelRD1->Name = L"panelRD1";
+			this->panelRD1->Size = System::Drawing::Size(6, 40);
 			this->panelRD1->TabIndex = 3;
 			// 
 			// rightPP1
 			// 
-			this->rightPP1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->rightPP1->Margin = System::Windows::Forms::Padding(0);
-			this->rightPP1->Location = System::Drawing::Point(1126, 0);
-			this->rightPP1->Size = System::Drawing::Size(1114, 96);
+			this->rightPP1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
 			this->rightPP1->Controls->Add(this->rightTB1);
+			this->rightPP1->Location = System::Drawing::Point(563, 0);
+			this->rightPP1->Margin = System::Windows::Forms::Padding(0);
 			this->rightPP1->Name = L"rightPP1";
+			this->rightPP1->Size = System::Drawing::Size(557, 50);
 			this->rightPP1->TabIndex = 2;
 			// 
 			// rightTB1
 			// 
-			this->rightTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->rightTB1->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
-			this->rightTB1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->rightTB1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->rightTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->rightTB1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->rightTB1->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(128)));
 			this->rightTB1->ForeColor = System::Drawing::SystemColors::Window;
+			this->rightTB1->Location = System::Drawing::Point(10, 9);
 			this->rightTB1->Margin = System::Windows::Forms::Padding(0);
-			this->rightTB1->Location = System::Drawing::Point(20, 17);
-			this->rightTB1->Size = System::Drawing::Size(1074, 63);
 			this->rightTB1->Name = L"rightTB1";
+			this->rightTB1->Size = System::Drawing::Size(537, 32);
 			this->rightTB1->TabIndex = 0;
 			// 
 			// leftPP1
 			// 
-			this->leftPP1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->leftPP1->Margin = System::Windows::Forms::Padding(0);
-			this->leftPP1->Location = System::Drawing::Point(0, 0);
-			this->leftPP1->Size = System::Drawing::Size(1114, 96);
+			this->leftPP1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
 			this->leftPP1->Controls->Add(this->leftTB1);
+			this->leftPP1->Location = System::Drawing::Point(0, 0);
+			this->leftPP1->Margin = System::Windows::Forms::Padding(0);
 			this->leftPP1->Name = L"leftPP1";
+			this->leftPP1->Size = System::Drawing::Size(557, 50);
 			this->leftPP1->TabIndex = 1;
 			// 
 			// leftTB1
 			// 
-			this->leftTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->leftTB1->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
-			this->leftTB1->TextChanged += gcnew System::EventHandler(this, &MainPage::leftTB1_TextChanged);
-			this->leftTB1->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->leftTB1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->leftTB1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->leftTB1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->leftTB1->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(128)));
 			this->leftTB1->ForeColor = System::Drawing::SystemColors::Window;
+			this->leftTB1->Location = System::Drawing::Point(10, 9);
 			this->leftTB1->Margin = System::Windows::Forms::Padding(0);
-			this->leftTB1->Location = System::Drawing::Point(20, 17);
-			this->leftTB1->Size = System::Drawing::Size(1074, 63);
 			this->leftTB1->Name = L"leftTB1";
+			this->leftTB1->Size = System::Drawing::Size(537, 32);
 			this->leftTB1->TabIndex = 0;
-			// 
-			// button1
-			// 
-			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
-			this->button1->Click += gcnew System::EventHandler(this, &MainPage::AddRow);
-			this->button1->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
-			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->button1->Location = System::Drawing::Point(2788, 213);
-			this->button1->Size = System::Drawing::Size(280, 150);
-			this->button1->UseVisualStyleBackColor = false;
-			this->button1->Name = L"button1";
-			this->button1->Text = L"button1";
-			this->button1->TabIndex = 1;
+			this->leftTB1->TextChanged += gcnew System::EventHandler(this, &MainPage::leftTB1_TextChanged);
 			// 
 			// bannerLG
 			// 
-			this->bannerLG->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)));
 			this->bannerLG->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
+			this->bannerLG->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)),
+				static_cast<System::Int32>(static_cast<System::Byte>(68)));
+			this->bannerLG->Location = System::Drawing::Point(0, 16);
 			this->bannerLG->Margin = System::Windows::Forms::Padding(0);
-			this->bannerLG->Location = System::Drawing::Point(0, 31);
-			this->bannerLG->Size = System::Drawing::Size(3200, 96);
 			this->bannerLG->Name = L"bannerLG";
+			this->bannerLG->Size = System::Drawing::Size(1600, 50);
 			this->bannerLG->TabIndex = 0;
+			// 
+			// button2
+			// 
+			this->button2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
+				static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->button2->Location = System::Drawing::Point(1394, 195);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(140, 78);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Test";
+			this->button2->UseVisualStyleBackColor = false;
+			this->button2->Click += gcnew System::EventHandler(this, &MainPage::Test);
+			// 
+			// button1
+			// 
+			this->button1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->button1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)),
+				static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->button1->Location = System::Drawing::Point(1394, 111);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(140, 78);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = false;
+			this->button1->Click += gcnew System::EventHandler(this, &MainPage::AddRow);
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(1101, 32);
-			this->button3->Size = System::Drawing::Size(219, 114);
-			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Location = System::Drawing::Point(550, 17);
+			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button3->Name = L"button3";
-			this->button3->Text = L"Learn";
+			this->button3->Size = System::Drawing::Size(110, 59);
 			this->button3->TabIndex = 3;
+			this->button3->Text = L"Learn";
+			this->button3->UseVisualStyleBackColor = true;
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(1839, 32);
-			this->button4->Size = System::Drawing::Size(219, 114);
-			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Location = System::Drawing::Point(920, 17);
+			this->button4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button4->Name = L"button4";
-			this->button4->Text = L"Test";
+			this->button4->Size = System::Drawing::Size(110, 59);
 			this->button4->TabIndex = 4;
+			this->button4->Text = L"Test";
+			this->button4->UseVisualStyleBackColor = true;
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(1101, 212);
-			this->button5->Size = System::Drawing::Size(219, 114);
-			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Location = System::Drawing::Point(550, 110);
+			this->button5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button5->Name = L"button5";
-			this->button5->Text = L"Cards";
+			this->button5->Size = System::Drawing::Size(110, 59);
 			this->button5->TabIndex = 5;
+			this->button5->Text = L"Cards";
+			this->button5->UseVisualStyleBackColor = true;
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(1839, 212);
-			this->button6->Size = System::Drawing::Size(219, 114);
-			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Location = System::Drawing::Point(920, 110);
+			this->button6->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button6->Name = L"button6";
-			this->button6->Text = L"futur";
+			this->button6->Size = System::Drawing::Size(110, 59);
 			this->button6->TabIndex = 6;
+			this->button6->Text = L"futur";
+			this->button6->UseVisualStyleBackColor = true;
 			// 
 			// MainPage
 			// 
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
-			this->Closed += gcnew System::EventHandler(this, &MainPage::OnFormClosing);
-			this->Load += gcnew System::EventHandler(this, &MainPage::MainPage_Load);
-			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
-			this->Margin = System::Windows::Forms::Padding(6, 6, 6, 6);
-			this->ClientSize = System::Drawing::Size(2884, 1656);
-			this->backgroundDG->ResumeLayout(false);
+			this->AutoScroll = true;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+			this->ClientSize = System::Drawing::Size(1584, 862);
 			this->Controls->Add(this->backgroundDG);
-			this->panelTB1->ResumeLayout(false);
-			this->rightPP1->ResumeLayout(false);
 			this->Controls->Add(this->button6);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
-			this->leftPP1->ResumeLayout(false);
-			this->rightPP1->PerformLayout();
-			this->leftPP1->PerformLayout();
-			this->ResumeLayout(false);
 			this->Name = L"MainPage";
 			this->Text = L"MainPage";
-			this->AutoScroll = true;
+			this->Closed += gcnew System::EventHandler(this, &MainPage::OnFormClosing);
+			this->Load += gcnew System::EventHandler(this, &MainPage::MainPage_Load);
+			this->backgroundDG->ResumeLayout(false);
+			this->panelTB1->ResumeLayout(false);
+			this->rightPP1->ResumeLayout(false);
+			this->rightPP1->PerformLayout();
+			this->leftPP1->ResumeLayout(false);
+			this->leftPP1->PerformLayout();
+			this->ResumeLayout(false);
 
 		}
 
