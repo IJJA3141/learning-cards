@@ -334,8 +334,6 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
     // 
     //fromStringToSystemstring
     //Test
-    
-    this->leftTB1->Text = fromStringToSystemstring(fromSystemstringToString(this->rightTB1->Text));
 }
 
 [STAThread]
