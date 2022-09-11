@@ -353,7 +353,7 @@ System::Void QzCPP::MainPage::NewCard()
     int Fw = this->Width * 30 / 100;
     int Fh = this->Height * 3 / 6;
 
-    int numVoc = 10;
+    /*int numVoc = 10;
     if (numVoc > vocList.size()) { numVoc = vocList.size(); }
     vector<int> arr;
     for (int i = 0; i < numVoc; i++)
@@ -363,6 +363,7 @@ System::Void QzCPP::MainPage::NewCard()
 
     auto rng = std::default_random_engine{};
     std::shuffle(std::begin(arr), std::end(arr), rng);
+    */
 
     System::Windows::Forms::Panel^ Frame = gcnew System::Windows::Forms::Panel();
 
@@ -382,7 +383,8 @@ System::Void QzCPP::MainPage::NewCard()
     Term->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 20.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
     Term->ForeColor = System::Drawing::SystemColors::Window;
 
-    Term->Text = fromStringToSystemstring(vocList[arr[0]][0]);
+    //Term->Text = fromStringToSystemstring(vocList[arr[0]][0]);
+    Term->Text = L"COUCOU";
 
     Term->Location = System::Drawing::Point(0, Fh/10);
     Term->Size = System::Drawing::Size(Fw, 100);
