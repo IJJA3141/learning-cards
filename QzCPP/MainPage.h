@@ -26,13 +26,16 @@ namespace QzCPP {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 	private: System::Windows::Forms::Panel^ Learn;
-	private: System::Windows::Forms::Button^ BackMenu;
+
+
+
 	private: System::Windows::Forms::Button^ button6;
 
 	public:
 		MainPage(void)
 		{
 			InitializeComponent();
+			this->Learn->Hide();
 			//
 			//TODO: ajoutez ici le code du constructeur
 			//
@@ -50,7 +53,6 @@ namespace QzCPP {
 				delete components;
 			}
 		}
-
 	protected:
 	private: System::Windows::Forms::Panel^ backgroundDG;
 	private: System::Windows::Forms::Panel^ bannerLG;
@@ -97,13 +99,11 @@ namespace QzCPP {
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->Menu = (gcnew System::Windows::Forms::Panel());
 			this->Learn = (gcnew System::Windows::Forms::Panel());
-			this->BackMenu = (gcnew System::Windows::Forms::Button());
 			this->backgroundDG->SuspendLayout();
 			this->panelTB1->SuspendLayout();
 			this->rightPP1->SuspendLayout();
 			this->leftPP1->SuspendLayout();
 			this->Menu->SuspendLayout();
-			this->Learn->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// backgroundDG
@@ -283,45 +283,30 @@ namespace QzCPP {
 			this->Menu->Controls->Add(this->button5);
 			this->Menu->Controls->Add(this->button4);
 			this->Menu->Controls->Add(this->button3);
-			this->Menu->Location = System::Drawing::Point(29, 82);
+			this->Menu->Location = System::Drawing::Point(3, 3);
 			this->Menu->Name = L"Menu";
 			this->Menu->Size = System::Drawing::Size(1787, 1050);
 			this->Menu->TabIndex = 7;
 			// 
 			// Learn
 			// 
-			this->Learn->Controls->Add(this->BackMenu);
 			this->Learn->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->Learn->Location = System::Drawing::Point(0, 0);
 			this->Learn->Name = L"Learn";
-			this->Learn->Size = System::Drawing::Size(1787, 1050);
+			this->Learn->Size = System::Drawing::Size(1743, 1077);
 			this->Learn->TabIndex = 8;
 			this->Learn->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &MainPage::Learn_Paint);
-			this->Learn->Hide();
-			// 
-			// BackMenu
-			// 
-			this->BackMenu->Location = System::Drawing::Point(1045, 20);
-			this->BackMenu->Name = L"BackMenu";
-			this->BackMenu->Size = System::Drawing::Size(458, 101);
-			this->BackMenu->TabIndex = 0;
-			this->BackMenu->Text = L"menu";
-			this->BackMenu->UseVisualStyleBackColor = true;
-			this->BackMenu->Click += gcnew System::EventHandler(this, &MainPage::TestD);
 			// 
 			// MainPage
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->AutoScroll = true;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)),
 				static_cast<System::Int32>(static_cast<System::Byte>(28)));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-			this->ClientSize = System::Drawing::Size(1787, 1050);
+			this->ClientSize = System::Drawing::Size(1743, 1077);
 			this->Controls->Add(this->Learn);
 			this->Controls->Add(this->Menu);
 			this->Name = L"MainPage";
-			this->Text = L"MainPage";
+			this->Text = L"QzCPP";
 			this->Closed += gcnew System::EventHandler(this, &MainPage::OnFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainPage::MainPage_Load);
 			this->backgroundDG->ResumeLayout(false);
@@ -331,7 +316,6 @@ namespace QzCPP {
 			this->leftPP1->ResumeLayout(false);
 			this->leftPP1->PerformLayout();
 			this->Menu->ResumeLayout(false);
-			this->Learn->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -363,7 +347,8 @@ namespace QzCPP {
 	private: System::Void Test(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void Populate();
 	private: System::Void NewCard();
+	private: System::Void UpDateVocList();
 	private: System::Void Learn_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}
-	};
+};
 }

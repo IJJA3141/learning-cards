@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 
+#include <algorithm>
+#include <random>
+
 using namespace System::Windows::Forms;
 using namespace System;
 using namespace std;
@@ -19,7 +22,6 @@ string fromSystemstringToString(String^ text)
 {
     return converter.to_bytes(msclr::interop::marshal_as<std::wstring>(text));
 }
-
 String^ fromStringToSystemstring(string text)
 {
     return gcnew String(converter.from_bytes(text).c_str());
@@ -273,7 +275,7 @@ bool emptyOrNot(System::String^ sstr)
     return System::String::IsNullOrWhiteSpace(sstr);
 }
 
-System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::EventArgs^ e)
+System::Void QzCPP::MainPage::UpDateVocList()
 {
     int backgroundDGPath;
     int StoringPosition;
@@ -321,24 +323,47 @@ System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::Even
     }
 
     store("vocList.txt", vocList);
+}
 
+System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::EventArgs^ e)
+{
+    UpDateVocList();
     return System::Void();
 }
 
 System::Void QzCPP::MainPage::TestD(System::Object^ sender, System::EventArgs^ e)
 {
+    for (int i = 0; i < this->Learn->Controls->Count; i++)
+    {
+        delete this->Learn->Controls[i];
+    }
     this->Learn->Hide();
     this->Menu->Show();
-    //NewCard();
 }
 System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
 {
+    UpDateVocList();
+    NewCard();
     this->Menu->Hide();
     this->Learn->Show();
 }
 
 System::Void QzCPP::MainPage::NewCard()
 {
+    int Fw = this->Width * 30 / 100;
+    int Fh = this->Height * 3 / 6;
+
+    int numVoc = 10;
+    if (numVoc > vocList.size()) { numVoc = vocList.size(); }
+    vector<int> arr;
+    for (int i = 0; i < numVoc; i++)
+    {
+        arr.push_back(i);
+    }
+
+    auto rng = std::default_random_engine{};
+    std::shuffle(std::begin(arr), std::end(arr), rng);
+
     System::Windows::Forms::Panel^ Frame = gcnew System::Windows::Forms::Panel();
 
     System::Windows::Forms::Label^ Term = gcnew System::Windows::Forms::Label();
@@ -348,15 +373,56 @@ System::Void QzCPP::MainPage::NewCard()
 
     System::Windows::Forms::Button^ Help = gcnew System::Windows::Forms::Button();
     System::Windows::Forms::Button^ Ret = gcnew System::Windows::Forms::Button();
+    System::Windows::Forms::Button^ BackMenu = gcnew System::Windows::Forms::Button();
+
+    Frame->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Frame->Location = System::Drawing::Point(7*this->Width/20, this->Height/6);
+    Frame->Size = System::Drawing::Size(Fw, Fh);
+
+    Term->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 20.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+    Term->ForeColor = System::Drawing::SystemColors::Window;
+
+    Term->Text = fromStringToSystemstring(vocList[arr[0]][0]);
+
+    Term->Location = System::Drawing::Point(0, Fh/10);
+    Term->Size = System::Drawing::Size(Fw, 100);
+    Term->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+    
+    VocPos->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+    VocPos->ForeColor = System::Drawing::SystemColors::Window;
+    VocPos->Location = System::Drawing::Point(Fw*90/100, 3);
+    VocPos->Size = System::Drawing::Size(Fw*10/100, 100);
+    VocPos->Text = L"1/10";
+
+    Ans->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+    Ans->BorderStyle = System::Windows::Forms::BorderStyle::None;
+    Ans->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
+    Ans->ForeColor = System::Drawing::SystemColors::Window;
+    Ans->Margin = System::Windows::Forms::Padding(0);
+    Ans->Location = System::Drawing::Point(Fw/20, Fh-100);
+    Ans->Size = System::Drawing::Size(Fw*18/20, 40);
+
+    Help->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Help->Location = System::Drawing::Point(100, Fh-50);
+    Help->Size = System::Drawing::Size(100, 50);
+
+    Ret->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Ret->Location = System::Drawing::Point(300, Fh-50);
+    Ret->Size = System::Drawing::Size(100, 50);
+
+    BackMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    BackMenu->Location = System::Drawing::Point(0, 0);
+    BackMenu->Size = System::Drawing::Size(100, 50);
+    BackMenu->Click += gcnew System::EventHandler(this, &MainPage::TestD);
 
     Frame->Controls->Add(Term);
     Frame->Controls->Add(VocPos);
     Frame->Controls->Add(Ans);
     Frame->Controls->Add(Help);
     Frame->Controls->Add(Ret);
+    Frame->Controls->Add(BackMenu);
+    
     this->Learn->Controls->Add(Frame);
-    Sleep(1000);
-    delete Frame;
 }
 
 [STAThread]
