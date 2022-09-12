@@ -2,3 +2,7 @@ E:\Prog\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.AssemblyReference.cache
 E:\Prog\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.SuggestedBindingRedirects.cache
 E:\Prog\C++\learning-cards\QzCPP\x64\Debug\QzCPP.MainPage.resources
 E:\Prog\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.GenerateResource.cache
+C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.AssemblyReference.cache
+C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\x64\Debug\QzCPP.MainPage.resources
+C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\x64\Debug\QzCPP.vcxproj.GenerateResource.cache

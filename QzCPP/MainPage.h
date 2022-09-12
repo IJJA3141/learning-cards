@@ -14,6 +14,7 @@ namespace QzCPP {
 	/// </summary>
 	public ref class MainPage : public System::Windows::Forms::Form
 	{
+	public: int RightAns;
 	public: int NumberOfLine = 1;
 	public: int pos = 258;
 	public: int posIncr = 200;
@@ -347,6 +348,7 @@ namespace QzCPP {
 	private: System::Void Test(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void Populate();
 	private: System::Void NewCard();
+	private: System::Void Next(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void UpDateVocList();
 	private: System::Void Learn_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	}

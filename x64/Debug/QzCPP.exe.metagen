@@ -20,6 +20,7 @@ Class QzCPP.MainPage: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
+    Int32 RightAns : Public
     Int32 NumberOfLine : Public
     Int32 pos : Public
     Int32 posIncr : Public

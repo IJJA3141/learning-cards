@@ -16,6 +16,10 @@ using namespace System::Windows::Forms;
 using namespace System;
 using namespace std;
 
+vector<int> arr;
+int nomPlusTard;
+bool miss = false;
+
 wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
 string fromSystemstringToString(String^ text)
@@ -333,6 +337,7 @@ System::Void QzCPP::MainPage::OnFormClosing(System::Object^ sender, System::Even
 
 System::Void QzCPP::MainPage::TestD(System::Object^ sender, System::EventArgs^ e)
 {
+    arr = {};
     for (int i = 0; i < this->Learn->Controls->Count; i++)
     {
         delete this->Learn->Controls[i];
@@ -348,27 +353,48 @@ System::Void QzCPP::MainPage::Test(System::Object^ sender, System::EventArgs^ e)
     this->Learn->Show();
 }
 
+System::Void QzCPP::MainPage::Next(Object^ sender, EventArgs^ e)
+{
+    if (vocList[arr[nomPlusTard]][1] == fromSystemstringToString(this->Learn->Controls[0]->Controls[2]->Text))
+    {
+        if (miss == false) { RightAns += 1; }
+        nomPlusTard += 1;
+        miss = false;
+        if (nomPlusTard >= vocList.size()) 
+        {
+            this->Learn->Controls[0]->Controls[2]->Text = fromStringToSystemstring(to_string(RightAns));
+            //result
+            return;
+        }
+        this->Learn->Controls[0]->Controls[0]->Text = fromStringToSystemstring(vocList[arr[nomPlusTard]][0]);
+    }
+    else 
+    {
+        miss = true;
+        this->Learn->Controls[0]->Controls[6]->Text = L"The right anser was:" + fromStringToSystemstring(vocList[arr[nomPlusTard]][1]);
+    }
+}
+
 System::Void QzCPP::MainPage::NewCard()
 {
     int Fw = this->Width * 30 / 100;
     int Fh = this->Height * 3 / 6;
+    RightAns = 0;
+    nomPlusTard = 0;
 
-    /*int numVoc = 10;
-    if (numVoc > vocList.size()) { numVoc = vocList.size(); }
-    vector<int> arr;
-    for (int i = 0; i < numVoc; i++)
+    for (int i = 0; i < vocList.size(); i++)
     {
         arr.push_back(i);
     }
 
-    auto rng = std::default_random_engine{};
+    default_random_engine rng(time(0));
     std::shuffle(std::begin(arr), std::end(arr), rng);
-    */
 
     System::Windows::Forms::Panel^ Frame = gcnew System::Windows::Forms::Panel();
 
     System::Windows::Forms::Label^ Term = gcnew System::Windows::Forms::Label();
     System::Windows::Forms::Label^ VocPos = gcnew System::Windows::Forms::Label();
+    System::Windows::Forms::Label^ YouWrong = gcnew System::Windows::Forms::Label();
 
     System::Windows::Forms::TextBox^ Ans = gcnew System::Windows::Forms::TextBox();
 
@@ -383,8 +409,7 @@ System::Void QzCPP::MainPage::NewCard()
     Term->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 20.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
     Term->ForeColor = System::Drawing::SystemColors::Window;
 
-    //Term->Text = fromStringToSystemstring(vocList[arr[0]][0]);
-    Term->Text = L"COUCOU";
+    Term->Text = fromStringToSystemstring(vocList[arr[0]][0]);
 
     Term->Location = System::Drawing::Point(0, Fh/10);
     Term->Size = System::Drawing::Size(Fw, 100);
@@ -396,6 +421,12 @@ System::Void QzCPP::MainPage::NewCard()
     VocPos->Size = System::Drawing::Size(Fw*10/100, 100);
     VocPos->Text = L"1/10";
 
+    YouWrong->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+    YouWrong->ForeColor = System::Drawing::SystemColors::Window;
+    YouWrong->Location = System::Drawing::Point(Fw * 1 / 2, Fh - 200);
+    YouWrong->Size = System::Drawing::Size(Fw * 10 / 100, 100);
+    YouWrong->Text = "";
+
     Ans->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
     Ans->BorderStyle = System::Windows::Forms::BorderStyle::None;
     Ans->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
@@ -404,6 +435,11 @@ System::Void QzCPP::MainPage::NewCard()
     Ans->Location = System::Drawing::Point(Fw/20, Fh-100);
     Ans->Size = System::Drawing::Size(Fw*18/20, 40);
 
+    for (int i = 0; i < arr.size(); i++)
+    {
+        Ans->Text = fromStringToSystemstring(to_string(arr[i])+fromSystemstringToString(Ans->Text));
+    }
+
     Help->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
     Help->Location = System::Drawing::Point(100, Fh-50);
     Help->Size = System::Drawing::Size(100, 50);
@@ -411,6 +447,7 @@ System::Void QzCPP::MainPage::NewCard()
     Ret->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
     Ret->Location = System::Drawing::Point(300, Fh-50);
     Ret->Size = System::Drawing::Size(100, 50);
+    Ret->Click += gcnew System::EventHandler(this, &MainPage::Next);
 
     BackMenu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
     BackMenu->Location = System::Drawing::Point(0, 0);
@@ -423,10 +460,10 @@ System::Void QzCPP::MainPage::NewCard()
     Frame->Controls->Add(Help);
     Frame->Controls->Add(Ret);
     Frame->Controls->Add(BackMenu);
-    
+    Frame->Controls->Add(YouWrong);
+
     this->Learn->Controls->Add(Frame);
 }
-
 [STAThread]
 
 void main() {
