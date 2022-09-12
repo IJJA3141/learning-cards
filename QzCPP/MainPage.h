@@ -350,7 +350,9 @@ namespace QzCPP {
 	private: System::Void NewCard();
 	private: System::Void Next(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void UpDateVocList();
-	private: System::Void Learn_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	}
+	private: System::Void Learn_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {}
+	private: System::Void Result();
+	private: System::Void PreNewCard(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void Help(System::Object^ sender, System::EventArgs^ e);
 };
 }

@@ -362,10 +362,10 @@ System::Void QzCPP::MainPage::Next(Object^ sender, EventArgs^ e)
         miss = false;
         if (nomPlusTard >= vocList.size()) 
         {
-            this->Learn->Controls[0]->Controls[2]->Text = fromStringToSystemstring(to_string(RightAns));
-            //result
+            Result();
             return;
         }
+        this->Learn->Controls[0]->Controls[6]->Text = "";
         this->Learn->Controls[0]->Controls[0]->Text = fromStringToSystemstring(vocList[arr[nomPlusTard]][0]);
     }
     else 
@@ -373,6 +373,66 @@ System::Void QzCPP::MainPage::Next(Object^ sender, EventArgs^ e)
         miss = true;
         this->Learn->Controls[0]->Controls[6]->Text = L"The right anser was:" + fromStringToSystemstring(vocList[arr[nomPlusTard]][1]);
     }
+}
+
+System::Void QzCPP::MainPage::Result()
+{
+    int Fw = this->Width * 30 / 100;
+    int Fh = this->Height * 3 / 6;
+
+    for (int i = 0; i < this->Learn->Controls->Count; i++)
+    {
+        delete this->Learn->Controls[i];
+    }
+    Panel^ Frame = gcnew Panel();
+
+    Label^ Res = gcnew Label();
+
+    Button^ Quit = gcnew Button();
+    Button^ Again = gcnew Button();
+
+    Frame->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Frame->Location = System::Drawing::Point(7 * this->Width / 20, this->Height / 6);
+    Frame->Size = System::Drawing::Size(Fw, Fh);
+
+    Res->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei", 20.5F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+    Res->ForeColor = System::Drawing::SystemColors::Window;
+    Res->Text = L"You had " + RightAns + " right ansers";
+    Res->Location = System::Drawing::Point(0, Fh / 10);
+    Res->Size = System::Drawing::Size(Fw, 100);
+    Res->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+
+    Quit->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Quit->Location = System::Drawing::Point(Fw-200, Fh-100);
+    Quit->Size = System::Drawing::Size(100, 50);
+    Quit->Click += gcnew System::EventHandler(this, &MainPage::PreNewCard);
+
+    Again->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+    Again->Location = System::Drawing::Point(0, Fh-100);
+    Again->Size = System::Drawing::Size(100, 50);
+    Again->Click += gcnew System::EventHandler(this, &MainPage::TestD);
+
+    Frame->Controls->Add(Res);
+    Frame->Controls->Add(Quit);
+    Frame->Controls->Add(Again);
+
+    this->Learn->Controls->Add(Frame);
+}
+
+Void QzCPP::MainPage::PreNewCard(System::Object^ sender, System::EventArgs^ e)
+{
+    for (int i = 0; i < this->Learn->Controls->Count; i++)
+    {
+        delete this->Learn->Controls[i];
+    }
+    arr = {};
+    NewCard();
+}
+
+Void QzCPP::MainPage::Help(System::Object^ sender, System::EventArgs^ e)
+{
+    miss = true;
+    this->Learn->Controls[0]->Controls[6]->Text = L"The right anser was:" + fromStringToSystemstring(vocList[arr[nomPlusTard]][1]);
 }
 
 System::Void QzCPP::MainPage::NewCard()
@@ -443,6 +503,7 @@ System::Void QzCPP::MainPage::NewCard()
     Help->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
     Help->Location = System::Drawing::Point(100, Fh-50);
     Help->Size = System::Drawing::Size(100, 50);
+    BackMenu->Click += gcnew System::EventHandler(this, &MainPage::Help);
 
     Ret->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
     Ret->Location = System::Drawing::Point(300, Fh-50);
