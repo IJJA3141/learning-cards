@@ -1,5 +1,4 @@
 ﻿  MainPage.cpp
-E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(62,24): warning C4566: le caractère représenté par le nom de caractère universel '\u3000' ne peut pas être représenté dans la page de codes actuelle (1252)
-E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(450,35): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(23,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
   MainPage.obj : module MSIL détecté ; liens incrémentiels désactivés pour MSIL ; édition de liens complète en cours
   QzCPP.vcxproj -> E:\Prog\C++\learning-cards\x64\Debug\QzCPP.exe

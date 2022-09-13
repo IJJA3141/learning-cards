@@ -24,3 +24,7 @@ Class QzCPP.MainPage: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Int32 NumberOfLine : Public
     Int32 pos : Public
     Int32 posIncr : Public
+    Int32 MainWindowHeight : Public
+    Int32 MainWindowWidth : Public, Static
+  Methods:
+    ResizeAll(): PrivateScope, Public, HideBySig
