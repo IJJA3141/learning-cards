@@ -46,16 +46,42 @@ namespace QzCPP {
 		}
 	protected:
 	private: System::Windows::Forms::Button^ startCard;
+	public: System::Drawing::Rectangle startCardButton;
+
 	private: System::Windows::Forms::Button^ startLearn;
+	public: System::Drawing::Rectangle startLearnButton;
+
 	private: System::Windows::Forms::Button^ startWrite;
+	public: System::Drawing::Rectangle startWriteButton;
+
 	private: System::Windows::Forms::Button^ StartPlusTard;
+	public: System::Drawing::Rectangle startPlusTardButton;
+
+	private: System::Windows::Forms::Panel^ backgroundInputZone;
+	public: System::Drawing::Rectangle backgroundInputZonePanel;
+	
+	private: System::Windows::Forms::Panel^ bannerLightGrey;
+	public: System::Drawing::Rectangle bannerLightGreyPanel;
+
+	private: System::Windows::Forms::Panel^ panelRedDarck;
+	public: System::Drawing::Rectangle panelRedDarckPanel;
+
+	private: System::Windows::Forms::Panel^ panelTextBox;
+	public: System::Drawing::Rectangle panelTextBoxPanel;
+
+	private: System::Windows::Forms::TextBox^ leftTextBox;
+	public: System::Drawing::Rectangle leftTextBoxTextBox;
+
+	private: System::Windows::Forms::TextBox^ rightTextBox;
+	public: System::Drawing::Rectangle rightTextBoxTextBox;
+		  //
+		  //
+		  //
 
 	private: System::Windows::Forms::Panel^ Menu;
 
 		   /*
 		   private: System::Windows::Forms::Panel^ Learn;
-		   private: System::Windows::Forms::Panel^ backgroundDG;
-		   private: System::Windows::Forms::Panel^ bannerLG;
 
 		   private: System::Windows::Forms::Button^ button1;
 
@@ -79,7 +105,7 @@ namespace QzCPP {
 
 		void InitializeMyComponent(void)
 		{
-			this->ClientSize = System::Drawing::Size(1000, 1000);
+			this->ClientSize = System::Drawing::Size(2560, 1440);
 
 			MainWindowWidth = this->Width;
 			MainWindowHeight = this->Height;
@@ -89,6 +115,14 @@ namespace QzCPP {
 			this->startWrite = (gcnew System::Windows::Forms::Button());
 			this->StartPlusTard = (gcnew System::Windows::Forms::Button());
 
+			this->backgroundInputZone = (gcnew System::Windows::Forms::Panel());
+			this->bannerLightGrey = (gcnew System::Windows::Forms::Panel());
+			this->panelTextBox = (gcnew System::Windows::Forms::Panel());
+			this->panelRedDarck = (gcnew System::Windows::Forms::Panel());
+
+			this->leftTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->rightTextBox = (gcnew System::Windows::Forms::TextBox());
+
 			this->Menu = (gcnew System::Windows::Forms::Panel());
 
 			// startCard
@@ -96,38 +130,105 @@ namespace QzCPP {
 			this->startCard->Size = System::Drawing::Size(120, 60);
 			this->startCard->TabIndex = 1;
 			this->startCard->Text = L"Card";
+			startCardButton = System::Drawing::Rectangle(this->startCard->Left, this->startCard->Top, this->startCard->Width, this->startCard->Height);
 
-			// button4
+			// startLearn
 			this->startLearn->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 200);
 			this->startLearn->Size = System::Drawing::Size(120, 60);
 			this->startLearn->TabIndex = 2;
 			this->startLearn->Text = L"Learn";
+			startLearnButton = System::Drawing::Rectangle(this->startLearn->Left, this->startLearn->Top, this->startLearn->Width, this->startLearn->Height);
 
-			// button
+			// startWrite
 			this->startWrite->Location = System::Drawing::Point((MainWindowWidth / 2) - 100 - 120, 360);
 			this->startWrite->Size = System::Drawing::Size(120, 60);
 			this->startWrite->TabIndex = 3;
 			this->startWrite->Text = L"Write";
+			startWriteButton = System::Drawing::Rectangle(this->startWrite->Left, this->startWrite->Top, this->startWrite->Width, this->startWrite->Height);
 
-			// button6
+			// StartPlusTard
 			this->StartPlusTard->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 360);
 			this->StartPlusTard->Size = System::Drawing::Size(120, 60);
 			this->StartPlusTard->TabIndex = 4;
 			this->StartPlusTard->Text = L"?";
+			startPlusTardButton = System::Drawing::Rectangle(this->StartPlusTard->Left, this->StartPlusTard->Top, this->StartPlusTard->Width, this->StartPlusTard->Height);
 
-			//Menu
+			// Menu
 			this->Menu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
 			this->Menu->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight);
 			this->Menu->Location = System::Drawing::Point(0, 0);
 			this->Menu->TabStop = false;
-			this->Menu->Name = L"Menu";
 			this->Menu->AutoSize = true;
+			this->Menu->Name = L"Menu";
 
-			//this->Menu->Controls->Add(this->backgroundDG);
+			// backgroundInputZone
+			this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			this->backgroundInputZone->Location = System::Drawing::Point(0, MainWindowHeight/2);
+			this->backgroundInputZone->Name = L"backgroundInputZone";
+			this->backgroundInputZone->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight/2);
+			this->backgroundInputZone->TabStop = false;
+			this->backgroundInputZonePanel = System::Drawing::Rectangle(this->backgroundInputZone->Left, this->backgroundInputZone->Top, this->backgroundInputZone->Width, this->backgroundInputZone->Height);
+
+			//bannerLightGrey
+			this->bannerLightGrey->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)));
+			this->bannerLightGrey->Location = System::Drawing::Point(0, 16);
+			this->bannerLightGrey->Name = L"bannerLightGrey";
+			this->bannerLightGrey->Size = System::Drawing::Size(MainWindowWidth, 50);
+			this->bannerLightGrey->TabStop = false;
+			this->bannerLightGreyPanel = System::Drawing::Rectangle(this->bannerLightGrey->Left, this->bannerLightGrey->Top, this->bannerLightGrey->Width, this->bannerLightGrey->Height);
+
+			// panelTextbox
+			this->panelTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->panelTextBox->Name = L"panelTextbox1";
+			this->panelTextBox->Size = System::Drawing::Size(this->backgroundInputZone->Width*65/100, 45);
+			this->panelTextBox->Location = System::Drawing::Point((MainWindowWidth / 2) - (this->panelTextBox->Width / 2), 100);
+			this->panelTextBoxPanel = System::Drawing::Rectangle(this->panelTextBox->Left, this->panelTextBox->Top, this->panelTextBox->Width, this->panelTextBox->Height);
+			
+			// leftTextBox
+			this->leftTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->leftTextBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->leftTextBox->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
+			this->leftTextBox->ForeColor = System::Drawing::SystemColors::Window;
+			this->leftTextBox->Name = L"leftTextBox1";
+
+			this->leftTextBox->Location = System::Drawing::Point(0, this->panelTextBox->Height * 5 / 100);
+			this->leftTextBox->Size = System::Drawing::Size(this->panelTextBox->Width * 45 / 100, this->panelTextBox->Height * 90 / 100);
+			this->leftTextBox->TabIndex = 5;
+			this->leftTextBoxTextBox = System::Drawing::Rectangle(this->leftTextBox->Left, this->leftTextBox->Top, this->leftTextBox->Width, this->leftTextBox->Height);
+
+			// rightTextBox
+			this->rightTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+			this->rightTextBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->rightTextBox->Font = (gcnew System::Drawing::Font(L"UD Digi Kyokasho NP-B", 20.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(128)));
+			this->rightTextBox->ForeColor = System::Drawing::SystemColors::Window;
+			this->rightTextBox->Name = L"rightTextBox1";
+
+			this->rightTextBox->Size = System::Drawing::Size(this->panelTextBox->Width * 45 / 100, this->panelTextBox->Height * 90 / 100);
+			this->rightTextBox->Location = System::Drawing::Point(this->panelTextBox->Width - this->rightTextBox->Width, this->panelTextBox->Height * 5 / 100);
+			this->rightTextBox->TabIndex = 6;
+			this->rightTextBoxTextBox = System::Drawing::Rectangle(this->rightTextBox->Left, this->rightTextBox->Top, this->rightTextBox->Width, this->rightTextBox->Height);
+
+			// panelRedDarck
+			this->panelRedDarck->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
+			this->panelRedDarck->Name = L"panelRedDarck1";
+			this->panelRedDarck->TabStop = false;
+			this->panelRedDarck->Location = System::Drawing::Point(this->panelTextBox->Width * 5 / 10 - this->panelTextBox->Width * 5 / 100, 0);
+			this->panelRedDarck->Size = System::Drawing::Size(this->panelTextBox->Width * 10 / 100, panelTextBox->Height);
+			this->panelRedDarckPanel = System::Drawing::Rectangle(this->panelRedDarck->Left, this->panelRedDarck->Top, this->panelRedDarck->Width, this->panelRedDarck->Height);
+
+			//AddZone
+			this->panelTextBox->Controls->Add(this->leftTextBox);
+			this->panelTextBox->Controls->Add(this->panelRedDarck);
+			this->panelTextBox->Controls->Add(this->rightTextBox);
+
+			this->backgroundInputZone->Controls->Add(this->bannerLightGrey);
+			this->backgroundInputZone->Controls->Add(this->panelTextBox);
+
 			this->Menu->Controls->Add(this->startCard);
 			this->Menu->Controls->Add(this->startLearn);
 			this->Menu->Controls->Add(this->startWrite);
 			this->Menu->Controls->Add(this->StartPlusTard);
+			this->Menu->Controls->Add(this->backgroundInputZone);
 
 			// MainPage
 
@@ -149,14 +250,13 @@ namespace QzCPP {
 		/*
 		void InitializeComponent(void)
 		{
-			this->backgroundDG = (gcnew System::Windows::Forms::Panel());
-			this->panelTB1 = (gcnew System::Windows::Forms::Panel());
-			this->panelRD1 = (gcnew System::Windows::Forms::Panel());
+			
+			
+			
 			this->rightPP1 = (gcnew System::Windows::Forms::Panel());
 			this->rightTB1 = (gcnew System::Windows::Forms::TextBox());
 			this->leftPP1 = (gcnew System::Windows::Forms::Panel());
 			this->leftTB1 = (gcnew System::Windows::Forms::TextBox());
-			this->bannerLG = (gcnew System::Windows::Forms::Panel());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 
