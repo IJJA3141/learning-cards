@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <Windows.h>
 
 namespace QzCPP {
 
@@ -19,7 +20,9 @@ namespace QzCPP {
 	public: int pos = 258;
 	public: int posIncr = 200;
 	public: static int MainWindowWidth;
-	public: int MainWindowHeight;
+	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
+	public:
+	public: static int MainWindowHeight;
 
 	public:
 		MainPage(void)
@@ -60,6 +63,9 @@ namespace QzCPP {
 	private: System::Windows::Forms::Panel^ backgroundInputZone;
 	public: System::Drawing::Rectangle backgroundInputZonePanel;
 	
+	private: System::Windows::Forms::Panel^ backgroundMask;
+	public: System::Drawing::Rectangle backgroundMaskPanel;
+
 	private: System::Windows::Forms::Panel^ bannerLightGrey;
 	public: System::Drawing::Rectangle bannerLightGreyPanel;
 
@@ -77,8 +83,12 @@ namespace QzCPP {
 		  //
 		  //
 		  //
-
 	private: System::Windows::Forms::Panel^ Menu;
+		  //
+		  //
+		  //
+	private: System::Windows::Forms::Panel^ scrollBar;
+	private: System::Windows::Forms::Panel^ handle;
 
 		   /*
 		   private: System::Windows::Forms::Panel^ Learn;
@@ -105,7 +115,8 @@ namespace QzCPP {
 
 		void InitializeMyComponent(void)
 		{
-			this->ClientSize = System::Drawing::Size(2560, 1440);
+			this->ClientSize = System::Drawing::Size(1920, 1080);
+			this->MinimumSize = System::Drawing::Size(400, 500);
 
 			MainWindowWidth = this->Width;
 			MainWindowHeight = this->Height;
@@ -116,6 +127,7 @@ namespace QzCPP {
 			this->StartPlusTard = (gcnew System::Windows::Forms::Button());
 
 			this->backgroundInputZone = (gcnew System::Windows::Forms::Panel());
+			this->backgroundMask = (gcnew System::Windows::Forms::Panel());
 			this->bannerLightGrey = (gcnew System::Windows::Forms::Panel());
 			this->panelTextBox = (gcnew System::Windows::Forms::Panel());
 			this->panelRedDarck = (gcnew System::Windows::Forms::Panel());
@@ -125,29 +137,33 @@ namespace QzCPP {
 
 			this->Menu = (gcnew System::Windows::Forms::Panel());
 
+			this->scrollBar = (gcnew System::Windows::Forms::Panel());
+			this->handle = (gcnew System::Windows::Forms::Panel());
+
+
 			// startCard
-			this->startCard->Location = System::Drawing::Point((MainWindowWidth / 2) - 100 - 120, 200);
+			this->startCard->Location = System::Drawing::Point((MainWindowWidth / 2) - 100 - 120, 200 - 50);
 			this->startCard->Size = System::Drawing::Size(120, 60);
 			this->startCard->TabIndex = 1;
 			this->startCard->Text = L"Card";
 			startCardButton = System::Drawing::Rectangle(this->startCard->Left, this->startCard->Top, this->startCard->Width, this->startCard->Height);
 
 			// startLearn
-			this->startLearn->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 200);
+			this->startLearn->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 200 - 50);
 			this->startLearn->Size = System::Drawing::Size(120, 60);
 			this->startLearn->TabIndex = 2;
 			this->startLearn->Text = L"Learn";
 			startLearnButton = System::Drawing::Rectangle(this->startLearn->Left, this->startLearn->Top, this->startLearn->Width, this->startLearn->Height);
 
 			// startWrite
-			this->startWrite->Location = System::Drawing::Point((MainWindowWidth / 2) - 100 - 120, 360);
+			this->startWrite->Location = System::Drawing::Point((MainWindowWidth / 2) - 100 - 120, 360 - 50);
 			this->startWrite->Size = System::Drawing::Size(120, 60);
 			this->startWrite->TabIndex = 3;
 			this->startWrite->Text = L"Write";
 			startWriteButton = System::Drawing::Rectangle(this->startWrite->Left, this->startWrite->Top, this->startWrite->Width, this->startWrite->Height);
 
 			// StartPlusTard
-			this->StartPlusTard->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 360);
+			this->StartPlusTard->Location = System::Drawing::Point((MainWindowWidth / 2) + 100, 360 - 50);
 			this->StartPlusTard->Size = System::Drawing::Size(120, 60);
 			this->StartPlusTard->TabIndex = 4;
 			this->StartPlusTard->Text = L"?";
@@ -157,24 +173,44 @@ namespace QzCPP {
 			this->Menu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
 			this->Menu->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight);
 			this->Menu->Location = System::Drawing::Point(0, 0);
+			this->Menu->Margin = System::Windows::Forms::Padding(0, 0, 0 , 0);
 			this->Menu->TabStop = false;
-			this->Menu->AutoSize = true;
 			this->Menu->Name = L"Menu";
+
+			// scrollBar
+			//this->scrollBar->Dock = System::Windows::Forms::DockStyle::Right;
+			this->scrollBar->Size = System::Drawing::Size(15, MainWindowHeight);
+			this->scrollBar->Location = System::Drawing::Point(0, 0);
+			this->scrollBar->Name = L"flowLayoutPanel1";
+			this->scrollBar->Size = System::Drawing::Size(53, 147);
+			this->scrollBar->TabStop = false;
+
+			// backgroundMask
+			this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			this->backgroundMask->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
+			this->backgroundMask->Name = L"backgroundInputZone";
+			this->backgroundMask->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight * 65 / 100);
+			this->backgroundMask->TabStop = false;
+			this->backgroundMask->AutoSize = true;
+			this->backgroundMaskPanel = System::Drawing::Rectangle(this->backgroundMask->Left, this->backgroundMask->Top, this->backgroundMask->Width, this->backgroundMask->Height);
 
 			// backgroundInputZone
 			this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
-			this->backgroundInputZone->Location = System::Drawing::Point(0, MainWindowHeight/2);
+			this->backgroundInputZone->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
 			this->backgroundInputZone->Name = L"backgroundInputZone";
-			this->backgroundInputZone->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight/2);
+			this->backgroundInputZone->Size = System::Drawing::Size(MainWindowWidth, 211);
 			this->backgroundInputZone->TabStop = false;
+			this->backgroundInputZone->AutoSize = true;
+			this->backgroundInputZone->Margin = System::Windows::Forms::Padding(0, 0, 0, 0);
 			this->backgroundInputZonePanel = System::Drawing::Rectangle(this->backgroundInputZone->Left, this->backgroundInputZone->Top, this->backgroundInputZone->Width, this->backgroundInputZone->Height);
 
 			//bannerLightGrey
 			this->bannerLightGrey->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)));
 			this->bannerLightGrey->Location = System::Drawing::Point(0, 16);
 			this->bannerLightGrey->Name = L"bannerLightGrey";
-			this->bannerLightGrey->Size = System::Drawing::Size(MainWindowWidth, 50);
+			this->bannerLightGrey->Size = System::Drawing::Size(MainWindowWidth, 25);
 			this->bannerLightGrey->TabStop = false;
+			this->bannerLightGrey->Margin = System::Windows::Forms::Padding(0, 0, 0, 0);
 			this->bannerLightGreyPanel = System::Drawing::Rectangle(this->bannerLightGrey->Left, this->bannerLightGrey->Top, this->bannerLightGrey->Width, this->bannerLightGrey->Height);
 
 			// panelTextbox
@@ -224,16 +260,17 @@ namespace QzCPP {
 			this->backgroundInputZone->Controls->Add(this->bannerLightGrey);
 			this->backgroundInputZone->Controls->Add(this->panelTextBox);
 
+			this->Menu->Controls->Add(this->scrollBar);
 			this->Menu->Controls->Add(this->startCard);
 			this->Menu->Controls->Add(this->startLearn);
 			this->Menu->Controls->Add(this->startWrite);
 			this->Menu->Controls->Add(this->StartPlusTard);
 			this->Menu->Controls->Add(this->backgroundInputZone);
+			this->Menu->Controls->Add(this->backgroundMask);
 
 			// MainPage
-
-			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
-
+			this->Controls->Add(this->handle);
+			this->Controls->Add(this->scrollBar);
 			this->Controls->Add(this->Menu);
 			this->Name = L"MainPage";
 			this->Text = L"QzCPP";

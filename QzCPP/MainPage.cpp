@@ -27,16 +27,49 @@ void ResizeControlers(Control^ control, System::Drawing::Rectangle c, int newMai
     control->Width = newS;
 }
 
+void ResizeControlersAll(Control^ control, System::Drawing::Rectangle c, int newMainPageWidth, int newMainPageHeight)
+{
+    float horizontalRatio = (static_cast<float>(newMainPageWidth) / QzCPP::MainPage::MainWindowWidth);
+    float verticalRatio = (static_cast<float>(newMainPageHeight) / QzCPP::MainPage::MainWindowHeight);
+
+    int newX = (c.X * horizontalRatio);
+    int newWidth = (c.Width * horizontalRatio);
+
+    int newY = (c.Y * verticalRatio);
+    int newHeight = (c.Height * horizontalRatio);
+
+    control->Location = System::Drawing::Point(newX, newY);
+    control->Size = System::Drawing::Size(newWidth, newHeight);
+}
+
+void ResizeControlersPlus(Control^ control, System::Drawing::Rectangle c, int newMainPageWidth, int newMainPageHeight)
+{
+    float horizontalRatio = (static_cast<float>(newMainPageWidth) / QzCPP::MainPage::MainWindowWidth);
+    float verticalRatio = (static_cast<float>(newMainPageHeight) / QzCPP::MainPage::MainWindowHeight);
+
+    int newX = (c.X * horizontalRatio);
+    int newWidth = (c.Width * horizontalRatio);
+
+    int newHeight = (c.Height * horizontalRatio);
+
+    control->Location = System::Drawing::Point(newX, control->Top);
+    control->Size = System::Drawing::Size(newWidth, newHeight);
+}
+
 System::Void QzCPP::MainPage::ResizeAll()
 {
-    this->Menu->Size = this->Size;
+    this->Menu->Size = System::Drawing::Size(this->Width, this->Height);
+    this->backgroundMask->Size = System::Drawing::Size(this->Width, this->Height - QzCPP::MainPage::MainWindowHeight * 35 / 100);
+    this->scrollBar->Height = this->Height;
+    
+    this->backgroundInputZone->Width = this->Width;
     //this->Learn->Size = this->Size;
 
     ResizeControlers(this->startCard,startCardButton,this->Width);
     ResizeControlers(this->startLearn, startLearnButton, this->Width);
     ResizeControlers(this->startWrite, startWriteButton, this->Width);
     ResizeControlers(this->StartPlusTard, startPlusTardButton, this->Width);
-    ResizeControlers(this->backgroundInputZone, backgroundInputZonePanel, this->Width);
+
     ResizeControlers(this->bannerLightGrey, bannerLightGreyPanel, this->Width);
     ResizeControlers(this->panelTextBox, panelTextBoxPanel, this->Width);
     ResizeControlers(this->rightTextBox, rightTextBoxTextBox, this->Width);
