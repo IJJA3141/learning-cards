@@ -60,8 +60,11 @@ System::Void QzCPP::MainPage::ResizeAll()
 {
     this->Menu->Size = System::Drawing::Size(this->Width, this->Height);
     this->backgroundMask->Size = System::Drawing::Size(this->Width, this->Height - QzCPP::MainPage::MainWindowHeight * 35 / 100);
-    this->scrollBar->Height = this->Height;
     
+    this->scrollBar->Height = this->Height;
+    this->scrollBar->Location = System::Drawing::Point(this->Width - this->scrollBar->Width, 0);
+    this->handle->Location = System::Drawing::Point(this->Width - (this->handle->Width), MainWindowHeight / 2);
+
     this->backgroundInputZone->Width = this->Width;
     //this->Learn->Size = this->Size;
 

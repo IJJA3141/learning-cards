@@ -21,6 +21,8 @@ namespace QzCPP {
 	public: int posIncr = 200;
 	public: static int MainWindowWidth;
 	private: System::Windows::Forms::FlowLayoutPanel^ flowLayoutPanel1;
+	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ button2;
 	public:
 	public: static int MainWindowHeight;
 
@@ -88,7 +90,7 @@ namespace QzCPP {
 		  //
 		  //
 	private: System::Windows::Forms::Panel^ scrollBar;
-	private: System::Windows::Forms::Panel^ handle;
+	private: System::Windows::Forms::Button^ handle;
 
 		   /*
 		   private: System::Windows::Forms::Panel^ Learn;
@@ -138,7 +140,7 @@ namespace QzCPP {
 			this->Menu = (gcnew System::Windows::Forms::Panel());
 
 			this->scrollBar = (gcnew System::Windows::Forms::Panel());
-			this->handle = (gcnew System::Windows::Forms::Panel());
+			this->handle = (gcnew System::Windows::Forms::Button());
 
 
 			// startCard
@@ -178,12 +180,19 @@ namespace QzCPP {
 			this->Menu->Name = L"Menu";
 
 			// scrollBar
-			//this->scrollBar->Dock = System::Windows::Forms::DockStyle::Right;
-			this->scrollBar->Size = System::Drawing::Size(15, MainWindowHeight);
-			this->scrollBar->Location = System::Drawing::Point(0, 0);
+			this->scrollBar->Size = System::Drawing::Size(30, MainWindowHeight);
+			this->scrollBar->Location = System::Drawing::Point(MainWindowWidth - this->scrollBar->Width, 0);
 			this->scrollBar->Name = L"flowLayoutPanel1";
-			this->scrollBar->Size = System::Drawing::Size(53, 147);
 			this->scrollBar->TabStop = false;
+
+			this->handle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)), static_cast<System::Int32>(static_cast<System::Byte>(68)));
+			this->handle->Size = System::Drawing::Size(25, 15);
+			this->handle->UseVisualStyleBackColor = false;
+			this->handle->Margin = System::Windows::Forms::Padding(0, 0, 0, 0);
+			this->handle->Location = System::Drawing::Point(MainWindowWidth - (this->handle->Width + this->scrollBar->Width / 2), MainWindowHeight/2);
+			this->handle->FlatAppearance->BorderSize = 0;
+			this->handle->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Red;
+			this->handle->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 
 			// backgroundMask
 			this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
