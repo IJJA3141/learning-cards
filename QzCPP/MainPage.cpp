@@ -56,30 +56,85 @@ void ResizeControlersPlus(Control^ control, System::Drawing::Rectangle c, int ne
     control->Size = System::Drawing::Size(newWidth, newHeight);
 }
 
-System::Void QzCPP::MainPage::ResizeAll()
+int handleSize(int windowHeight, int backgroundHeight, int backgroundTop)
 {
-    this->Menu->Size = System::Drawing::Size(this->Width, this->Height);
-    this->backgroundMask->Size = System::Drawing::Size(this->Width, this->Height - QzCPP::MainPage::MainWindowHeight * 35 / 100);
-    
-    this->scrollBar->Height = this->Height;
-    this->scrollBar->Location = System::Drawing::Point(this->Width - this->scrollBar->Width, 0);
-    this->handle->Location = System::Drawing::Point(this->Width - (this->handle->Width), MainWindowHeight / 2);
+    int offPart = backgroundHeight - (windowHeight - backgroundTop);
+    int all = backgroundTop + offPart;
+    int onPart = all - offPart;
 
-    this->backgroundInputZone->Width = this->Width;
-    //this->Learn->Size = this->Size;
-
-    ResizeControlers(this->startCard,startCardButton,this->Width);
-    ResizeControlers(this->startLearn, startLearnButton, this->Width);
-    ResizeControlers(this->startWrite, startWriteButton, this->Width);
-    ResizeControlers(this->StartPlusTard, startPlusTardButton, this->Width);
-
-    ResizeControlers(this->bannerLightGrey, bannerLightGreyPanel, this->Width);
-    ResizeControlers(this->panelTextBox, panelTextBoxPanel, this->Width);
-    ResizeControlers(this->rightTextBox, rightTextBoxTextBox, this->Width);
-    ResizeControlers(this->leftTextBox, leftTextBoxTextBox, this->Width);
-    ResizeControlers(this->panelRedDarck, panelRedDarckPanel, this->Width);
+    int handleHeight = windowHeight * onPart / all;
+    return handleHeight;
 }
 
+int aaaaa(int Top)
+{
+    if (Top < 0)
+    {
+        return std::abs(Top);
+    } else {
+        return 0;
+    }
+}
+
+System::Void QzCPP::MainPage::ResizeAll()
+{ 
+    // Special Things
+    int tempWidh = this->Width - 16;
+
+    // Menu
+    this->backgroundMask->Size = System::Drawing::Size(tempWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
+    // Menu->InputZone
+    this->backgroundInputZone->Width = tempWidh;
+    
+    // ScrollBar
+    this->scrollBar->Height = this->Height - 39;
+    this->scrollBar->Location = System::Drawing::Point(tempWidh - this->scrollBar->Width, 0);
+    // ScrollBar->Handle
+    this->handle->Location = System::Drawing::Point(tempWidh - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+
+    // Learn
+    //this->Learn->Size = this->Size;
+
+    // Normal Controls
+    ResizeControlers(this->startCard,startCardButton, tempWidh);
+    ResizeControlers(this->startLearn, startLearnButton, tempWidh);
+    ResizeControlers(this->startWrite, startWriteButton, tempWidh);
+    ResizeControlers(this->StartPlusTard, startPlusTardButton, tempWidh);
+
+    ResizeControlers(this->bannerLightGrey, bannerLightGreyPanel, tempWidh);
+    ResizeControlers(this->panelTextBox, panelTextBoxPanel, tempWidh);
+    ResizeControlers(this->rightTextBox, rightTextBoxTextBox, tempWidh);
+    ResizeControlers(this->leftTextBox, leftTextBoxTextBox, tempWidh);
+    ResizeControlers(this->panelRedDarck, panelRedDarckPanel, tempWidh);
+
+    if (this->backgroundInputZone->Height > this->backgroundMask->Height)
+    {
+        this->handle->Show();
+        this->scrollBar->Show();
+        this->handle->Height = handleSize(this->Height - 39, this->backgroundInputZone->Height, this->backgroundInputZone->Top);
+        this->Menu->Size = System::Drawing::Size(tempWidh, aaaaa(this->Menu->Top) + this->backgroundInputZone->Top + this->backgroundInputZone->Height);
+    } else {
+        this->handle->Hide();
+        this->scrollBar->Hide();
+        this->Menu->Size = System::Drawing::Size(tempWidh, aaaaa(this->Menu->Top) + this->Height - 39);
+    }
+}
+System::Void QzCPP::MainPage::showScrollBar()
+{
+    this->scrollBar->Width = 12;
+    this->handle->Width = 8;
+    this->scrollBar->Height = this->Height - 39;
+    this->scrollBar->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width, 0);
+    this->handle->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+}
+System::Void QzCPP::MainPage::hideScrollBar()
+{
+    this->scrollBar->Width = 4;
+    this->handle->Width = 2;
+    this->scrollBar->Height = this->Height - 39;
+    this->scrollBar->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width, 0);
+    this->handle->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+}
 
 [STAThread]
 
