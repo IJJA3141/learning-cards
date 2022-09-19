@@ -82,8 +82,26 @@ System::Void QzCPP::MainPage::ResizeAll()
     int tempWidh = this->Width - 16;
 
     // Menu
-    this->backgroundMask->Size = System::Drawing::Size(tempWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
+    /*
+    if (this->Menu->Top == 0 || this->backgroundInputZone->Top + this->backgroundInputZone->Height != this->Menu->Height)
+    {
+        this->Menu->Height = this->Height - 39;
+    }
+    else
+    {
+        this->Menu->Top = -1 * (this->Height - this->Menu->Height);
+    }*/
+
+    if (this->Height - 39 > this->backgroundInputZone->Height + this->backgroundInputZone->Top)
+    {
+        this->Menu->Height = this->Height - 39;
+    }
+    else {
+        this->Menu->Height = this->backgroundInputZone->Height + this->backgroundInputZone->Top + 100;
+    }
+
     // Menu->InputZone
+    this->backgroundMask->Size = System::Drawing::Size(tempWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
     this->backgroundInputZone->Width = tempWidh;
     
     // ScrollBar
@@ -112,11 +130,9 @@ System::Void QzCPP::MainPage::ResizeAll()
         this->handle->Show();
         this->scrollBar->Show();
         this->handle->Height = handleSize(this->Height - 39, this->backgroundInputZone->Height, this->backgroundInputZone->Top);
-        this->Menu->Size = System::Drawing::Size(tempWidh, aaaaa(this->Menu->Top) + this->backgroundInputZone->Top + this->backgroundInputZone->Height);
     } else {
         this->handle->Hide();
         this->scrollBar->Hide();
-        this->Menu->Size = System::Drawing::Size(tempWidh, aaaaa(this->Menu->Top) + this->Height - 39);
     }
 }
 System::Void QzCPP::MainPage::showScrollBar()

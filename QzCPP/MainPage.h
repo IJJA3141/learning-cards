@@ -200,7 +200,7 @@ namespace QzCPP {
 			this->handle->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::onButtonMouseUp);
 
 			// backgroundMask
-			this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			//this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->backgroundMask->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
 			this->backgroundMask->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight * 65 / 100);
 			this->backgroundMask->Name = L"backgroundInputZone";
@@ -209,12 +209,13 @@ namespace QzCPP {
 			this->backgroundMaskPanel = System::Drawing::Rectangle(this->backgroundMask->Left, this->backgroundMask->Top, this->backgroundMask->Width, this->backgroundMask->Height);
 			this->backgroundMask->MouseEnter += gcnew System::EventHandler(this, &QzCPP::MainPage::scrollBarMouseLeave);
 
+			this->backgroundMask->BackColor = System::Drawing::Color::Red;
+			
 			// backgroundInputZone
-			//this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
-			this->backgroundInputZone->BackColor = System::Drawing::Color::Red;
+			this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->backgroundInputZone->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
 			this->backgroundInputZone->Name = L"backgroundInputZone";
-			this->backgroundInputZone->Size = System::Drawing::Size(MainWindowWidth, 700);
+			this->backgroundInputZone->Size = System::Drawing::Size(MainWindowWidth, 200);
 			this->backgroundInputZone->TabStop = false;
 			this->backgroundInputZone->AutoSize = true;
 			this->backgroundInputZone->Margin = System::Windows::Forms::Padding(0, 0, 0, 0);
@@ -309,15 +310,7 @@ namespace QzCPP {
 		hideScrollBar();
 	}
 	private: System::Void handleClick(System::Object^ sender, System::EventArgs^ e) {
-		/*if (this->Menu->Top * -1 + this->Height - 39 + 100 <= this->Menu->Height)
-		{
-			this->Menu->Top -= 100;
-		}
-		else {
-			this->Menu->Top -= this->Menu->Height - (this->Menu->Top * -1 + this->Height - 39 + 100);
-		}
-		ResizeAll();*/
-		this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::MainPage_MouseMove);
+		this->Menu->Top -= 100;
 	}
 	private: System::Void MainPage_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->Text = gcnew String((std::to_string(e->Y)).c_str());
