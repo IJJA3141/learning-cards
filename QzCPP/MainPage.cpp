@@ -82,22 +82,16 @@ System::Void QzCPP::MainPage::ResizeAll()
     int tempWidh = this->Width - 16;
 
     // Menu
-    /*
-    if (this->Menu->Top == 0 || this->backgroundInputZone->Top + this->backgroundInputZone->Height != this->Menu->Height)
+    this->Menu->Width = tempWidh;
+    
+    if (-this->Menu->Top + this->Height - 39 > 0 && this->Menu->Top < 0)
     {
-        this->Menu->Height = this->Height - 39;
+        this->Menu->Top = this->Height - 39 - this->Menu->Height;
     }
-    else
+    else if (this->backgroundInputZone->Height <= this->backgroundMask->Height && this->Menu->Top == 0)
     {
-        this->Menu->Top = -1 * (this->Height - this->Menu->Height);
-    }*/
-
-    if (this->Height - 39 > this->backgroundInputZone->Height + this->backgroundInputZone->Top)
-    {
+        this->Menu->Top = 0;
         this->Menu->Height = this->Height - 39;
-    }
-    else {
-        this->Menu->Height = this->backgroundInputZone->Height + this->backgroundInputZone->Top + 100;
     }
 
     // Menu->InputZone

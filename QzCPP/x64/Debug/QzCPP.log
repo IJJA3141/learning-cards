@@ -1,12 +1,12 @@
 ﻿  MainPage.cpp
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(23,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(24,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(35,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(36,18): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(38,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(39,19): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(50,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(51,18): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
-C:\Users\alexe\Documents\Programation\C++\learning-cards\QzCPP\MainPage.cpp(53,19): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(23,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(24,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(35,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(36,18): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(38,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(39,19): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(50,14): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(51,18): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
+E:\Prog\C++\learning-cards\QzCPP\MainPage.cpp(53,19): warning C4244: 'initialisation' : conversion de 'float' en 'int', perte possible de données
   MainPage.obj : module MSIL détecté ; liens incrémentiels désactivés pour MSIL ; édition de liens complète en cours
-  QzCPP.vcxproj -> C:\Users\alexe\Documents\Programation\C++\learning-cards\x64\Debug\QzCPP.exe
+  QzCPP.vcxproj -> E:\Prog\C++\learning-cards\x64\Debug\QzCPP.exe

@@ -44,8 +44,8 @@ namespace QzCPP {
 			//InitializeComponent();
 			InitializeMyComponent();
 
-			//this->scrollBar->Hide();
-			//this->handle->Hide();
+			this->scrollBar->Hide();
+			this->handle->Hide();
 			//this->Learn->Hide();
 
 			//Populate();
@@ -147,6 +147,7 @@ namespace QzCPP {
 			this->startCard->TabIndex = 1;
 			this->startCard->Text = L"Card";
 			startCardButton = System::Drawing::Rectangle(this->startCard->Left, this->startCard->Top, this->startCard->Width, this->startCard->Height);
+			this->startCard->Click += gcnew System::EventHandler(this, &QzCPP::MainPage::addRow);
 
 			// startLearn
 			this->startLearn->Size = System::Drawing::Size(120, 60);
@@ -154,6 +155,7 @@ namespace QzCPP {
 			this->startLearn->TabIndex = 2;
 			this->startLearn->Text = L"Learn";
 			startLearnButton = System::Drawing::Rectangle(this->startLearn->Left, this->startLearn->Top, this->startLearn->Width, this->startLearn->Height);
+			this->startLearn->Click += gcnew System::EventHandler(this, &QzCPP::MainPage::handleClick);
 
 			// startWrite
 			this->startWrite->Size = System::Drawing::Size(120, 60);
@@ -161,6 +163,7 @@ namespace QzCPP {
 			this->startWrite->TabIndex = 3;
 			this->startWrite->Text = L"Write";
 			startWriteButton = System::Drawing::Rectangle(this->startWrite->Left, this->startWrite->Top, this->startWrite->Width, this->startWrite->Height);
+			this->startWrite->Click += gcnew System::EventHandler(this, &QzCPP::MainPage::handleClick);
 
 			// StartPlusTard
 			this->StartPlusTard->Size = System::Drawing::Size(120, 60);
@@ -168,6 +171,7 @@ namespace QzCPP {
 			this->StartPlusTard->TabIndex = 4;
 			this->StartPlusTard->Text = L"?";
 			startPlusTardButton = System::Drawing::Rectangle(this->StartPlusTard->Left, this->StartPlusTard->Top, this->StartPlusTard->Width, this->StartPlusTard->Height);
+			this->StartPlusTard->Click += gcnew System::EventHandler(this, &QzCPP::MainPage::handleClick);
 
 			// Menu
 			this->Menu->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(17)), static_cast<System::Int32>(static_cast<System::Byte>(18)), static_cast<System::Int32>(static_cast<System::Byte>(19)));
@@ -210,7 +214,7 @@ namespace QzCPP {
 			this->backgroundMask->MouseEnter += gcnew System::EventHandler(this, &QzCPP::MainPage::scrollBarMouseLeave);
 
 			this->backgroundMask->BackColor = System::Drawing::Color::Red;
-			
+
 			// backgroundInputZone
 			this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->backgroundInputZone->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
@@ -279,10 +283,10 @@ namespace QzCPP {
 			this->backgroundInputZone->Controls->Add(this->bannerLightGrey);
 			this->backgroundInputZone->Controls->Add(this->panelTextBox);
 
-			//this->Menu->Controls->Add(this->startCard);
-			//this->Menu->Controls->Add(this->startLearn);
-			//this->Menu->Controls->Add(this->startWrite);
-			//this->Menu->Controls->Add(this->StartPlusTard);
+			this->Menu->Controls->Add(this->startCard);
+			this->Menu->Controls->Add(this->startLearn);
+			this->Menu->Controls->Add(this->startWrite);
+			this->Menu->Controls->Add(this->StartPlusTard);
 			this->Menu->Controls->Add(this->backgroundInputZone);
 			this->Menu->Controls->Add(this->backgroundMask);
 
@@ -293,6 +297,7 @@ namespace QzCPP {
 			this->Controls->Add(this->Menu);
 			this->Name = L"MainPage";
 			this->Text = L"QzCPP";
+			this->ResizeEnd += gcnew System::EventHandler(this, &MainPage::MainPage_ResizeEnd);
 			this->Resize += gcnew System::EventHandler(this, &MainPage::MainPage_Resize);
 			this->Menu->ResumeLayout(false);
 			this->ResumeLayout(false);
@@ -300,6 +305,11 @@ namespace QzCPP {
 #pragma region Windows Form Designer generated code
 #pragma endregion
 
+	private: System::Void addRow(System::Object^ sender, System::EventArgs^ e) {
+		this->backgroundInputZone->Height += 100;
+		this->Menu->Height += 100;
+		ResizeAll();
+	}
 	private: System::Void MainPage_Resize(System::Object^ sender, System::EventArgs^ e) {
 		ResizeAll();
 	}
@@ -310,7 +320,15 @@ namespace QzCPP {
 		hideScrollBar();
 	}
 	private: System::Void handleClick(System::Object^ sender, System::EventArgs^ e) {
-		this->Menu->Top -= 100;
+		if (this->Menu->Height - this->Height - 39 + this->Menu->Top >= 10)
+		{
+			this->Menu->Top -= 10;
+		}
+		else
+		{
+			//this->Menu->Top -= this->Menu->Height - this->Height + 39;
+			this->Menu->Top -= 1;
+		}
 	}
 	private: System::Void MainPage_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->Text = gcnew String((std::to_string(e->Y)).c_str());
@@ -327,10 +345,13 @@ namespace QzCPP {
 			this->Controls[i]->MouseMove -= gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::MainPage_MouseMove);
 		}
 	}
+	private: System::Void MainPage_ResizeEnd(System::Object^ sender, System::EventArgs^ e) {
+		//ResizeAll();
+	}
 	public: System::Void ResizeAll();
 	public: System::Void showScrollBar();
 	public: System::Void hideScrollBar();
-};
+	};
 }
 
 /*{
