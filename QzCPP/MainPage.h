@@ -104,6 +104,7 @@ namespace QzCPP {
 		   //
 	private: System::Windows::Forms::Panel^ scrollBar;
 	private: System::Windows::Forms::Button^ handle;
+	//public: event System::Windows::Forms::MouseEventHandler^ MouseWheel;
 	private:
 		/// <summary>
 		/// Variable nécessaire au concepteur.
@@ -204,7 +205,7 @@ namespace QzCPP {
 			this->handle->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::onButtonMouseUp);
 
 			// backgroundMask
-			//this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->backgroundMask->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
 			this->backgroundMask->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight * 65 / 100);
 			this->backgroundMask->Name = L"backgroundInputZone";
@@ -212,8 +213,6 @@ namespace QzCPP {
 			this->backgroundMask->AutoSize = true;
 			this->backgroundMaskPanel = System::Drawing::Rectangle(this->backgroundMask->Left, this->backgroundMask->Top, this->backgroundMask->Width, this->backgroundMask->Height);
 			this->backgroundMask->MouseEnter += gcnew System::EventHandler(this, &QzCPP::MainPage::scrollBarMouseLeave);
-
-			this->backgroundMask->BackColor = System::Drawing::Color::Red;
 
 			// backgroundInputZone
 			this->backgroundInputZone->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
@@ -291,16 +290,16 @@ namespace QzCPP {
 			this->Menu->Controls->Add(this->backgroundMask);
 
 			// MainPage
-			this->BackColor = System::Drawing::Color::AliceBlue;
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
 			this->Controls->Add(this->handle);
 			this->Controls->Add(this->scrollBar);
 			this->Controls->Add(this->Menu);
 			this->Name = L"MainPage";
 			this->Text = L"QzCPP";
-			this->ResizeEnd += gcnew System::EventHandler(this, &MainPage::MainPage_ResizeEnd);
 			this->Resize += gcnew System::EventHandler(this, &MainPage::MainPage_Resize);
 			this->Menu->ResumeLayout(false);
 			this->ResumeLayout(false);
+			this->MouseWheel += gcnew System::Windows::Forms::MouseEventHandler(this, &QzCPP::MainPage::OnMouseWheel);
 		}
 #pragma region Windows Form Designer generated code
 #pragma endregion
@@ -320,15 +319,18 @@ namespace QzCPP {
 		hideScrollBar();
 	}
 	private: System::Void handleClick(System::Object^ sender, System::EventArgs^ e) {
-		if (this->Menu->Height - this->Height - 39 + this->Menu->Top >= 10)
+		if (this->Menu->Height - this->Height - 39 + this->Menu->Top >= 1)
 		{
-			this->Menu->Top -= 10;
+			this->Menu->Top -= 1;
 		}
 		else
 		{
 			//this->Menu->Top -= this->Menu->Height - this->Height + 39;
-			this->Menu->Top -= 1;
 		}
+	}
+	private: System::Void OnMouseWheel(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+	{
+		aaaaaaaaa(e->Delta);
 	}
 	private: System::Void MainPage_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 		this->Text = gcnew String((std::to_string(e->Y)).c_str());
@@ -345,13 +347,36 @@ namespace QzCPP {
 			this->Controls[i]->MouseMove -= gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::MainPage_MouseMove);
 		}
 	}
-	private: System::Void MainPage_ResizeEnd(System::Object^ sender, System::EventArgs^ e) {
-		//ResizeAll();
-	}
 	public: System::Void ResizeAll();
 	public: System::Void showScrollBar();
 	public: System::Void hideScrollBar();
-	};
+	private: System::Void aaaaaaaaa(int scroll)
+	{
+		if (scroll < 0)
+		{
+			if (this->Menu->Height + this->Menu->Top - this->Height + 39 > 30 * scroll / 120)
+			{
+				this->Menu->Top += 30 * scroll / 120;
+			}
+			else
+			{
+				this->Menu->Top -= this->Menu->Height + this->Menu->Top - this->Height + 39;
+			}
+		} 
+		else if (scroll > 0)
+		{
+			if (this->Menu->Top < 30 * scroll / 120)
+			{
+				this->Menu->Top += 30 * scroll / 120;
+			}
+			else
+			{
+				this->Menu->Top -= this->Menu->Top;
+			}
+		}
+		ResizeAll();
+	}
+};
 }
 
 /*{

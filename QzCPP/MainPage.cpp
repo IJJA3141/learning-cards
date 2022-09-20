@@ -66,58 +66,74 @@ int handleSize(int windowHeight, int backgroundHeight, int backgroundTop)
     return handleHeight;
 }
 
-int aaaaa(int Top)
-{
-    if (Top < 0)
-    {
-        return std::abs(Top);
-    } else {
-        return 0;
-    }
-}
-
 System::Void QzCPP::MainPage::ResizeAll()
 { 
     // Special Things
-    int tempWidh = this->Width - 16;
+    int windWidh = this->Width - 16;
+    int windHeight = this->Height - 39;
+
+    int menuHeight = this->Menu->Height;
+    int menuTop = -this->Menu->Top;
+
+    int backHeight = this->backgroundInputZone->Height;
+    int backTop = this->backgroundInputZone->Top;
 
     // Menu
-    this->Menu->Width = tempWidh;
-    
-    if (-this->Menu->Top + this->Height - 39 > 0 && this->Menu->Top < 0)
+    this->Menu->Width = windWidh;
+
+    if (this->Menu->Top < 0)
     {
-        this->Menu->Top = this->Height - 39 - this->Menu->Height;
+        if (menuTop + windHeight == backTop + backHeight)
+        {
+            this->Menu->Top = this->Height - 39 - this->Menu->Height;
+        }
+        else
+        {
+            
+        }
     }
-    else if (this->backgroundInputZone->Height <= this->backgroundMask->Height && this->Menu->Top == 0)
+    else if (menuTop == 0 && this->backgroundInputZone->Height <= this->backgroundMask->Height)
+    {
+        this->Menu->Height = this->Height - 39;
+    } 
+    // preventing problems
+    else
     {
         this->Menu->Top = 0;
+    }
+    if (this->backgroundInputZone->Height <= this->backgroundMask->Height)
+    {
+        this->Menu->Top = 0;
+    }
+    if (this->Menu->Height < this->Height - 39)
+    {
         this->Menu->Height = this->Height - 39;
     }
-
+    this->Text = gcnew String((to_string(this->Menu->Top)).c_str());
     // Menu->InputZone
-    this->backgroundMask->Size = System::Drawing::Size(tempWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
-    this->backgroundInputZone->Width = tempWidh;
+    this->backgroundMask->Size = System::Drawing::Size(windWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
+    this->backgroundInputZone->Width = windWidh;
     
     // ScrollBar
     this->scrollBar->Height = this->Height - 39;
-    this->scrollBar->Location = System::Drawing::Point(tempWidh - this->scrollBar->Width, 0);
+    this->scrollBar->Location = System::Drawing::Point(windWidh - this->scrollBar->Width, 0);
     // ScrollBar->Handle
-    this->handle->Location = System::Drawing::Point(tempWidh - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+    this->handle->Location = System::Drawing::Point(windWidh - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
 
     // Learn
     //this->Learn->Size = this->Size;
 
     // Normal Controls
-    ResizeControlers(this->startCard,startCardButton, tempWidh);
-    ResizeControlers(this->startLearn, startLearnButton, tempWidh);
-    ResizeControlers(this->startWrite, startWriteButton, tempWidh);
-    ResizeControlers(this->StartPlusTard, startPlusTardButton, tempWidh);
+    ResizeControlers(this->startCard,startCardButton, windWidh);
+    ResizeControlers(this->startLearn, startLearnButton, windWidh);
+    ResizeControlers(this->startWrite, startWriteButton, windWidh);
+    ResizeControlers(this->StartPlusTard, startPlusTardButton, windWidh);
 
-    ResizeControlers(this->bannerLightGrey, bannerLightGreyPanel, tempWidh);
-    ResizeControlers(this->panelTextBox, panelTextBoxPanel, tempWidh);
-    ResizeControlers(this->rightTextBox, rightTextBoxTextBox, tempWidh);
-    ResizeControlers(this->leftTextBox, leftTextBoxTextBox, tempWidh);
-    ResizeControlers(this->panelRedDarck, panelRedDarckPanel, tempWidh);
+    ResizeControlers(this->bannerLightGrey, bannerLightGreyPanel, windWidh);
+    ResizeControlers(this->panelTextBox, panelTextBoxPanel, windWidh);
+    ResizeControlers(this->rightTextBox, rightTextBoxTextBox, windWidh);
+    ResizeControlers(this->leftTextBox, leftTextBoxTextBox, windWidh);
+    ResizeControlers(this->panelRedDarck, panelRedDarckPanel, windWidh);
 
     if (this->backgroundInputZone->Height > this->backgroundMask->Height)
     {
