@@ -83,13 +83,18 @@ System::Void QzCPP::MainPage::ResizeAll()
 
     if (this->Menu->Top < 0)
     {
+        if (0 < menuHeight - menuTop - windHeight)
+        {
+            // do nothing
+        }
         if (menuTop + windHeight == backTop + backHeight)
         {
-            this->Menu->Top = this->Height - 39 - this->Menu->Height;
+            this->Menu->Top = windHeight - menuHeight;
+            this->Menu->BackColor = System::Drawing::Color::Blue;
         }
         else
         {
-            
+            this->Menu->BackColor = System::Drawing::Color::Pink;
         }
     }
     else if (menuTop == 0 && this->backgroundInputZone->Height <= this->backgroundMask->Height)
@@ -101,15 +106,17 @@ System::Void QzCPP::MainPage::ResizeAll()
     {
         this->Menu->Top = 0;
     }
-    if (this->backgroundInputZone->Height <= this->backgroundMask->Height)
+    /*if (this->backgroundInputZone->Height <= this->backgroundMask->Height)
     {
         this->Menu->Top = 0;
-    }
+    }*/
     if (this->Menu->Height < this->Height - 39)
     {
         this->Menu->Height = this->Height - 39;
     }
+
     this->Text = gcnew String((to_string(this->Menu->Top)).c_str());
+
     // Menu->InputZone
     this->backgroundMask->Size = System::Drawing::Size(windWidh, this->Height - 39 - QzCPP::MainPage::MainWindowHeight * 35 / 100);
     this->backgroundInputZone->Width = windWidh;

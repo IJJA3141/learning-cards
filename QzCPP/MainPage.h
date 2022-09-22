@@ -205,7 +205,8 @@ namespace QzCPP {
 			this->handle->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &MainPage::onButtonMouseUp);
 
 			// backgroundMask
-			this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			//this->backgroundMask->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)), static_cast<System::Int32>(static_cast<System::Byte>(42)));
+			this->backgroundMask->BackColor = System::Drawing::Color::Red;
 			this->backgroundMask->Location = System::Drawing::Point(0, MainWindowHeight * 35 / 100);
 			this->backgroundMask->Size = System::Drawing::Size(MainWindowWidth, MainWindowHeight * 65 / 100);
 			this->backgroundMask->Name = L"backgroundInputZone";
@@ -354,7 +355,7 @@ namespace QzCPP {
 	{
 		if (scroll < 0)
 		{
-			if (this->Menu->Height + this->Menu->Top - this->Height + 39 > 30 * scroll / 120)
+			if (this->Menu->Height + this->Menu->Top - this->Height + 39 > 60 * scroll / 120)
 			{
 				this->Menu->Top += 30 * scroll / 120;
 			}
@@ -371,7 +372,7 @@ namespace QzCPP {
 			}
 			else
 			{
-				this->Menu->Top -= this->Menu->Top;
+				this->Menu->Top -= this->Menu->Top * scroll / 120;
 			}
 		}
 		ResizeAll();
