@@ -41,6 +41,7 @@ namespace QzCPP {
 	public:
 		MainPage(void)
 		{
+			//InitializeComponent
 			//InitializeComponent();
 			InitializeMyComponent();
 
@@ -49,6 +50,10 @@ namespace QzCPP {
 			//this->Learn->Hide();
 
 			//Populate();
+			
+			//InitializeVars
+			WindowWidth = this->Width - 16;
+			WindowHeight = this->Height - 39;
 		}
 
 	protected:
@@ -377,6 +382,39 @@ namespace QzCPP {
 		}
 		ResizeAll();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public: static int WindowWidth;
+	public: static int WindowHeight;
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 }
 

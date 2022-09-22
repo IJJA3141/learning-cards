@@ -1,5 +1,6 @@
 ﻿#include <msclr/marshal_cppstd.h>
 #include <msclr/marshal.h>
+#include "MyScrollBar.h"
 #include "MainPage.h"
 #include <fstream>
 #include <codecvt>
@@ -168,6 +169,79 @@ System::Void QzCPP::MainPage::hideScrollBar()
     this->scrollBar->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width, 0);
     this->handle->Location = System::Drawing::Point(this->Width - 16 - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+System::Void QzCPP::MyScrollBar::ScrollBarMaximize(System::Object^ sender, System::EventArgs^ e)
+{
+    this->scrollBar->Width = 12;
+    this->handle->Width = 8;
+    this->scrollBar->Height = QzCPP::MainPage::WindowHeight;
+    this->scrollBar->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width, 0);
+    this->handle->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+}
+
+System::Void QzCPP::MyScrollBar::ScrollBarMinimize(System::Object^ sender, System::EventArgs^ e)
+{
+    this->scrollBar->Width = 4;
+    this->handle->Width = 2;
+    this->scrollBar->Height = QzCPP::MainPage::WindowHeight;
+    this->scrollBar->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width, 0);
+    this->handle->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+}
+
+System::Void QzCPP::MyScrollBar::ResizeScrollBar()
+{
+    // ScrollBar
+    this->scrollBar->Height = QzCPP::MainPage::WindowHeight;
+    this->scrollBar->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width, 0);
+
+    // Handle
+    this->handle->Location = System::Drawing::Point(QzCPP::MainPage::WindowWidth - this->scrollBar->Width + (this->scrollBar->Width - this->handle->Width) / 2, 0);
+}
+
+System::Void QzCPP::MyScrollBar::ScrollBarShow()
+{
+    this->handle->Show();
+    this->scrollBar->Show();
+}
+
+System::Void QzCPP::MyScrollBar::ScrollBarHide()
+{
+    this->handle->Hide();
+    this->scrollBar->Hide();
+}
+
+System::Void QzCPP::MyScrollBar::HandlePosition(int backgroundHeight, int backgroundTop)
+{
+    this->handle->Height = handleSize(QzCPP::MainPage::WindowHeight, backgroundHeight, backgroundTop);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [STAThread]
 
