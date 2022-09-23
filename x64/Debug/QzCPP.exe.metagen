@@ -21,25 +21,3 @@ Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c5619
 Class QzCPP.MainPage: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    Int32 RightAns : Public
-    Int32 NumberOfLine : Public
-    Int32 pos : Public
-    Int32 posIncr : Public
-    System.Drawing.Rectangle startCardButton : Public
-    System.Drawing.Rectangle startLearnButton : Public
-    System.Drawing.Rectangle startWriteButton : Public
-    System.Drawing.Rectangle startPlusTardButton : Public
-    System.Drawing.Rectangle backgroundInputZonePanel : Public
-    System.Drawing.Rectangle backgroundMaskPanel : Public
-    System.Drawing.Rectangle bannerLightGreyPanel : Public
-    System.Drawing.Rectangle panelRedDarckPanel : Public
-    System.Drawing.Rectangle panelTextBoxPanel : Public
-    System.Drawing.Rectangle leftTextBoxTextBox : Public
-    System.Drawing.Rectangle rightTextBoxTextBox : Public
-    Int32 MainWindowWidth : Public, Static
-    Int32 MainWindowHeight : Public, Static
-  Methods:
-    ResizeAll(): PrivateScope, Public, HideBySig
-    showScrollBar(): PrivateScope, Public, HideBySig
-    hideScrollBar(): PrivateScope, Public, HideBySig

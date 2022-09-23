@@ -123,17 +123,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="InputZone.cpp" />
     <ClCompile Include="MainPage.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyScrollBar.cpp" />
-    <ClCompile Include="Patern.cpp" />
+    <ClCompile Include="SetPageTerm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InputZone.h" />
     <ClInclude Include="MainPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MyScrollBar.h" />
+    <ClInclude Include="SetPageTerm.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainPage.resx">
