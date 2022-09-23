@@ -124,11 +124,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainPage.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MyScrollBar.cpp" />
+    <ClCompile Include="Patern.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainPage.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="MyScrollBar.h" />
   </ItemGroup>
   <ItemGroup>
