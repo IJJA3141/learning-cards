@@ -1,6 +1,6 @@
-#include "SetPageTerm.h"
 #include "InputZone.h"
 
+#pragma once
 namespace QzCPP
 {
 	ref class Menu : public System::Windows::Forms::Panel
