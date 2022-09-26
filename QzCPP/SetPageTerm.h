@@ -44,5 +44,6 @@ namespace QzCPP
 		System::Void OnRightTextBoxLostFocus(System::Object^ sender, System::EventArgs^ e);
 	private:
 		System::Void Del(System::Object^ sender, System::EventArgs^ e);
+		void OnTextChanged(System::Object^ sender, System::EventArgs^ e);
 	};
 }

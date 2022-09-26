@@ -1,6 +1,5 @@
 #include "InputZone.h"
 #include "SetPageTerm.h"
-//#include "QzCPPLib.h"
 
 void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::string term, std::string definition)
 {
@@ -26,10 +25,11 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 
 		// redStyle
 		this->m_redStyle->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
-		this->m_redStyle->Size = System::Drawing::Size(500, 4);
+		this->m_redStyle->Size = System::Drawing::Size(500, 1);
 		this->m_redStyle->Location = System::Drawing::Point(0, 37);
 
 		// deleteButton
+		this->m_deleteButton->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
 		this->m_deleteButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(173)), static_cast<System::Int32>(static_cast<System::Byte>(63)), static_cast<System::Int32>(static_cast<System::Byte>(49)));
 		this->m_deleteButton->Size = System::Drawing::Size(70, 25);
 		this->m_deleteButton->Location = System::Drawing::Point(424, 6);
@@ -46,19 +46,26 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_rightTextBoxPanel->Location = System::Drawing::Point(265, 102);
 
 		// leftTextBox
-		this->m_leftTextBox->Size = System::Drawing::Size(225, 45);
-		this->m_leftTextBox->Location = System::Drawing::Point(10, 55);
+		this->m_leftTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+		this->m_leftTextBox->Multiline = true;
+		this->m_leftTextBox->BorderStyle = System::Windows::Forms::BorderStyle(0);
+		this->m_leftTextBox->Size = System::Drawing::Size(225, 35);
+		this->m_leftTextBox->Location = System::Drawing::Point(10, 65);
 		this->m_leftTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnLeftTextBoxGotFocus);
 		this->m_leftTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnLeftTextBoxLostFocus);
 
 		// rightTextBox
-		this->m_rightTextBox->Size = System::Drawing::Size(225, 45);
-		this->m_rightTextBox->Location = System::Drawing::Point(265, 55);
+		this->m_rightTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
+		this->m_rightTextBox->Multiline = true;
+		this->m_rightTextBox->BorderStyle = System::Windows::Forms::BorderStyle(0);
+		this->m_rightTextBox->Size = System::Drawing::Size(225, 35);
+		this->m_rightTextBox->Location = System::Drawing::Point(265, 65);
 		this->m_rightTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxGotFocus);
 		this->m_rightTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxLostFocus);
 
 		// index
 		this->m_index->Text = gcnew System::String(std::to_string(numberOfSetPageTerm).c_str());
+		this->m_index->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnTextChanged);
 
 		this->Controls->Add(this->m_index);
 		this->Controls->Add(this->m_leftTextBox);
@@ -102,9 +109,14 @@ System::Void QzCPP::SetPageTerm::Del(System::Object^ sender, System::EventArgs^ 
 {
 	for (int i = this->m_numberOfSetPageTerm; i < this->Parent->Controls->Count - 1; i++)
 	{
-		this->Parent->Controls[i + 1]->Top -= 61 + 131 * i;
-		this->Parent->Controls[i + 1]->Controls[0]->Text = gcnew System::String(std::to_string(i).c_str());
+		this->Parent->Controls[i + 1]->Top = 61 + 131 * (i - 1);
+		this->Parent->Controls[i + 1]->Controls[0]->Text = gcnew System::String(std::to_string(i - 1).c_str());
 	}
 
 	delete this;
+}
+
+void QzCPP::SetPageTerm::OnTextChanged(System::Object^ sender, System::EventArgs^ e)
+{
+	this->m_numberOfSetPageTerm -= 1;
 }
