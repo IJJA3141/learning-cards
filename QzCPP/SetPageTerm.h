@@ -45,5 +45,6 @@ namespace QzCPP
 	private:
 		System::Void Del(System::Object^ sender, System::EventArgs^ e);
 		void OnTextChanged(System::Object^ sender, System::EventArgs^ e);
+		void NewLine(System::Object^ sender, System::EventArgs^ e);
 	};
 }

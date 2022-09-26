@@ -53,6 +53,7 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_leftTextBox->Location = System::Drawing::Point(10, 65);
 		this->m_leftTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnLeftTextBoxGotFocus);
 		this->m_leftTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnLeftTextBoxLostFocus);
+		this->m_leftTextBox->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::NewLine);
 
 		// rightTextBox
 		this->m_rightTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
@@ -62,6 +63,7 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_rightTextBox->Location = System::Drawing::Point(265, 65);
 		this->m_rightTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxGotFocus);
 		this->m_rightTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxLostFocus);
+		this->m_rightTextBox->Font = 
 
 		// index
 		this->m_index->Text = gcnew System::String(std::to_string(numberOfSetPageTerm).c_str());
@@ -119,4 +121,14 @@ System::Void QzCPP::SetPageTerm::Del(System::Object^ sender, System::EventArgs^ 
 void QzCPP::SetPageTerm::OnTextChanged(System::Object^ sender, System::EventArgs^ e)
 {
 	this->m_numberOfSetPageTerm -= 1;
+}
+
+
+void QzCPP::SetPageTerm::NewLine(System::Object^ sender, System::EventArgs^ e)
+{
+	this->m_rightTextBox;
+	this->m_leftTextBox;
+	this->m_leftTextBoxPanel;
+	this->m_rightTextBox;
+	//this->;
 }
