@@ -63,7 +63,9 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_rightTextBox->Location = System::Drawing::Point(265, 65);
 		this->m_rightTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxGotFocus);
 		this->m_rightTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxLostFocus);
-		this->m_rightTextBox->Font = 
+
+		this->m_rightTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 16, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
+		this->m_rightTextBox->ForeColor = System::Drawing::SystemColors::Window;
 
 		// index
 		this->m_index->Text = gcnew System::String(std::to_string(numberOfSetPageTerm).c_str());
