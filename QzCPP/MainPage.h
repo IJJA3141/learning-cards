@@ -30,6 +30,8 @@ namespace QzCPP
 		{
 			this->ClientSize = System::Drawing::Size(600, 600);
 			this->Size = System::Drawing::Size(616, 639);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
+			this->AutoScale = true;
 
 			menu = gcnew QzCPP::Menu();
 			this->Controls->Add(menu);
