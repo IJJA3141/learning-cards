@@ -56,9 +56,7 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 
 		this->m_leftTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
 		this->m_leftTextBox->ForeColor = System::Drawing::SystemColors::Window;
-
-		this->m_leftTextBox->AutoSize = true;
-		//this->m_leftTextBox->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::NewLine);
+		this->m_leftTextBox->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::NewLeftLine);
 
 		// rightTextBox
 		this->m_rightTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
@@ -70,6 +68,7 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_rightTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxLostFocus);
 
 		this->m_rightTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
+		this->m_leftTextBox->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::NewRightLine);
 		this->m_rightTextBox->ForeColor = System::Drawing::SystemColors::Window;
 
 		// index
@@ -140,47 +139,141 @@ void QzCPP::SetPageTerm::OnTextChanged(System::Object^ sender, System::EventArgs
 	this->m_numberOfSetPageTerm -= 1;
 }
 
-/*
-void QzCPP::SetPageTerm::NewLine(System::Object^ sender, System::EventArgs^ e)
+
+void QzCPP::SetPageTerm::NewLeftLine(System::Object^ sender, System::EventArgs^ e)
 {
-	this->m_index->Text = gcnew System::String(std::to_string(this->m_leftTextBox->Lines->Length).c_str());
-	
-	this->m_index->Text = gcnew System::String(std::to_string(this->m_leftTextBox->Text->Length).c_str());
-	if (this->m_leftTextBox->Text->Length == this->m_rightTextBound)
+	if (this->m_oldLength == this->m_leftTextBox->Text->Length - 1 || this->m_oldLength == this->m_leftTextBox->Text->Length + 1 || this->m_oldLength == this->m_leftTextBox->Text->Length - 3 || this->m_oldLength == this->m_leftTextBox->Text->Length + 2)
 	{
-		this->Height += 32;
-		this->m_leftTextBox->Height += 32;
-		this->m_leftTextBoxPanel->Top += 32;
-		this->m_leftTextBox->Text += "\r\n";
-		this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+		if (this->m_leftTextBox->Text->Length == this->m_rightTextBound)
+		{
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+			this->m_leftTextBox->Text += "\r\n";
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
 
-		this->m_rightTextBound += 12;
-		this->m_leftTextBound += 12;
-	}
-	else if (this->m_leftTextBox->Text->Length == this->m_leftTextBound)
-	{
-		this->Height -= 32;
-		this->m_leftTextBox->Height -= 32;
-		this->m_leftTextBoxPanel->Top -= 32;
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+		}
+		else if (this->m_leftTextBox->Text->Length == this->m_leftTextBound)
+		{
+			this->Height -= 32;
+			this->m_leftTextBox->Height -= 32;
+			this->m_leftTextBoxPanel->Top -= 32;
 
-		this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
-		this->m_rightTextBound -= 12;
-		this->m_leftTextBound -= 12;
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+			this->m_rightTextBound -= 12;
+			this->m_leftTextBound -= 12;
+		}
+		if (this->m_leftTextBox->Text->Length == this->m_rightTextBound + 1 && this->m_leftTextBox->Lines->Length == (this->m_rightTextBound + 2) / 12)
+		{
+			this->m_leftTextBox->Text = this->m_leftTextBox->Text->Insert(this->m_leftTextBox->Text->Length - 1, "\r\n");
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
 
-		//this->m_leftTextBox->Text->Insert(10, "\r\n");
-	}
-	if (this->m_leftTextBox->Text->Length == this->m_rightTextBound + 1 && this->m_leftTextBox->Lines->Length == (this->m_rightTextBound + 2) / 12)
-	{
-		this->m_leftTextBox->Text = this->m_leftTextBox->Text->Insert(this->m_leftTextBox->Text->Length - 1, "\r\n");
-		this->m_index->Text = L"jsuisla";
-		this->Height += 32;
-		this->m_leftTextBox->Height += 32;
-		this->m_leftTextBoxPanel->Top += 32;
-		this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
-
-		this->m_rightTextBound += 12;
-		this->m_leftTextBound += 12;
-	}
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+		}
 		this->v1 = this->m_leftTextBox->Lines->Length;
 		this->v2 = (this->m_rightTextBound + 2) / 12;
-}*/
+	}
+	else
+	{
+		this->Height = 117;
+		this->m_leftTextBox->Height = 32;
+		this->m_leftTextBoxPanel->Top = 102;
+
+		this->m_leftTextBound = -2;
+		this->m_rightTextBound = 10;
+
+		System::String^ s = this->m_leftTextBox->Text;
+		s = s->Replace("\r\n", "");
+		for (int i = 10; i < this->m_leftTextBox->Text->Length; i += 12)
+		{
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+
+			s = s->Insert(i, "\r\n");
+		}
+		this->m_leftTextBox->Text = s;
+
+
+		this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+	}
+	this->m_oldLength = this->m_leftTextBox->Text->Length;
+}
+
+void QzCPP::SetPageTerm::NewRightLine(System::Object^ sender, System::EventArgs^ e)
+{
+	if (this->m_oldLength == this->m_leftTextBox->Text->Length - 1 || this->m_oldLength == this->m_leftTextBox->Text->Length + 1 || this->m_oldLength == this->m_leftTextBox->Text->Length - 3 || this->m_oldLength == this->m_leftTextBox->Text->Length + 2)
+	{
+		if (this->m_leftTextBox->Text->Length == this->m_rightTextBound)
+		{
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+			this->m_leftTextBox->Text += "\r\n";
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+		}
+		else if (this->m_leftTextBox->Text->Length == this->m_leftTextBound)
+		{
+			this->Height -= 32;
+			this->m_leftTextBox->Height -= 32;
+			this->m_leftTextBoxPanel->Top -= 32;
+
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+			this->m_rightTextBound -= 12;
+			this->m_leftTextBound -= 12;
+		}
+		if (this->m_leftTextBox->Text->Length == this->m_rightTextBound + 1 && this->m_leftTextBox->Lines->Length == (this->m_rightTextBound + 2) / 12)
+		{
+			this->m_leftTextBox->Text = this->m_leftTextBox->Text->Insert(this->m_leftTextBox->Text->Length - 1, "\r\n");
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+			this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+		}
+		this->v1 = this->m_leftTextBox->Lines->Length;
+		this->v2 = (this->m_rightTextBound + 2) / 12;
+	}
+	else
+	{
+		this->Height = 117;
+		this->m_leftTextBox->Height = 32;
+		this->m_leftTextBoxPanel->Top = 102;
+
+		this->m_leftTextBound = -2;
+		this->m_rightTextBound = 10;
+
+		System::String^ s = this->m_leftTextBox->Text;
+		s = s->Replace("\r\n", "");
+		for (int i = 10; i < this->m_leftTextBox->Text->Length; i += 12)
+		{
+			this->Height += 32;
+			this->m_leftTextBox->Height += 32;
+			this->m_leftTextBoxPanel->Top += 32;
+
+			this->m_rightTextBound += 12;
+			this->m_leftTextBound += 12;
+
+			s = s->Insert(i, "\r\n");
+		}
+		this->m_leftTextBox->Text = s;
+
+
+		this->m_leftTextBox->SelectionStart = this->m_leftTextBox->TextLength;
+	}
+	this->m_oldLength = this->m_leftTextBox->Text->Length;
+}

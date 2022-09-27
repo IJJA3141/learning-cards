@@ -9,6 +9,7 @@ namespace QzCPP
 		int v1;
 		int v2;
 	private:
+		int m_oldLength;
 		int m_numberOfSetPageTerm;
 		int m_leftTextBound = -2;
 		int m_rightTextBound = 10;
@@ -50,6 +51,7 @@ namespace QzCPP
 	private:
 		System::Void Del(System::Object^ sender, System::EventArgs^ e);
 		void OnTextChanged(System::Object^ sender, System::EventArgs^ e);
-		//void NewLine(System::Object^ sender, System::EventArgs^ e);
+		void NewLeftLine(System::Object^ sender, System::EventArgs^ e);
+		void NewRightLine(System::Object^ sender, System::EventArgs^ e);
 	};
 }
