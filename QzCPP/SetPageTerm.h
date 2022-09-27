@@ -6,9 +6,12 @@ namespace QzCPP
 	ref class SetPageTerm : public System::Windows::Forms::Panel
 	{
 	private:
+		int v1;
+		int v2;
+	private:
 		int m_numberOfSetPageTerm;
-		int m_leftTextSize;
-		int m_rightTextSize;
+		int m_leftTextBound = -2;
+		int m_rightTextBound = 10;
 	private:
 		System::Windows::Forms::Label^ m_index;
 
@@ -47,6 +50,6 @@ namespace QzCPP
 	private:
 		System::Void Del(System::Object^ sender, System::EventArgs^ e);
 		void OnTextChanged(System::Object^ sender, System::EventArgs^ e);
-		void NewLine(System::Object^ sender, System::EventArgs^ e);
+		//void NewLine(System::Object^ sender, System::EventArgs^ e);
 	};
 }
