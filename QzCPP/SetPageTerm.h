@@ -7,6 +7,8 @@ namespace QzCPP
 	{
 	private:
 		int m_numberOfSetPageTerm;
+		int m_leftTextSize;
+		int m_rightTextSize;
 	private:
 		System::Windows::Forms::Label^ m_index;
 

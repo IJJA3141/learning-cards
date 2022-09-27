@@ -55,6 +55,11 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_leftTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnLeftTextBoxLostFocus);
 		this->m_leftTextBox->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::NewLine);
 
+		this->m_leftTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
+		this->m_leftTextBox->ForeColor = System::Drawing::SystemColors::Window;
+
+		this->m_leftTextBox->MaxLength = 10;
+
 		// rightTextBox
 		this->m_rightTextBox->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(28)));
 		this->m_rightTextBox->Multiline = true;
@@ -64,12 +69,15 @@ void QzCPP::SetPageTerm::InitializeComponent(int numberOfSetPageTerm, std::strin
 		this->m_rightTextBox->GotFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxGotFocus);
 		this->m_rightTextBox->LostFocus += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnRightTextBoxLostFocus);
 
-		this->m_rightTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
+		this->m_rightTextBox->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
 		this->m_rightTextBox->ForeColor = System::Drawing::SystemColors::Window;
 
 		// index
 		this->m_index->Text = gcnew System::String(std::to_string(numberOfSetPageTerm).c_str());
 		this->m_index->TextChanged += gcnew System::EventHandler(this, &QzCPP::SetPageTerm::OnTextChanged);
+
+		this->m_index->Font = (gcnew System::Drawing::Font(L"M PLUS Rounded 1c", 18, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(256)));
+		this->m_index->ForeColor = System::Drawing::SystemColors::Window;
 
 		this->Controls->Add(this->m_index);
 		this->Controls->Add(this->m_leftTextBox);
@@ -111,13 +119,20 @@ System::Void QzCPP::SetPageTerm::OnRightTextBoxLostFocus(System::Object^ sender,
 
 System::Void QzCPP::SetPageTerm::Del(System::Object^ sender, System::EventArgs^ e)
 {
-	for (int i = this->m_numberOfSetPageTerm; i < this->Parent->Controls->Count - 1; i++)
+	if (this->m_numberOfSetPageTerm != 0 || this->Parent->Controls->Count > 2)
 	{
-		this->Parent->Controls[i + 1]->Top = 61 + 131 * (i - 1);
-		this->Parent->Controls[i + 1]->Controls[0]->Text = gcnew System::String(std::to_string(i - 1).c_str());
+		for (int i = this->m_numberOfSetPageTerm; i < this->Parent->Controls->Count - 1; i++) 
+		{ 
+			this->Parent->Controls[i + 1]->Top = 61 + 131 * (i - 1);
+			this->Parent->Controls[i + 1]->Controls[0]->Text = gcnew System::String(std::to_string(i - 1).c_str());
+		}
+		delete this; 
 	}
-
-	delete this;
+	else
+	{
+		this->m_rightTextBox->Text = L"";
+		this->m_leftTextBox->Text = L"";
+	}
 }
 
 void QzCPP::SetPageTerm::OnTextChanged(System::Object^ sender, System::EventArgs^ e)
@@ -128,9 +143,10 @@ void QzCPP::SetPageTerm::OnTextChanged(System::Object^ sender, System::EventArgs
 
 void QzCPP::SetPageTerm::NewLine(System::Object^ sender, System::EventArgs^ e)
 {
-	this->m_rightTextBox;
-	this->m_leftTextBox;
-	this->m_leftTextBoxPanel;
-	this->m_rightTextBox;
-	//this->;
+	m_leftTextSize += 1;
+	if (m_leftTextSize > 9)
+	{
+		m_leftTextSize = 0;
+	}
+	
 }
