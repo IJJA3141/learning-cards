@@ -18,6 +18,19 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\edit.cpp" />
+    <ClCompile Include="src\homePage.cpp" />
+    <ClCompile Include="src\Qz.cpp" />
+    <ClCompile Include="src\readAndWrite.cpp" />
+    <ClCompile Include="src\settings.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\edit.h" />
+    <ClInclude Include="src\homePage.h" />
+    <ClInclude Include="src\readAndWrite.h" />
+    <ClInclude Include="src\settings.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -146,19 +159,6 @@
       <AdditionalDependencies>ftxui-component.lib;ftxui-dom.lib;ftxui-screen.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="edit.cpp" />
-    <ClCompile Include="homePage.cpp" />
-    <ClCompile Include="Qz.cpp" />
-    <ClCompile Include="readAndWrite.cpp" />
-    <ClCompile Include="settings.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="edit.h" />
-    <ClInclude Include="homePage.h" />
-    <ClInclude Include="readAndWrite.h" />
-    <ClInclude Include="settings.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

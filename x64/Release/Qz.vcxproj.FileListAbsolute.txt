@@ -1,2 +1,0 @@
-E:\Prog\Small Projects\Cpp\Qz\x64\Release\Qz.exe
-E:\Prog\Projects\learning-cards\x64\Release\Qz.exe
