@@ -18,7 +18,7 @@
     <ClCompile Include="src\edit.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\homePage.cpp">
+    <ClCompile Include="src\home.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\Qz.cpp">
@@ -35,7 +35,7 @@
     <ClInclude Include="src\edit.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\homePage.h">
+    <ClInclude Include="src\home.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\readAndWrite.h">

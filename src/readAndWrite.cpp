@@ -3,7 +3,7 @@
 #include <string>
 #include "readAndWrite.h"
 
-void readFile(const char* _fileName, std::vector<std::vector<std::string>>* _strVector)
+void getListContent(const char* _fileName, std::vector<std::vector<std::string>>* _pStrVectVector)
 {
     std::fstream file;
     file.open(_fileName, std::ios::in);
@@ -17,12 +17,13 @@ void readFile(const char* _fileName, std::vector<std::vector<std::string>>* _str
         while (std::getline(file, str))
         {
             line++;
-            if (line % 2) {
+            if (line % 2)
+            {
                 buffer = str;
             }
             else
             {
-                _strVector->push_back({ buffer, str });
+                _pStrVectVector->push_back({ buffer, str });
             }
         }
 
@@ -32,18 +33,56 @@ void readFile(const char* _fileName, std::vector<std::vector<std::string>>* _str
     return;
 }
 
-void writeFile(const char* _fileName, std::vector<std::vector<std::string>>* _strVector)
+void setListContent(const char* _fileName, std::vector<std::vector<std::string>>* _pStrVectVector)
 {
     std::fstream file;
     file.open(_fileName, std::ios::out);
 
-    if (file.is_open()) {
-        for (int i = 0; i < _strVector->size(); i++)
+    if (file.is_open()) 
+    {
+        for (int i = 0; i < _pStrVectVector->size(); i++)
         {
-            file << _strVector->at(i)[0] << "\n" << _strVector->at(i)[1] << "\n";
+            file << _pStrVectVector->at(i)[0] << "\n" << _pStrVectVector->at(i)[1] << "\n";
         }
 
         file.close();
+    }
+
+    return;
+}
+
+void getLists(const char* _fileName, std::vector<std::string>* _pStrVector)
+{
+    std::fstream file;
+    file.open(_fileName, std::ios::in);
+
+    if (file.is_open())
+    {
+        std::string str;
+
+        while (std::getline(file, str))
+        {
+            _pStrVector->push_back(str);
+        }
+
+        file.close();
+    }
+
+    return;
+}
+
+void setLists(const char* _fileName, std::vector<std::string>* _pStrVector)
+{
+    std::fstream file;
+    file.open(_fileName, std::ios::out);
+
+    if (file.is_open()) 
+    {
+        std::string str;
+        for (int i = 0; i < _pStrVector->size(); i++)
+        {
+            file << _pStrVector->at(i) << "\n";
+        }
     }
 
     return;
