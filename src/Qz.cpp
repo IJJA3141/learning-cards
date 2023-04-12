@@ -21,7 +21,7 @@ int main()
     ftxui::Component* nextComp = nullptr;
     bool end = false;
     
-    homePage hp = homePage(&screen, nextComp, &end);
+    homePage hp = homePage(&screen, &nextComp, &end);
     nextComp = &hp.page;
 
     while (!end)

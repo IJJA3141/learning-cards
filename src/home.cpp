@@ -13,11 +13,11 @@
 
 #include "home.h"
 
-homePage::homePage(ftxui::ScreenInteractive* _pScreen, ftxui::Component* _pNextComp, bool* _pEnd)
+homePage::homePage(ftxui::ScreenInteractive* _pScreen, ftxui::Component** _pPNextComp, bool* _pEnd)
 {
 	// save pointers
 	this->m_pScreen = _pScreen;
-	this->m_pNextComp = _pNextComp;
+	this->m_pPNextComp = _pPNextComp;
 	this->m_pEnd = _pEnd;
 
 	// set private variables
@@ -47,9 +47,9 @@ homePage::homePage(ftxui::ScreenInteractive* _pScreen, ftxui::Component* _pNextC
 				this->m_pScreen->Exit();
 			}),
 
-		ftxui::Button("Delet", [&] 
+		ftxui::Button("Delete", [&] 
 			{
-				//this->m_pNextComp = & delete page
+				*this->m_pPNextComp = &this->delPage;
 				this->m_pScreen->Exit();
 			}),
 
@@ -96,6 +96,28 @@ homePage::homePage(ftxui::ScreenInteractive* _pScreen, ftxui::Component* _pNextC
 			);
 		}
 	);
+
+	// delPage	
+	this->m_yes = ftxui::Button("Yes", [&]
+		{
+
+		});
+	this->m_no = ftxui::Button("No", [&]
+		{
+			*this->m_pPNextComp = &this->page;
+			this->m_pScreen->Exit();
+		});
+	this->delPage = ftxui::Renderer(ftxui::Container::Horizontal({ this->m_yes, this->m_no }), [&]
+		{
+			return ftxui::vbox(
+				{
+					ftxui::text("Are you sure you want to delete this list ?") | ftxui::center,
+					ftxui::text("It will be definitively removed.") | ftxui::center,
+					ftxui::filler(),
+					ftxui::hbox({ this->m_yes->Render(), this->m_no->Render()
+				}) | ftxui::center
+				}) | ftxui::border | ftxui::center;
+		});
 }
 
 homePage::~homePage()
