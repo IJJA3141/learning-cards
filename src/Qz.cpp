@@ -4,6 +4,27 @@
 #include <string>  // for operator+, to_string
 #include <vector>
 
+#include "screen.h"
+#include "home.h"
+
+int main()
+{
+    qz::Screen* monitor = nullptr;
+    ftxui::Component b = ftxui::Button("test: b", [&] 
+        {
+            monitor->stop();
+        });
+    ftxui::Component a = ftxui::Button("test: a", [&] 
+        {
+            monitor->swap(&b);
+        });
+    monitor = qz::Screen::screen(&a);
+    monitor->start();
+
+    return 0;
+}
+
+/*
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"  // for Button, Horizontal, Renderer
 #include "ftxui/component/component_base.hpp"      // for ComponentBase
@@ -11,24 +32,7 @@
 #include "ftxui/dom/elements.hpp"  // for separator, gauge, text, Element, operator|, vbox, border
 #include "ftxui/screen/color.hpp"
 #include "ftxui/dom/node.hpp"
-
-#include "home.h"
-
-int main()
-{
-    ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
-
-    ftxui::Component* nextComp = nullptr;
-    bool end = false;
-    
-    homePage hp = homePage(&screen, &nextComp, &end);
-    nextComp = &hp.page;
-
-    while (!end)
-    {
-        screen.Loop(*nextComp);
-    }
-}
+*/
 
 /*
 int main()
