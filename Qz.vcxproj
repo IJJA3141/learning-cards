@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\delete.cpp" />
     <ClCompile Include="src\edit.cpp" />
     <ClCompile Include="src\home.cpp" />
     <ClCompile Include="src\Qz.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="src\settings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\delete.h" />
     <ClInclude Include="src\edit.h" />
     <ClInclude Include="src\home.h" />
     <ClInclude Include="src\readAndWrite.h" />

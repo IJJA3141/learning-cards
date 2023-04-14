@@ -3,6 +3,8 @@
 #include <string>
 #include "readAndWrite.h"
 
+#include <iostream>
+
 void getListContent(const char* _fileName, std::vector<std::vector<std::string>>* _pStrVectVector)
 {
     std::fstream file;
@@ -84,6 +86,21 @@ void setLists(const char* _fileName, std::vector<std::string>* _pStrVector)
             file << _pStrVector->at(i) << "\n";
         }
     }
+
+    return;
+}
+
+void deleteList(const char* _fileName)
+{
+    char buffer[sizeof(_PATH_CONTENT) + sizeof(_fileName) + sizeof(".txt")];
+
+    strcpy(buffer, _PATH_CONTENT);
+    strcat(buffer, _fileName);
+    strcat(buffer, ".txt");
+
+    const char* file = buffer;
+
+    std::remove(buffer);
 
     return;
 }

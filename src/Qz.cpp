@@ -7,19 +7,16 @@
 #include "screen.h"
 #include "home.h"
 
+#include "ftxui/component/component.hpp"
+
 int main()
 {
-    qz::Screen* monitor = nullptr;
-    ftxui::Component b = ftxui::Button("test: b", [&] 
-        {
-            monitor->stop();
-        });
-    ftxui::Component a = ftxui::Button("test: a", [&] 
-        {
-            monitor->swap(&b);
-        });
-    monitor = qz::Screen::screen(&a);
-    monitor->start();
+    qz::Screen* pScreen = nullptr;
+    qz::HomePage* pHP = nullptr;
+
+    pHP = qz::HomePage::homePage(&pScreen);
+    pScreen = qz::Screen::screen(&pHP->component);
+    pScreen->start();
 
     return 0;
 }
