@@ -4,26 +4,27 @@ ftxui::ScreenInteractive qz::Screen::m_screen = ftxui::ScreenInteractive::Fullsc
 ftxui::Component* qz::Screen::m_pComponent = nullptr;
 qz::Screen* qz::Screen::screen_ = nullptr;
 
-qz::Screen::Screen(ftxui::Component* _pComponent)
+qz::Screen::Screen()
 {
-	qz::Screen::m_pComponent = _pComponent;
+	qz::Screen::m_pComponent = nullptr;
 	this->m_end = false;
 
 	return;
 }
 
-qz::Screen* qz::Screen::screen(ftxui::Component* _pComponent)
+qz::Screen* qz::Screen::screen()
 {
 	if (qz::Screen::screen_ == nullptr)
 	{
-		qz::Screen::screen_ = new qz::Screen(_pComponent);
+		qz::Screen::screen_ = new qz::Screen();
 	}
 
 	return qz::Screen::screen_;
 }
 
-void qz::Screen::start()
+void qz::Screen::start(ftxui::Component* _pComponent)
 {
+	this->m_pComponent = _pComponent;
 	this->m_end = false;
 
 	while (!qz::Screen::m_end)

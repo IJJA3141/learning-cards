@@ -11,7 +11,7 @@ namespace qz
 	class Screen
 	{
 	private:
-		Screen(ftxui::Component* _pComponent);
+		Screen();
 		
 		static Screen* screen_;
 		static ftxui::ScreenInteractive m_screen;
@@ -22,9 +22,9 @@ namespace qz
 
 
 	public:
-		static Screen* screen(ftxui::Component* _pComponent);
+		static Screen* screen();
 
-		void start();
+		void start(ftxui::Component* _pComponent);
 		void stop();
 		void swap(ftxui::Component* _pComponent);
 

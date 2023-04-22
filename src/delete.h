@@ -14,22 +14,24 @@ namespace qz
 	class DeletePage
 	{
 	private:
-		DeletePage(ftxui::Component* _pHomePage, qz::Screen** _ppScreen);
+		DeletePage(ftxui::Component* _pHomePage);
 		static DeletePage* m_pDeletePage;
 
-		qz::Screen** m_ppScreen;
+		qz::Screen* m_pScreen;
 		ftxui::Component* m_pHomePage;
 		ftxui::Component* m_pParent;
 
 		ftxui::Component m_component;
+		qz::Raw* m_pRaw;
 
 	public:
-		static DeletePage* deletePage(ftxui::Component* _pHomePage, qz::Screen** _ppScreen);
+		static DeletePage* deletePage(ftxui::Component* _pHomePage);
 
 		ftxui::Component buttons;
 		std::string list;
+		int index;
 
-		ftxui::Component* component(std::string _list, ftxui::Component* _pParent);
+		ftxui::Component* component(int _index, std::string _list, ftxui::Component* _pParent);
 
 		DeletePage(DeletePage& other) = delete;
 		void operator = (const DeletePage&) = delete;

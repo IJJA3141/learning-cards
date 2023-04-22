@@ -15,8 +15,8 @@ int main()
     qz::HomePage* pHP = nullptr;
 
     pHP = qz::HomePage::homePage(&pScreen);
-    pScreen = qz::Screen::screen(&pHP->component);
-    pScreen->start();
+    pScreen = qz::Screen::screen(); 
+    pScreen->start(&pHP->component);
 
     return 0;
 }

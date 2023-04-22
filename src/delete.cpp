@@ -2,18 +2,19 @@
 
 qz::DeletePage* qz::DeletePage::m_pDeletePage = nullptr;
 
-qz::DeletePage::DeletePage(ftxui::Component* _pHomePage, qz::Screen** _ppScreen)
+qz::DeletePage::DeletePage(ftxui::Component* _pHomePage)
 {
-	this->m_ppScreen = _ppScreen;
+	this->m_pScreen = qz::Screen::screen();
 	this->m_pHomePage = _pHomePage;
 	this->m_pParent = nullptr;
 	this->list = "";
+	this->m_pRaw = qz::Raw::raw(nullptr);
 
 	this->buttons = ftxui::Container::Horizontal(
 		{
-			ftxui::Button("Delete", [&] {deleteList(this->list.c_str()); ((qz::Screen*)*_ppScreen)->swap(this->m_pHomePage); return; }),
+			ftxui::Button("Delete", [&] {this->m_pRaw->deleteList(this->index); this->m_pScreen->swap(this->m_pHomePage); return; }),
 			ftxui::Renderer([]{return ftxui::filler() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 10); }),
-			ftxui::Button("Cancel",  [&] {((qz::Screen*)*_ppScreen)->swap(this->m_pParent); return; }),
+			ftxui::Button("Cancel",  [&] {this->m_pScreen->swap(this->m_pParent); return; }),
 		});
 
 	this->m_component = ftxui::Renderer(this->buttons, [&]
@@ -33,19 +34,20 @@ qz::DeletePage::DeletePage(ftxui::Component* _pHomePage, qz::Screen** _ppScreen)
 	return;
 }
 
-qz::DeletePage* qz::DeletePage::deletePage(ftxui::Component* _pHomePage, qz::Screen** _ppScreen)
+qz::DeletePage* qz::DeletePage::deletePage(ftxui::Component* _pHomePage)
 {
 	if (qz::DeletePage::m_pDeletePage == nullptr)
 	{
-		qz::DeletePage::m_pDeletePage = new DeletePage(_pHomePage, _ppScreen);
+		qz::DeletePage::m_pDeletePage = new DeletePage(_pHomePage);
 	}
 
 	return qz::DeletePage::m_pDeletePage;
 }
 
-ftxui::Component* qz::DeletePage::component(std::string _list, ftxui::Component* _pParent)
+ftxui::Component* qz::DeletePage::component(int _index, std::string _list, ftxui::Component* _pParent)
 {
 	this->m_pParent = _pParent;
+	this->index = _index;
 	this->list = _list;
 
 	return &this->m_component;
