@@ -8,27 +8,28 @@
 
 namespace qz
 {
-	class sScreen
+	class Screen
 	{
 	private:
-		sScreen();
-
-		static sScreen* m_pSScreen;
-		ftxui::Component* m_pComponent;
+		Screen();
+		
+		static Screen* screen_;
 		static ftxui::ScreenInteractive m_screen;
-		bool m_initState;
-		bool m_endState;
+		bool m_end;
+	
+
+		static ftxui::Component* m_pComponent;
+
 
 	public:
-		static sScreen* get();
+		static Screen* screen();
 
-		void init(ftxui::Component* _pComponent);
-		void start();
+		void start(ftxui::Component* _pComponent);
 		void stop();
 		void swap(ftxui::Component* _pComponent);
 
-		sScreen(sScreen &other) = delete;
-		void operator = (const sScreen&) = delete;
+		Screen(Screen& other) = delete;
+		void operator = (const Screen&) = delete;
 	};
 };
 

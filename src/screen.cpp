@@ -1,52 +1,53 @@
 #include "screen.h"
 
-ftxui::ScreenInteractive qz::Screen::m_screen = ftxui::ScreenInteractive::Fullscreen();
-ftxui::Component* qz::Screen::m_pComponent = nullptr;
-qz::Screen* qz::Screen::screen_ = nullptr;
+qz::sScreen* qz::sScreen::m_pSScreen = nullptr;
+ftxui::ScreenInteractive qz::sScreen::m_screen = ftxui::ScreenInteractive::Fullscreen();
 
-qz::Screen::Screen()
+qz::sScreen::sScreen()
 {
-	qz::Screen::m_pComponent = nullptr;
-	this->m_end = false;
+	this->m_endState = false;
+	this->m_initState = false;
+	this->m_pComponent = nullptr;
 
 	return;
-}
+};
 
-qz::Screen* qz::Screen::screen()
+qz::sScreen* qz::sScreen::get()
 {
-	if (qz::Screen::screen_ == nullptr)
-	{
-		qz::Screen::screen_ = new qz::Screen();
-	}
+	if (qz::sScreen::m_pSScreen == nullptr) qz::sScreen::m_pSScreen = new qz::sScreen();
+	return qz::sScreen::m_pSScreen;
+};
 
-	return qz::Screen::screen_;
-}
-
-void qz::Screen::start(ftxui::Component* _pComponent)
+void qz::sScreen::init(ftxui::Component* _pComponent)
 {
+	if (this->m_initState) return;
+	this->m_initState = true;
 	this->m_pComponent = _pComponent;
-	this->m_end = false;
+	return;
+};
 
-	while (!qz::Screen::m_end)
+void qz::sScreen::start()
+{
+	if (!this->m_initState) throw "not initialized";
+	
+	while (!this->m_endState)
 	{
-		qz::Screen::m_screen.Loop(*qz::Screen::m_pComponent);
+		qz::sScreen::m_screen.Loop(*this->m_pComponent);
 	};
 
 	return;
-}
+};
 
-void qz::Screen::stop()
+void qz::sScreen::stop()
 {
-	this->m_end = true;
-	qz::Screen::m_screen.Exit();
+	this->m_endState = true;
+	qz::sScreen::m_screen.Exit();
+};
 
-	return;
-}
-
-void qz::Screen::swap(ftxui::Component* _pComponent)
+void qz::sScreen::swap(ftxui::Component* _pComponent)
 {
 	this->m_pComponent = _pComponent;
-	qz::Screen::m_screen.Exit();
+	qz::sScreen::m_screen.Exit();
 
 	return;
-}
+};

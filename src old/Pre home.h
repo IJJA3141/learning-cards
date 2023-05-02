@@ -15,32 +15,30 @@
 
 namespace qz
 {
-	class sHomePage
+	class HomePage
 	{
 	private:
-		sHomePage();
-
-		static sHomePage* m_pSHomePage;
+		HomePage(qz::Screen** _ppScreen);
+		static HomePage* m_pHomePage;
 		
-		ftxui::Component m_buttons;
-		ftxui::Component m_lists;
-		ftxui::Component m_comp;
+		std::vector<std::string> m_list;
+		int m_listPos;
 
+		ftxui::Component m_lists;
+		ftxui::Component m_buttons;
+		ftxui::Component m_comp;
+		
 		qz::DeletePage* m_pDeletePage;
 		qz::AddPage* m_pAddPage;
-		qz::sScreen* m_pScreen;
 		qz::Raw* m_pRaw;
 
 	public:
-		static sHomePage* get();
+		static HomePage* homePage(qz::Screen** _ppScreen);
 
 		ftxui::Component component;
 
-		std::vector<std::string> lists;
-		int index;
-
-		sHomePage(sHomePage& other) = delete;
-		void operator = (const sHomePage&) = delete;
+		HomePage(HomePage& other) = delete;
+		void operator = (const HomePage&) = delete;
 	};
 };
 

@@ -8,33 +8,29 @@
 
 #include "readAndWrite.h"
 #include "screen.h"
+#include "home.h"
 
 namespace qz
 {
-	class DeletePage
+	class sDeletePage
 	{
 	private:
-		DeletePage(ftxui::Component* _pHomePage);
-		static DeletePage* m_pDeletePage;
+		sDeletePage();
+		static sDeletePage* m_pDeletePage;
 
-		qz::Screen* m_pScreen;
-		ftxui::Component* m_pHomePage;
-		ftxui::Component* m_pParent;
-
-		ftxui::Component m_component;
+		qz::sScreen* m_pScreen;
+		qz::sHomePage* m_pHomePage;
 		qz::Raw* m_pRaw;
 
+		ftxui::Component m_buttons;
+
 	public:
-		static DeletePage* deletePage(ftxui::Component* _pHomePage);
+		static sDeletePage* get();
 
-		ftxui::Component buttons;
-		std::string list;
-		int index;
+		ftxui::Component component;
 
-		ftxui::Component* component(int _index, std::string _list, ftxui::Component* _pParent);
-
-		DeletePage(DeletePage& other) = delete;
-		void operator = (const DeletePage&) = delete;
+		sDeletePage(sDeletePage& other) = delete;
+		void operator = (const sDeletePage&) = delete;
 	};
 }
 #endif // !QZDELETE
