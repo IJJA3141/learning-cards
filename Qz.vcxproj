@@ -24,7 +24,6 @@
     <ClCompile Include="src\edit.cpp" />
     <ClCompile Include="src\home.cpp" />
     <ClCompile Include="src\Qz.cpp" />
-    <ClCompile Include="src\readAndWrite.cpp" />
     <ClCompile Include="src\screen.cpp" />
     <ClCompile Include="src\settings.cpp" />
   </ItemGroup>
@@ -33,7 +32,6 @@
     <ClInclude Include="src\delete.h" />
     <ClInclude Include="src\edit.h" />
     <ClInclude Include="src\home.h" />
-    <ClInclude Include="src\readAndWrite.h" />
     <ClInclude Include="src\screen.h" />
     <ClInclude Include="src\settings.h" />
   </ItemGroup>

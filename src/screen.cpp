@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "screen.h"
 
 ftxui::ScreenInteractive qz::Screen::m_screen = ftxui::ScreenInteractive::Fullscreen();
@@ -14,10 +16,7 @@ qz::Screen::Screen()
 
 qz::Screen* qz::Screen::screen()
 {
-	if (qz::Screen::screen_ == nullptr)
-	{
-		qz::Screen::screen_ = new qz::Screen();
-	}
+	if (qz::Screen::screen_ == nullptr)	qz::Screen::screen_ = new qz::Screen();
 
 	return qz::Screen::screen_;
 }
@@ -27,10 +26,9 @@ void qz::Screen::start(ftxui::Component* _pComponent)
 	this->m_pComponent = _pComponent;
 	this->m_end = false;
 
-	while (!qz::Screen::m_end)
-	{
-		qz::Screen::m_screen.Loop(*qz::Screen::m_pComponent);
-	};
+	std::cout << this->m_pComponent;
+
+	while (!qz::Screen::m_end) qz::Screen::m_screen.Loop(*qz::Screen::m_pComponent);
 
 	return;
 }

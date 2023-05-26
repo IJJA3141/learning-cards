@@ -17,9 +17,7 @@ namespace qz
 		static ftxui::ScreenInteractive m_screen;
 		bool m_end;
 	
-
 		static ftxui::Component* m_pComponent;
-
 
 	public:
 		static Screen* screen();

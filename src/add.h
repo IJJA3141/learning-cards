@@ -17,11 +17,6 @@ namespace qz
 		AddPage();
 		static AddPage* m_pAddPage;
 
-		ftxui::Component m_buttons;
-		ftxui::Component m_component;
-		ftxui::Component m_errorText;
-
-		std::string m_input;
 		bool m_bool;
 
 	public:

@@ -6,7 +6,6 @@
 #include "ftxui/component/component.hpp"
 #include <string>
 
-#include "readAndWrite.h"
 #include "screen.h"
 
 namespace qz
@@ -22,7 +21,6 @@ namespace qz
 		ftxui::Component* m_pParent;
 
 		ftxui::Component m_component;
-		qz::Raw* m_pRaw;
 
 	public:
 		static DeletePage* deletePage(ftxui::Component* _pHomePage);
