@@ -19,21 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\add.cpp" />
-    <ClCompile Include="src\delete.cpp" />
-    <ClCompile Include="src\edit.cpp" />
     <ClCompile Include="src\home.cpp" />
+    <ClCompile Include="src\play.cpp" />
+    <ClCompile Include="src\quit.cpp" />
     <ClCompile Include="src\Qz.cpp" />
     <ClCompile Include="src\screen.cpp" />
-    <ClCompile Include="src\settings.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\add.h" />
-    <ClInclude Include="src\delete.h" />
-    <ClInclude Include="src\edit.h" />
     <ClInclude Include="src\home.h" />
+    <ClInclude Include="src\play.h" />
+    <ClInclude Include="src\quit.h" />
     <ClInclude Include="src\screen.h" />
-    <ClInclude Include="src\settings.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

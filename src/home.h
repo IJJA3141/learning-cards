@@ -9,8 +9,8 @@
 #include <string>
 
 #include "screen.h"
-#include "delete.h"
-#include "add.h"
+#include "quit.h"
+#include "play.h"
 
 namespace qz
 {
@@ -28,6 +28,8 @@ namespace qz
 		ftxui::Component m_buttonsMenu;
 
 		qz::Screen* m_pScreen;
+		qz::Quit* m_pQuitPage;
+		qz::Play* m_pPlay;
 
 	public:
 		static HomePage* homePage();
@@ -38,6 +40,5 @@ namespace qz
 		void operator = (const HomePage&) = delete;
 	};
 };
-
 
 #endif // !QZHOMEPAGE
