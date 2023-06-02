@@ -1,15 +1,11 @@
 #include "play.h"
 
-#include "home.h"
-
 qz::Play* qz::Play::m_play = nullptr;
 
 qz::Play::Play()
 {
 	this->m_pScreen = qz::Screen::screen();
 	this->m_pQuit = qz::Quit::quit();
-
-	this->m_pHomePage = qz::HomePage::homePage();
 
 	this->m_listName = "";
 	this->vTheme = {};
@@ -56,7 +52,7 @@ qz::Play::Play()
 		// Back
 		ftxui::Button("Back", [&]
 		{
-			this->m_pScreen->swap(&this->m_pHomePage->component);
+			
 			return;
 		}),
 

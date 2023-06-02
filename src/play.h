@@ -14,8 +14,6 @@
 
 namespace qz
 {
-	class HomePage;
-
 	class Play
 	{
 	private:
@@ -34,7 +32,6 @@ namespace qz
 
 		int m_index;
 
-		qz::HomePage* m_pHomePage;
 		qz::Screen* m_pScreen;
 		qz::Quit* m_pQuit;
 
