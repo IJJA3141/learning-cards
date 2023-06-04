@@ -27,11 +27,13 @@ namespace qz
 		ftxui::Component m_buttonsMenu;
 
 		static qz::Screen* m_pScreen;
+	public:
+		static HomePage* homePage();
+		
 		static qz::iPage* m_pQuitPage;
 		static qz::iPage* m_pPlay;
 
-	public:
-		static HomePage* homePage();
+		ftxui::Component* get(std::string _arg) override;
 
 		ftxui::Component component;
 

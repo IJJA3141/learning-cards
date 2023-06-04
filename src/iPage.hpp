@@ -4,13 +4,14 @@
 #define PAGE
 
 #include <ftxui/component/component.hpp>
+#include <string>
 
 namespace qz
 {
 	class iPage
 	{
 	public:
-		ftxui::Component component = 0;
+		virtual ftxui::Component* get(std::string _arg) = 0;
 	};
 }
 

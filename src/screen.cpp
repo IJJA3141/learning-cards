@@ -22,6 +22,7 @@ qz::Screen* qz::Screen::screen()
 
 void qz::Screen::start(ftxui::Component* _pComponent)
 {
+	this->m_pPreviousComponent = _pComponent;
 	this->m_pComponent = _pComponent;
 	this->m_end = false;
 
@@ -51,6 +52,11 @@ void qz::Screen::swap(ftxui::Component* _pComponent)
 
 void qz::Screen::back()
 {
+	ftxui::Component* temp = this->m_pComponent;
 	this->m_pComponent = this->m_pPreviousComponent;
+	this->m_pPreviousComponent = temp;
+
+	if (this->m_pComponent == this->m_pPreviousComponent) this->stop();
+
 	qz::Screen::m_screen.Exit();
 }

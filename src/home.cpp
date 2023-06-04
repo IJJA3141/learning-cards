@@ -1,5 +1,6 @@
 #include "home.hpp"
 
+qz::Screen* qz::HomePage::m_pScreen = qz::Screen::screen();
 qz::HomePage* qz::HomePage::m_pHomePage = nullptr;
 
 qz::HomePage::HomePage()
@@ -20,83 +21,88 @@ qz::HomePage::HomePage()
 	this->m_menu = ftxui::Menu(&this->m_list, &this->m_listIndex) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20);
 
 	this->m_buttons = ftxui::Container::Vertical(
+	{
+		// --> Play page
+		ftxui::Button("Play", [&]
 		{
-			// --> Play page
-			ftxui::Button("Play", [&]
-			{
-				this->m_pScreen->swap(this->m_pPlay->get("test"));
-				return;
+			this->m_pScreen->swap(this->m_pPlay->get(""));
+			return;
 
-			}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
 
 
-				// --> Eddit page
-				ftxui::Button("Eddit", [&]
-				{
-						// some stuff
+		// --> Eddit page
+		ftxui::Button("Eddit", [&]
+		{
+				// some stuff
 
-					}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
-
-
-					// --> Add popup	
-					ftxui::Button("Add", [&]
-					{
-						this->m_pScreen->swap(&this->component);
-						return;
-
-					}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
 
 
-						// --> Delete popup
-						ftxui::Button("Delete", [&]
-						{
-								// some stuff
+		// --> Add popup	
+		ftxui::Button("Add", [&]
+		{
+			this->m_pScreen->swap(&this->component);
+			return;
 
-							}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
-
-
-							// --> Settings Page
-							ftxui::Button("Settings", [&]
-							{
-									// some stuff
-
-								}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
 
 
-								// --> Quit popup	
-								ftxui::Button("Quit", [&]
-								{
-									this->m_pScreen->swap(this->m_pQuitPage->get(&this->component));
-									return;
+		// --> Delete popup
+		ftxui::Button("Delete", [&]
+		{
+				// some stuff
 
-								}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
 
-		}) | ftxui::center | ftxui::border;
+
+		// --> Settings Page
+		ftxui::Button("Settings", [&]
+		{
+				// some stuff
+
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+
+
+		// --> Quit popup	
+		ftxui::Button("Quit", [&]
+		{
+			this->m_pScreen->swap(this->m_pQuitPage->get(""));
+			return;
+
+		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),
+
+	}) | ftxui::center | ftxui::border;
 
 	this->m_buttonsMenu = ftxui::Container::Horizontal(
-		{
-			this->m_buttons,
-			this->m_menu,
-		});
+	{
+		this->m_buttons,
+		this->m_menu,
+	});
 
 	this->component = ftxui::Renderer(this->m_buttonsMenu, [&]
+	{
+		return ftxui::window(ftxui::text("<| Qz |>") | ftxui::center,
 		{
-			return ftxui::window(ftxui::text("<| Qz |>") | ftxui::center,
-				{
-					ftxui::hbox(
-					{
-						this->m_buttons->Render(),
-						ftxui::filler() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 40),
-						vbox(
-							ftxui::text("> " + this->m_list[this->m_listIndex]),
-							ftxui::separator(),
-							ftxui::frame(ftxui::vscroll_indicator(this->m_menu->Render())
-						)) | ftxui::border,
-					}) | ftxui::center,
-				});
+			ftxui::hbox(
+			{
+				this->m_buttons->Render(),
+				ftxui::filler() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 40),
+				vbox(
+					ftxui::text("> " + this->m_list[this->m_listIndex]),
+					ftxui::separator(),
+					ftxui::frame(ftxui::vscroll_indicator(this->m_menu->Render())
+				)) | ftxui::border,
+			}) | ftxui::center,
 		});
+	});
 
 	return;
+}
+
+ftxui::Component* qz::HomePage::get(std::string _arg)
+{
+	return &this->component;
 }
 
 qz::HomePage* qz::HomePage::homePage()

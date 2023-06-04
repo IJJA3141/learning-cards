@@ -4,6 +4,8 @@ qz::Play* qz::Play::m_play = nullptr;
 
 qz::Play::Play()
 {
+	this->m_pScreen = qz::Screen::screen();
+
 	this->m_listName = "";
 	this->vTheme = {};
 	this->vVersion = {};
@@ -49,14 +51,14 @@ qz::Play::Play()
 		// Back
 		ftxui::Button("Back", [&]
 		{
-
+			this->m_pScreen->back();
 			return;
 		}),
 
 					// Eddit
 					ftxui::Button("Quit", [&]
 					{
-						this->m_pScreen->swap(this->m_pQuit->get(&this->m_component));
+						this->m_pScreen->swap(this->m_pQuit->get("?"));
 						return;
 					})
 		});
@@ -98,9 +100,9 @@ qz::Play::Play()
 	return;
 }
 
-ftxui::Component* qz::Play::get(std::string _list)
+ftxui::Component* qz::Play::get(std::string _arg)
 {
-	this->m_listName = _list;
+	this->m_listName = _arg;
 
 	// update m_junctionMenu & m_thermesMenu
 	//

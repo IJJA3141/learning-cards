@@ -33,12 +33,12 @@ namespace qz
 		int m_index;
 
 		qz::Screen* m_pScreen;
-		qz::Quit* m_pQuit;
 
 	public:
 		static Play* play();
+		static qz::iPage* m_pQuit;
 
-		ftxui::Component* get(std::string _list);
+		ftxui::Component* get(std::string _arg) override;
 		std::vector<std::string> vTheme;
 		std::vector<std::string> vVersion;
 
