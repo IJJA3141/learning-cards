@@ -10,6 +10,43 @@ qz::Screen::Screen()
 	qz::Screen::m_pComponent = nullptr;
 	this->m_end = false;
 
+	this->m_buttons = ftxui::Container::Horizontal(
+		{
+			//Quit button
+			ftxui::Button("Yes", [&]
+			{
+					//
+					//		/!\
+					//
+					// add saving system
+					//
+
+					this->stop();
+					return;
+				}),
+
+		//Back button
+		ftxui::Button("No", [&]
+		{
+			this->m_screen.Exit();
+			this->m_screen.Loop(*qz::Screen::m_pComponent);
+			return;
+		}),
+		});
+
+	this->m_quit = ftxui::Renderer(this->m_buttons, [&]
+		{
+			return ftxui::window(ftxui::text("<| Qz |>") | ftxui::center,
+				{
+					ftxui::vbox(
+					{
+
+						ftxui::text("Are you sure you want to exit ?") | ftxui::center,
+						this->m_buttons->Render() | ftxui::center,
+					}) | ftxui::center
+				});
+		});
+
 	return;
 }
 
@@ -59,4 +96,14 @@ void qz::Screen::back()
 	if (this->m_pComponent == this->m_pPreviousComponent) this->stop();
 
 	qz::Screen::m_screen.Exit();
+	
+	return;
+}
+
+void qz::Screen::quit()
+{
+	this->swap(&this->m_quit);
+	
+
+	return;
 }

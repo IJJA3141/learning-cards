@@ -20,11 +20,15 @@ namespace qz
 		static ftxui::Component* m_pComponent;
 		ftxui::Component* m_pPreviousComponent;
 
+		ftxui::Component m_quit;
+		ftxui::Component m_buttons;
+
 	public:
 		static Screen* screen();
 
 		void start(ftxui::Component* _pComponent);
 		void stop();
+		void quit();
 		void swap(ftxui::Component* _pComponent);
 		void back();
 
