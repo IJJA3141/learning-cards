@@ -4,6 +4,5 @@
 
 #include "home.hpp"
 #include "play.hpp"
-#include "quit.hpp"
 
 #endif // !PAGES

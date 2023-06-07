@@ -28,7 +28,6 @@ qz::Screen::Screen()
 		//Back button
 		ftxui::Button("No", [&]
 		{
-			this->m_screen.Exit();
 			this->m_screen.Loop(*qz::Screen::m_pComponent);
 			return;
 		}),
@@ -102,8 +101,6 @@ void qz::Screen::back()
 
 void qz::Screen::quit()
 {
-	this->swap(&this->m_quit);
-	
-
+	this->m_screen.Loop(this->m_quit);
 	return;
 }

@@ -30,7 +30,6 @@ namespace qz
 	public:
 		static HomePage* homePage();
 		
-		static qz::iPage* m_pQuitPage;
 		static qz::iPage* m_pPlay;
 
 		ftxui::Component* get(std::string _arg) override;

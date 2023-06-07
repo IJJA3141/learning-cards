@@ -19,19 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game-write.hpp" />
+    <ClInclude Include="src\iGame.hpp" />
     <ClInclude Include="src\home.hpp" />
     <ClInclude Include="src\iPage.hpp" />
     <ClInclude Include="src\pages.hpp" />
     <ClInclude Include="src\play.hpp" />
-    <ClInclude Include="src\quit.hpp" />
     <ClInclude Include="src\screen.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game-write.cpp" />
     <ClCompile Include="src\home.cpp" />
     <ClCompile Include="src\iPage.cpp" />
     <ClCompile Include="src\pages.cpp" />
     <ClCompile Include="src\play.cpp" />
-    <ClCompile Include="src\quit.cpp" />
     <ClCompile Include="src\qz.cpp" />
     <ClCompile Include="src\screen.cpp" />
   </ItemGroup>

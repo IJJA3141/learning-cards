@@ -67,7 +67,7 @@ qz::HomePage::HomePage()
 		// --> Quit popup	
 		ftxui::Button("Quit", [&]
 		{
-			this->m_pScreen->swap(this->m_pQuitPage->get(""));
+			this->m_pScreen->quit();
 			return;
 
 		}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, 20),

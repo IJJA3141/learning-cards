@@ -36,7 +36,6 @@ namespace qz
 
 	public:
 		static Play* play();
-		static qz::iPage* m_pQuit;
 
 		ftxui::Component* get(std::string _arg) override;
 		std::vector<std::string> vTheme;

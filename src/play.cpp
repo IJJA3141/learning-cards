@@ -58,7 +58,7 @@ qz::Play::Play()
 					// Eddit
 					ftxui::Button("Quit", [&]
 					{
-						this->m_pScreen->swap(this->m_pQuit->get("?"));
+						this->m_pScreen->quit();
 						return;
 					})
 		});
