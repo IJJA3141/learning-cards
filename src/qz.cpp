@@ -1,79 +1,59 @@
 ﻿#include <vector>
 #include <string>
 #include <algorithm>
+#include <fstream>
 
 #include <ftxui/component/screen_interactive.hpp>
 #include <ftxui/component/component.hpp>
 
 #include "pair.hpp"
+#include "game.hpp"
 
-struct Settings
+struct list
 {
 public:
-	Settings(int _rep, int _maxError);
+	list(std::string _name, int _score, std::vector<qz::Pair>* _pVPair);
 
-	int repetition, maxError;
+	std::vector<qz::Pair>* pVPair;
+	std::string name;
+	int score;
 
-	static const int FULLSIZE = -1;
-	static const int NOLIMIT = -1;
 };
 
-Settings::Settings(int _rep, int _maxError)
+list::list(std::string _name, int _score, std::vector<qz::Pair>* _pVPair)
 {
-	this->maxError = _maxError;
-	this->repetition = _rep;
-	return;
+	this->pVPair = _pVPair;
+	this->name = _name;
+	this->score = 0;
 }
 
-int gameWrite(std::vector<qz::Pair>* _pVPair, Settings _settings)
+int saveList(const list& _list)
 {
-	int max = _settings.repetition;
-	if (max == -1 || _settings.repetition > _pVPair->size()) max = _pVPair->size();
-	int score = -max/2;
-	int i = 0;
+	std::string url = "./lists/" + _list.name + ".txt";
 
-	ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
+	std::cout << url << "\n";
 
-	std::string strInput;
-	ftxui::Component compInput = ftxui::Input(&strInput, "");
-	ftxui::Component renderer = ftxui::Renderer(compInput, [&]
+	std::fstream fs;
+	fs.open(url, std::ios::in | std::ios::out);
+	if (fs.is_open())
 	{
-		return ftxui::vbox(
+		fs.clear();
+		fs << _list.name << "\n" << _list.score << "\n";
+		for (int i = 0; i < _list.pVPair->size(); i++)
 		{
-			ftxui::text(_pVPair->at(i).theme),
-			ftxui::separator(),
-				compInput->Render(),
-		});
-	});
-
-	renderer |= ftxui::CatchEvent([&](ftxui::Event _event)
-	{
-		if (_event == ftxui::Event::Return) screen.Exit();
-		return false;
-	});
-	std::cout << max;
-	for (i = 0; i < max; i++)
-	{
-		screen.Loop(renderer);
-		if (strInput == _pVPair->at(i).version)
-		{
-			score++;
-			_pVPair->at(i).accuracy++;
+			fs << _list.pVPair->at(i) << "\n";
 		}
-		else _pVPair->at(i).accuracy--;
-		strInput = "";
+		fs.close();
+		return 0;
 	}
-	std::sort(_pVPair->begin(), _pVPair->end());
-	return score;
+	return 1;
 }
-
-
 
 int main()
 {
-	std::vector<qz::Pair> a = { qz::Pair("",""),qz::Pair("","") ,qz::Pair("","") ,qz::Pair("","") };
-	ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
-	Settings b = Settings(Settings::FULLSIZE, Settings::NOLIMIT);
+	std::vector<qz::Pair> a = { qz::Pair("1", "1", 5), qz::Pair("2", "2", 6), qz::Pair("3", "3", 10), qz::Pair("alef", "sahdfldks", 453) };
 
-	return gameWrite(&a, b);
+	list b = list("test", 7, &a);
+
+	return saveList(b);
 }

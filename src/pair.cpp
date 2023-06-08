@@ -26,5 +26,5 @@ bool qz::Pair::operator==(const Pair& _pair)
 
 std::ostream& operator<<(std::ostream& _stream, const qz::Pair& _pair)
 {
-	return _stream << "theme: " << _pair.theme << " version: " << _pair.version << " accuracy: " << _pair.accuracy;
+	return _stream << _pair.theme << "\n" << _pair.version << "\n" << _pair.accuracy;
 }

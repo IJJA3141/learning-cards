@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\pair.cpp" />
     <ClCompile Include="src\qz.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\game.hpp" />
     <ClInclude Include="src\pair.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
