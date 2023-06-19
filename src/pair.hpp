@@ -7,20 +7,20 @@
 
 namespace qz 
 {
-	class Pair
+	class pair
 	{
 	public:
-		Pair(std::string _theme, std::string _version, int _accuracy = 0);
+		pair(std::string _theme, std::string _version, int _accuracy = 0);
 
 		std::string theme, version;
 		int accuracy;
 
-		bool operator<(const Pair& _pair);
-		bool operator>(const Pair& _pair);
-		bool operator==(const Pair& _pair);
+		bool operator<(const pair& _pair);
+		bool operator>(const pair& _pair);
+		bool operator==(const pair& _pair);
 	};
 }
 
-std::ostream& operator<<(std::ostream& _stream, const qz::Pair& _pair);
+std::ostream& operator<<(std::ostream& _stream, const qz::pair& _pair);
 
 #endif // !PAIR

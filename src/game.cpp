@@ -3,7 +3,7 @@
 
 #include "game.hpp"
 
-qz::Game::Game(std::vector<Pair>* _pVPair)
+qz::Game::Game(std::vector<qz::pair>* _pVPair)
 {
 	this->pVPair = _pVPair;
 	this->repetition = MAXSIZE;
