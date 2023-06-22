@@ -12,9 +12,12 @@
 
 int main()
 {
-	list a = list::get("test");
+	qz::hub hubpage = qz::hub("test");
+	ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
 
-	std::cout << a;
+	ftxui::Button
 
-	return a.save();
+	screen.Loop();
+
+	return 0;
 }

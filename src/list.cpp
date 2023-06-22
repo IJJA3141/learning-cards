@@ -10,6 +10,15 @@ qz::list::list(std::string _name, int _score)
 	this->vP = {};
 }
 
+qz::list::list()
+{
+	this->name = "";
+	this->score = NULL;
+	this->vP = {};
+
+	return;
+}
+
 qz::list::~list()
 {
 	this->save();
@@ -17,9 +26,10 @@ qz::list::~list()
 	return;
 }
 
-qz::list qz::list::make(std::string _name)
+qz::list& qz::list::make(std::string _name)
 {
-	return list(_name, 0);
+	list a = list(_name, 0);
+	return a;
 }
 
 bool qz::list::operator<<(qz::pair& _pair)
@@ -36,6 +46,8 @@ qz::list qz::list::get(std::string _name)
 	fs.open("./.save/lists/" + _name + ".txt", std::iostream::in);
 	if (fs.is_open())
 	{
+		std::cout << "loaded the list\n";
+
 		std::string str;
 		std::getline(fs, str);
 		out.score = std::stoi(str);
@@ -75,14 +87,14 @@ int qz::list::save()
 	}
 }
 
-std::ostream& operator<<(std::ostream& _stream, const qz::list* _pair)
+std::ostream& operator<<(std::ostream& _stream, const qz::list* _list)
 {
-	for (qz::pair pair : _pair->vP) _stream << pair << "\n";
+	for (qz::pair pair : _list->vP) _stream << pair << "\n";
 	return _stream;
 }
 
-std::ostream& operator<<(std::ostream& _stream, const qz::list& _pair)
+std::ostream& operator<<(std::ostream& _stream, const qz::list& _list)
 {
-	for (qz::pair pair : _pair.vP) _stream << pair << "\n";
+	for (qz::pair pair : _list.vP) _stream << pair << "\n";
 	return _stream;
 }

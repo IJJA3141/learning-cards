@@ -2,24 +2,33 @@
 #ifndef GAME
 #define GAME
 
-#define MAXSIZE -1;
-#define NOERROR -1;
+#include <string>
 
-#include <vector>
+#include <ftxui/component/component.hpp>
 
-#include "pair.hpp"
+#include "list.hpp"
 
-namespace qz 
+namespace qz
 {
-	class Game
+	class hub : public ftxui::ComponentBase
 	{
 	public:
-		Game(std::vector<Pair>* _pVPair);
+		hub(std::string _listName);
+		inline ftxui::Element Render() { return this->m_renderer->Render(); };
 
-		int repetition, error, score;
-		std::vector<Pair>* pVPair;
+		ftxui::Component m_renderer, m_container;
+	private:
+		//
+		// b prefix for button
+		// m prefix for menu
+		//
+		ftxui::Component m_bWrite, m_bCard, m_bTrueFalse, m_bChoose, m_bAdd, m_bEdit, m_bDelete, m_bHome, m_bQuit;
+		ftxui::Component m_mTheme, m_mVersion;
 
-		void write();
+		qz::list m_list;
+
+		std::vector<std::string> m_vStrTheme, m_vStrVersion;
+		int m_menuIndex;
 	};
 }
 
