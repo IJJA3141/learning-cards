@@ -17,14 +17,13 @@ namespace qz
 		std::vector<qz::pair> vP;
 
 		static list get(std::string _name);
-		static list& make(std::string _name);
+		static list make(std::string _name);
 
 		bool operator<<(qz::pair& _pair);
 
 		int save();
 
 		list();
-		~list();
 	private:
 		list(std::string _name, int _score);
 	};

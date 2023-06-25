@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "debug.hpp"
 #include "list.hpp"
 
 qz::list::list(std::string _name, int _score)
@@ -19,14 +20,7 @@ qz::list::list()
 	return;
 }
 
-qz::list::~list()
-{
-	this->save();
-
-	return;
-}
-
-qz::list& qz::list::make(std::string _name)
+qz::list qz::list::make(std::string _name)
 {
 	list a = list(_name, 0);
 	return a;
@@ -46,7 +40,7 @@ qz::list qz::list::get(std::string _name)
 	fs.open("./.save/lists/" + _name + ".txt", std::iostream::in);
 	if (fs.is_open())
 	{
-		std::cout << "loaded the list\n";
+		LOG("loaded the list")
 
 		std::string str;
 		std::getline(fs, str);
@@ -63,7 +57,7 @@ qz::list qz::list::get(std::string _name)
 		}
 		fs.close();
 	}
-	else std::cout << "didn't load the list" << std::endl;
+	else LOG("didn't load the list")
 
 	return out;
 }
@@ -74,15 +68,21 @@ int qz::list::save()
 
 	if (file.is_open()) 
 	{	
+		LOG("File opended")
+
 		file.clear();
 		file << this->score << "\n";
 		file << this;
 		file.close();
+
+		LOG(this->score)
+		LOG(this)
+
 		return 0;
 	}
 	else 
 	{
-		std::cout << "Error opening file." << std::endl;
+		LOG("Error opening file.")
 		return 1;
 	}
 }
