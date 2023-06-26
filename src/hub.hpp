@@ -4,7 +4,7 @@
 
 #include <string>
 
-#include "scene.hpp"
+#include "renderer.hpp"
 #include "list.hpp"
 
 namespace qz

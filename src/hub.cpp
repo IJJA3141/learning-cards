@@ -53,12 +53,15 @@ qz::Hub::Hub(std::string _listName)
 
 		return ftxui::hbox(
 		{
-			ftxui::vbox(ftxui::vscroll_indicator(ftxui::frame(ftxui::hbox(
+			ftxui::vbox(
 			{
-				this->mTheme_->Render(),
-				this->mVersion_->Render(),
-			}
-			))) | ftxui::center | ftxui::border) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, x / 2),
+				ftxui::frame(ftxui::vscroll_indicator(ftxui::hbox(
+				{
+					this->mTheme_->Render() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, x / 5),
+					this->mVersion_->Render() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, x / 5),
+					ftxui::filler(),
+				}))) | ftxui::center | ftxui::border
+			}) | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, x / 2),
 
 			ftxui::filler() | ftxui::size(ftxui::WIDTH, ftxui::EQUAL, space),
 
@@ -66,8 +69,8 @@ qz::Hub::Hub(std::string _listName)
 			{
 				ftxui::vbox(
 				{
-					ftxui::hbox({this->bWrite_->Render(), this->bCard_->Render(),}),
-					ftxui::hbox({this->bTrueFalse_->Render(), this->bChoose_->Render(),}),
+					ftxui::hbox({this->bWrite_->Render(), this->bCard_->Render(),}) | ftxui::xflex,
+					ftxui::hbox({this->bTrueFalse_->Render(), this->bChoose_->Render(),}) | ftxui::xflex,
 				}) | ftxui::border,
 				this->bAdd_->Render(),
 				this->bEdit_->Render(),

@@ -24,7 +24,7 @@
     <ClCompile Include="src\list.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\scene.cpp">
+    <ClCompile Include="src\renderer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="src\hub.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="src\list.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\scene.hpp">
+    <ClInclude Include="src\renderer.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="src\hub.hpp">

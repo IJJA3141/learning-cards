@@ -23,14 +23,14 @@
     <ClCompile Include="src\list.cpp" />
     <ClCompile Include="src\pair.cpp" />
     <ClCompile Include="src\qz.cpp" />
-    <ClCompile Include="src\scene.cpp" />
+    <ClCompile Include="src\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\debug.hpp" />
     <ClInclude Include="src\hub.hpp" />
     <ClInclude Include="src\list.hpp" />
     <ClInclude Include="src\pair.hpp" />
-    <ClInclude Include="src\scene.hpp" />
+    <ClInclude Include="src\renderer.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
